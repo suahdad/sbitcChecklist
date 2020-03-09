@@ -8,7 +8,7 @@ import { Observable } from 'rxjs'
 })
 export class WeatherService {
 
-  weatherUrl= 'https://localhost:5001/weatherforecast'
+  weatherUrl= 'http://sbitc-dbase07.sbitc.com:8080/weatherforecast'
   constructor(private http:HttpClient) { }
 
   getWeather(): Observable<Weather[]>{
