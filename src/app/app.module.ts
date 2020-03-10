@@ -9,11 +9,21 @@ import { LoginComponent } from './login/login.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { EquipmentComponent } from './equipment/equipment.component';
+import { MenuComponent } from './forms/menu/menu.component';
+import { MainformComponent } from './forms/mainform/mainform.component';
+import { StepperComponent } from './forms/stepper/stepper.component';
+import { RemarksComponent } from './forms/remarks/remarks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    EquipmentComponent,
+    MenuComponent,
+    MainformComponent,
+    StepperComponent,
+    RemarksComponent
   ],
   imports: [
     BrowserModule,
