@@ -14,6 +14,7 @@ import { MenuComponent } from './forms/menu/menu.component';
 import { MainformComponent } from './forms/mainform/mainform.component';
 import { StepperComponent } from './forms/stepper/stepper.component';
 import { RemarksComponent } from './forms/remarks/remarks.component';
+import { IssuesService } from './services/issues/issues.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { RemarksComponent } from './forms/remarks/remarks.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [ IssuesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

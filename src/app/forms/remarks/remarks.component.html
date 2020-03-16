@@ -6,9 +6,7 @@
           <mat-form-field>
             Component
             <mat-select>
-              <mat-option>1</mat-option>
-              <mat-option>2</mat-option>
-              <mat-option>3</mat-option>
+              <mat-option *ngFor="let item of issuesList" value="{{item.description}}">{{item.description}}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -21,7 +19,7 @@
             </mat-select>
           </mat-form-field>
 
-          <button mat-raised-button="Primary" (click)="deleteRemark()">
+          <button mat-raised-button="Primary" (click)="deleteRemark(i)">
             Delete
           </button>
         </section>
