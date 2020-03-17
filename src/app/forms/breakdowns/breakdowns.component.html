@@ -1,0 +1,37 @@
+<h1>Breakdowns</h1>
+<section [formGroup]="breakdownGroup">
+    <form formArrayName="breakdowns">
+        <mat-list *ngFor="let item of breakdownGroup.controls.breakdowns.controls; let i = index">
+            <fieldset>
+                <mat-form-field>
+                    Time Start
+                    <mat-select>
+                      <mat-option value="1">1</mat-option>
+                      <mat-option>2</mat-option>
+                      <mat-option>3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    Time End
+                    <mat-select>
+                      <mat-option value="1">1</mat-option>
+                      <mat-option>2</mat-option>
+                      <mat-option>3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <button mat-raised-button color="Primary" (click)="deleteBreakdown()">
+                    Delete
+                  </button>
+            </fieldset>
+            <fieldset>
+              <textarea mat-input id="$desc{{i}}" (onclick)="test(this.id)"></textarea>
+            </fieldset>
+        </mat-list>
+      </form>
+    <button mat-raised-button color="Primary" (click)="addBreakdown()">
+      Add
+    </button>
+  </section>
+  
