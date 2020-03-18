@@ -29,8 +29,4 @@ export class BreakdownsComponent implements OnInit {
     this.breakdownGroup.controls.breakdowns.removeAt(index)
   }
 
-  test(controlId: string) {
-    window.alert(controlId)
-    document.getElementById(controlId).className = "activebreakdownDescription"
-  }
 }
