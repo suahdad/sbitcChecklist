@@ -1,37 +1,43 @@
 <h1>Breakdowns</h1>
 <section [formGroup]="breakdownGroup">
     <form formArrayName="breakdowns">
-        <mat-list *ngFor="let item of breakdownGroup.controls.breakdowns.controls; let i = index">
-            <fieldset>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let item of breakdownGroup.controls.breakdowns.controls; let i = index" hideToggle="true" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Breakdown
+              </mat-panel-title>
+              <mat-panel-description>
+                {{test}}
+              </mat-panel-description>
+              <button mat-raised-button color="Primary" (click)="deleteBreakdown()">
+                Delete
+              </button>
+            </mat-expansion-panel-header>
+            <form>
+              <section>
                 <mat-form-field>
-                    Time Start
-                    <mat-select>
-                      <mat-option value="1">1</mat-option>
-                      <mat-option>2</mat-option>
-                      <mat-option>3</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                  <mat-label>Time Start</mat-label>
+                  <input matInput [ngModel]="test" name="TimeStart" (ngModelChange)="test = $event" [ngxTimepicker]="TimeStart" aria-label="Time Start">
+                  <ngx-material-timepicker #TimeStart></ngx-material-timepicker>
+                </mat-form-field>
 
-                  <mat-form-field>
-                    Time End
-                    <mat-select>
-                      <mat-option value="1">1</mat-option>
-                      <mat-option>2</mat-option>
-                      <mat-option>3</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Time End</mat-label>
+                  <input matInput [ngxTimepicker]="TimeEnd" aria-label="Time End">
+                  <ngx-material-timepicker #TimeEnd></ngx-material-timepicker>
+                </mat-form-field>
+              </section>
 
-                  <button mat-raised-button color="Primary" (click)="deleteBreakdown()">
-                    Delete
-                  </button>
-            </fieldset>
-            <fieldset>
-              <textarea mat-input id="$desc{{i}}" class="Description"></textarea>
-            </fieldset>
-        </mat-list>
+              <textarea mat-input class="Description"></textarea>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
       </form>
-    <button mat-raised-button color="Primary" (click)="addBreakdown()">
-      Add
-    </button>
+    <section>
+      <button mat-raised-button color="Primary" (click)="addBreakdown()" class="add">
+        Add
+      </button>
+    </section>  
   </section>
   

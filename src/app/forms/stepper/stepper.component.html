@@ -13,10 +13,6 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Summary</ng-template>
-    <p>You are now done.</p>
-    <div>S
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <app-summary></app-summary>
   </mat-step>
 </mat-horizontal-stepper>

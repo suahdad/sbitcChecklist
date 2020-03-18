@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormControl } from '@angular/forms';
+import { MatExpansionPanel } from '@angular/material';
 
 @Component({
   selector: 'app-breakdowns',
@@ -22,7 +23,7 @@ export class BreakdownsComponent implements OnInit {
   }
 
   addBreakdown() {
-    this.breakdownGroup.controls.breakdowns.push(new FormControl(null))
+    this.breakdownGroup.controls.breakdowns.push(new FormControl());
   }
 
   deleteBreakdown(index: Int32Array) {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule, MatToolbarModule, MatStepperModule, MatSelectModule, MatGridListModule} from '@angular/material';
-
+import {MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule, MatToolbarModule, MatStepperModule, MatSelectModule, MatGridListModule, MatExpansionModule} from '@angular/material';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [],
@@ -15,7 +15,9 @@ import {MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatL
     MatToolbarModule,
     MatStepperModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    NgxMaterialTimepickerModule,
+    MatExpansionModule
   ],
   exports: [
     MatFormFieldModule,
@@ -26,7 +28,9 @@ import {MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatL
     MatToolbarModule,
     MatStepperModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    NgxMaterialTimepickerModule,
+    MatExpansionModule
   ]
 })
 

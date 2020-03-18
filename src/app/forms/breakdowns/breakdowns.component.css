@@ -1,9 +1,3 @@
-.Description:focus{
-    height: 100px;
-    width: 100%;
-}
-
-.Description:default{
-    height: 50px;
-    width: 100%;
+.add{
+    margin-top: 10px;
 }

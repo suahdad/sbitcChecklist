@@ -16,6 +16,7 @@ import { StepperComponent } from './forms/stepper/stepper.component';
 import { RemarksComponent } from './forms/remarks/remarks.component';
 import { IssuesService } from './services/issues/issues.service';
 import { BreakdownsComponent } from './forms/breakdowns/breakdowns.component';
+import { SummaryComponent } from './forms/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BreakdownsComponent } from './forms/breakdowns/breakdowns.component';
     MainformComponent,
     StepperComponent,
     RemarksComponent,
-    BreakdownsComponent
+    BreakdownsComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
