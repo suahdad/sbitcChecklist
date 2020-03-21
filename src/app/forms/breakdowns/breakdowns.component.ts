@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormControl } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-breakdowns',
@@ -9,25 +10,27 @@ import { MatExpansionPanel } from '@angular/material';
 })
 export class BreakdownsComponent implements OnInit {
 
-  private breakdownGroup
-  private breakdownList
-
+  public breakdownList: FormArray
   constructor() {
     this.breakdownList = new FormArray([])
-    this.breakdownGroup = new FormGroup({
-      breakdowns: this.breakdownList
-    })
-   }
+  }
 
   ngOnInit() {
+
   }
 
   addBreakdown() {
-    this.breakdownGroup.controls.breakdowns.push(new FormControl());
+    const breakGroup = new FormGroup({
+      timeStart: new FormControl(''),
+      timeEnd: new FormControl(''),
+      description: new FormControl('')
+    })
+
+    this.breakdownList.push(breakGroup)
   }
 
-  deleteBreakdown(index: Int32Array) {
-    this.breakdownGroup.controls.breakdowns.removeAt(index)
+  removeBreakdown(i) {
+    this.breakdownList.removeAt(i)
   }
 
 }

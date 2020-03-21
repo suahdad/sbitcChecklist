@@ -1,43 +1,22 @@
 <h1>Breakdowns</h1>
-<section [formGroup]="breakdownGroup">
-    <form formArrayName="breakdowns">
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let item of breakdownGroup.controls.breakdowns.controls; let i = index" hideToggle="true" >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Breakdown
-              </mat-panel-title>
-              <mat-panel-description>
-                {{test}}
-              </mat-panel-description>
-              <button mat-raised-button color="Primary" (click)="deleteBreakdown()">
-                Delete
-              </button>
-            </mat-expansion-panel-header>
-            <form>
-              <section>
-                <mat-form-field>
-                  <mat-label>Time Start</mat-label>
-                  <input matInput [ngModel]="test" name="TimeStart" (ngModelChange)="test = $event" [ngxTimepicker]="TimeStart" aria-label="Time Start">
-                  <ngx-material-timepicker #TimeStart></ngx-material-timepicker>
-                </mat-form-field>
+<mat-accordion [formGroup]="breakdownList">
+  <div *ngFor="let formGroup of breakdownList.controls; let i = index">
+    <mat-expansion-panel [formGroup]="formGroup" hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Breakdown {{i+1}}</mat-panel-title>
+        <mat-panel-description>{{timeStart}}</mat-panel-description>
+        <button mat-raised-button color="Primary" (click)=removeBreakdown(i)">Delete</button>
+      </mat-expansion-panel-header>
 
-                <mat-form-field>
-                  <mat-label>Time End</mat-label>
-                  <input matInput [ngxTimepicker]="TimeEnd" aria-label="Time End">
-                  <ngx-material-timepicker #TimeEnd></ngx-material-timepicker>
-                </mat-form-field>
-              </section>
-
-              <textarea mat-input class="Description"></textarea>
-            </form>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </form>
-    <section>
-      <button mat-raised-button color="Primary" (click)="addBreakdown()" class="add">
-        Add
-      </button>
-    </section>  
-  </section>
+      <textarea mat-input formControlName="timeStart" class="Description"></textarea>
+      <textarea mat-input formControlName="timeEnd" class="Description"></textarea>
+      <textarea mat-input formControlName="description" class="Description"></textarea>
+    </mat-expansion-panel>      
+  </div>
+</mat-accordion>
+<section>
+<button mat-raised-button color="Primary" (click)="addBreakdown()" class="add">
+  Add
+</button>
+</section>  
   
