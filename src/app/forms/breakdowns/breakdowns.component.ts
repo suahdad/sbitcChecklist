@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormControl } from '@angular/forms';
-import { MatExpansionPanel } from '@angular/material';
-import { Time } from '@angular/common';
-
+import { FormArray, FormGroup, FormControl,FormBuilder } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-breakdowns',
   templateUrl: './breakdowns.component.html',
@@ -10,27 +8,35 @@ import { Time } from '@angular/common';
 })
 export class BreakdownsComponent implements OnInit {
 
-  public breakdownList: FormArray
-  constructor() {
-    this.breakdownList = new FormArray([])
-  }
+  breakdownList: FormGroup
+
+  constructor(private fb: FormBuilder,
+    private dp: DatePipe) {  }
 
   ngOnInit() {
+    this.breakdownList = this.fb.group({
+      breakdowns: this.fb.array([])
+    })
 
+  }
+
+  get breakdownForms() {
+    return this.breakdownList.get('breakdowns') as FormArray
   }
 
   addBreakdown() {
-    const breakGroup = new FormGroup({
-      timeStart: new FormControl(''),
-      timeEnd: new FormControl(''),
-      description: new FormControl('')
+    const breakdown = this.fb.group({
+      title:[],
+      timeRange: [],
+      description: []
     })
-
-    this.breakdownList.push(breakGroup)
+    breakdown.get('timeRange').valueChanges.subscribe(val =>
+      console.log(this.dp.transform(val,"yyyy-MM-dd")))
+    this.breakdownForms.push(breakdown)
   }
 
   removeBreakdown(i) {
-    this.breakdownList.removeAt(i)
+    this.breakdownForms.removeAt(i)
   }
 
 }

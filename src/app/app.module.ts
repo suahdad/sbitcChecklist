@@ -17,6 +17,7 @@ import { RemarksComponent } from './forms/remarks/remarks.component';
 import { IssuesService } from './services/issues/issues.service';
 import { BreakdownsComponent } from './forms/breakdowns/breakdowns.component';
 import { SummaryComponent } from './forms/summary/summary.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { SummaryComponent } from './forms/summary/summary.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [ IssuesService],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

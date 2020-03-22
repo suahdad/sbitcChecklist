@@ -1,17 +1,29 @@
 <h1>Breakdowns</h1>
 <mat-accordion [formGroup]="breakdownList">
-  <div *ngFor="let formGroup of breakdownList.controls; let i = index">
-    <mat-expansion-panel [formGroup]="formGroup" hideToggle="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Breakdown {{i+1}}</mat-panel-title>
-        <mat-panel-description>{{timeStart}}</mat-panel-description>
-        <button mat-raised-button color="Primary" (click)=removeBreakdown(i)">Delete</button>
-      </mat-expansion-panel-header>
+  <div formArrayName="breakdowns">
+    <div *ngFor="let breakdown of breakdownForms.controls; let i = index" [formGroupName]="i">
+      <mat-expansion-panel hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{breakdown.value.title}}</mat-panel-title>
+          <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <div>
+          <mat-form-field class="time">
+            <mat-label mat-label>Breakdown Time</mat-label>
+            <input matInput formControlName="timeRange" [owlDateTime]="dt1" 
+            [owlDateTimeTrigger]="dt1" placeholder="Date Time" selectMode='rangeFrom'>
+            <owl-date-time #dt1></owl-date-time>
+          </mat-form-field>
+        </div>
 
-      <textarea mat-input formControlName="timeStart" class="Description"></textarea>
-      <textarea mat-input formControlName="timeEnd" class="Description"></textarea>
-      <textarea mat-input formControlName="description" class="Description"></textarea>
-    </mat-expansion-panel>      
+        <div>
+          <textarea formControlName="description" class="Description" class="description" maxlength="150"></textarea>
+        </div>
+        
+      </mat-expansion-panel>      
+      <button mat-raised-button color="Warn" (click)="removeBreakdown(i)">Delete</button>
+    </div>
   </div>
 </mat-accordion>
 <section>

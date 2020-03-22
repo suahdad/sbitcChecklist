@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule, MatToolbarModule, MatStepperModule, MatSelectModule, MatGridListModule, MatExpansionModule} from '@angular/material';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatSelectModule,
     MatGridListModule,
     NgxMaterialTimepickerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   exports: [
     MatFormFieldModule,
@@ -30,7 +33,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatSelectModule,
     MatGridListModule,
     NgxMaterialTimepickerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ]
 })
 
