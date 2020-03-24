@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormControlName } from '@angular/forms';
-import { IssuesService } from '../../services/issues/issues.service';
-import { Issues } from 'src/app/model/issues/issues';
-import { Observable } from 'rxjs';
-import { Key } from 'protractor';
+import { IssuesService } from '../../../issues/issues.service';
+import { Issues } from 'src/app/issues/issues';
+
 @Component({
   selector: 'app-remarks',
   templateUrl: './remarks.component.html',

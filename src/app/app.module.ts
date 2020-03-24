@@ -13,10 +13,9 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { MenuComponent } from './forms/menu/menu.component';
 import { MainformComponent } from './forms/mainform/mainform.component';
 import { StepperComponent } from './forms/stepper/stepper.component';
-import { RemarksComponent } from './forms/remarks/remarks.component';
-import { IssuesService } from './services/issues/issues.service';
-import { BreakdownsComponent } from './forms/breakdowns/breakdowns.component';
-import { SummaryComponent } from './forms/summary/summary.component';
+import { RemarksComponent } from './forms/RTGForm/remarks/remarks.component';
+import { BreakdownsComponent } from './forms/RTGForm/breakdowns/breakdowns.component';
+import { SummaryComponent } from './forms/RTGForm/summary/summary.component';
 import { DatePipe } from '@angular/common';
 
 @NgModule({

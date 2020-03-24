@@ -20,19 +20,20 @@ export class BreakdownsComponent implements OnInit {
 
   }
 
-  get breakdownForms() {
+  public get breakdownForms() {
     return this.breakdownList.get('breakdowns') as FormArray
   }
 
   addBreakdown() {
+    const dtFormat = 'MM/dd/yyyy HH:mm'
     const breakdown = this.fb.group({
       title:[],
       timeRange: [],
+      subTitle:[],
       description: []
     })
-    breakdown.get('timeRange').valueChanges.subscribe(val =>
-      console.log(this.dp.transform(val,"yyyy-MM-dd")))
     this.breakdownForms.push(breakdown)
+    console.log(this.breakdownForms.value)
   }
 
   removeBreakdown(i) {

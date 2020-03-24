@@ -21,6 +21,11 @@ export class StepperComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+
+  }
+
+  testFunction() {
+    console.log('test')
   }
 
 }

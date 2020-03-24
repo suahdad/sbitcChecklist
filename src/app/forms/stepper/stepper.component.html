@@ -1,4 +1,4 @@
-<mat-horizontal-stepper >
+<mat-horizontal-stepper (selectionChanged)="testFunction()">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Remarks</ng-template>

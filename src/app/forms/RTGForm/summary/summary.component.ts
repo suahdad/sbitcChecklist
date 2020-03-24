@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakdownsComponent } from '../breakdowns/breakdowns.component'
 
 @Component({
   selector: 'app-summary',
@@ -11,5 +12,8 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+
 
 }
