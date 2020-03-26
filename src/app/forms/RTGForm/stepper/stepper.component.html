@@ -1,0 +1,17 @@
+<mat-horizontal-stepper>
+
+  <mat-step [stepControl]="breakdownsGroup">
+    <form [formGroup]="breakdownsGroup">
+      <ng-template matStepLabel>Breakdowns</ng-template>
+      <app-breakdowns formArrayName="breakdowns"></app-breakdowns>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="summaryGroup">
+    <form [formGroup]="summaryGroup">
+      <ng-template matStepLabel>Summary</ng-template>
+      <app-summary [breakdowns]="breakdowns"></app-summary>
+    </form>
+  </mat-step>
+
+</mat-horizontal-stepper>

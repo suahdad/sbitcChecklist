@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormControl,FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { validateBasis } from '@angular/flex-layout';
 @Component({
   selector: 'app-breakdowns',
   templateUrl: './breakdowns.component.html',
@@ -17,7 +18,6 @@ export class BreakdownsComponent implements OnInit {
     this.breakdownList = this.fb.group({
       breakdowns: this.fb.array([])
     })
-
   }
 
   public get breakdownForms() {
@@ -33,7 +33,6 @@ export class BreakdownsComponent implements OnInit {
       description: []
     })
     this.breakdownForms.push(breakdown)
-    console.log(this.breakdownForms.value)
   }
 
   removeBreakdown(i) {
