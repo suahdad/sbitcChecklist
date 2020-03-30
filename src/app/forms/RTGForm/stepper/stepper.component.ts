@@ -17,13 +17,12 @@ export class StepperComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder) {
     this.breakdownsGroup = this._formBuilder.group({
-      breakdowns: this._formBuilder.array([])
     })
     this.summaryGroup = this._formBuilder.group({
-      summary: this._formBuilder.array([])
     })
   }
 
   ngOnInit() {
   }
+
 }

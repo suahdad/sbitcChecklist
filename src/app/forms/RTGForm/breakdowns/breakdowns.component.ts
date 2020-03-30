@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormControl,FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { validateBasis } from '@angular/flex-layout';
+import { BreakdownService } from './breakdown.service';
+import { Breakdown } from './breakdown';
+
 @Component({
   selector: 'app-breakdowns',
   templateUrl: './breakdowns.component.html',
-  styleUrls: ['./breakdowns.component.css']
+  styleUrls: ['./breakdowns.component.css'],
+  providers: [BreakdownService]
 })
 export class BreakdownsComponent implements OnInit {
 
-  breakdownList: FormGroup
+  breakdownList: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private dp: DatePipe) {  }
+    private dp: DatePipe,
+    private bservice: BreakdownService) { }
 
   ngOnInit() {
     this.breakdownList = this.fb.group({
-      breakdowns: this.fb.array([])
+      breakdowns: this.fb.array([
+        title: this.fb.control(''),
+        timeRange: this.fb.control(''),
+        subTitle: this.fb.control(''),
+        description: this.fb.control('')
+      ])
     })
+    this.breakdownForms.valueChanges.subscribe(val =>
+      this.bservice.breakdowns = this.breakdownForms)
   }
 
   public get breakdownForms() {
