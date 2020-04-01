@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { EquipmentComponent } from './equipment/equipment.component';
-import { MainformComponent } from './forms/mainform/mainform.component';
+import { LoginComponent } from './components/login/login.component';
+import { EquipmentComponent } from './components/login-equipment/equipment.component';
+import { MainformComponent } from './components/mainform/mainform.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},

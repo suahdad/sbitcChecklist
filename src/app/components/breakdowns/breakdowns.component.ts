@@ -1,34 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormControl,FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { BreakdownService } from './breakdown.service';
-import { Breakdown } from './breakdown';
+import { BreakdownService } from '../../helper/breakdown/breakdown.service';
+import { Observable } from 'rxjs';
+import { MatAccordion } from '@angular/material';
 
 @Component({
   selector: 'app-breakdowns',
   templateUrl: './breakdowns.component.html',
-  styleUrls: ['./breakdowns.component.css'],
-  providers: [BreakdownService]
+  styleUrls: ['./breakdowns.component.css']
 })
 export class BreakdownsComponent implements OnInit {
 
+  @ViewChild('accordion',{static:true}) accordion: MatAccordion
   breakdownList: FormGroup;
+  breakdownInfo: FormGroup;
 
   constructor(private fb: FormBuilder,
     private dp: DatePipe,
-    private bservice: BreakdownService) { }
+    private bservice: BreakdownService) { 
+    }
 
   ngOnInit() {
-    this.breakdownList = this.fb.group({
-      breakdowns: this.fb.array([
-        title: this.fb.control(''),
-        timeRange: this.fb.control(''),
-        subTitle: this.fb.control(''),
-        description: this.fb.control('')
+    this.breakdownList = this.fb.group({      
+      breakdowns : this.fb.array([
       ])
     })
+
     this.breakdownForms.valueChanges.subscribe(val =>
-      this.bservice.breakdowns = this.breakdownForms)
+      this.bservice.setBreakdowns(this.breakdownForms))
   }
 
   public get breakdownForms() {
@@ -43,11 +43,13 @@ export class BreakdownsComponent implements OnInit {
       subTitle:[],
       description: []
     })
-    this.breakdownForms.push(breakdown)
+    
+    this.breakdownForms.push(breakdown);
   }
 
   removeBreakdown(i) {
     this.breakdownForms.removeAt(i)
   }
+
 
 }

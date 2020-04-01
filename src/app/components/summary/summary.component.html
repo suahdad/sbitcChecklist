@@ -1,0 +1,15 @@
+<div *ngIf="breakdownForms.length > 0">
+    <mat-card>
+        <h1>Breakdowns</h1>
+        <div *ngFor="let groups of breakdownForms.controls">
+            <ul>
+                <li>
+                    <p>
+                        {{groups.value.title}}
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </mat-card>
+</div>
+

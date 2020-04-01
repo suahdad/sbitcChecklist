@@ -16,6 +16,8 @@ export class StepperComponent implements OnInit {
   summaryGroup: FormGroup;
 
   constructor(private _formBuilder: FormBuilder) {
+    this.remarksGroup = this._formBuilder.group({
+    })
     this.breakdownsGroup = this._formBuilder.group({
     })
     this.summaryGroup = this._formBuilder.group({

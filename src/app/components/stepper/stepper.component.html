@@ -1,7 +1,14 @@
 <mat-horizontal-stepper>
 
+  <mat-step [stepControl]="remarksGroup">
+    <form [formGroup]="remarksGroup">
+      <ng-template matStepLabel>Remarks</ng-template>
+      <app-remarks></app-remarks>
+    </form>
+  </mat-step>
+
   <mat-step [stepControl]="breakdownsGroup">
-    <form [formGroup]="breakdownsGroup"></form>
+    <form [formGroup]="breakdownsGroup">
       <ng-template matStepLabel>Breakdowns</ng-template>
       <app-breakdowns></app-breakdowns>
     </form>

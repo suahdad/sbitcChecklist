@@ -1,0 +1,29 @@
+<h1>Remarks</h1>
+<div [formGroup]="remarksGroup">
+  <div>
+      <mat-list *ngFor="let item of remarksForms.controls; let i = index">
+        <span>
+          <span>
+            <mat-form-field>
+              Component
+              <mat-select>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field >
+              Issue
+              <mat-select>
+              </mat-select>
+            </mat-form-field>
+          </span>
+
+          <button mat-raised-button="warn" (click)="deleteRemark(i)">
+            Delete
+          </button>
+        </span>
+      </mat-list>
+  </div>
+</div>
+<button mat-raised-button color="primary" (click)="addRemarks()">
+  Add
+</button>
