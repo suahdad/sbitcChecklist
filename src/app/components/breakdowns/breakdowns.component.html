@@ -1,7 +1,7 @@
 <h1>Breakdowns</h1>
 <mat-accordion #accordion="matAccordion" [formGroup]="breakdownList" >
   <div formArrayName="breakdowns">
-    <div *ngFor="let breakdown of breakdownForms.controls; let i = index" [formGroupName]="remarks">
+    <div *ngFor="let breakdown of breakdownForms.controls; let i = index" [formGroupName]="i">
       <mat-expansion-panel hideToggle="true">
         <mat-expansion-panel-header>
           <mat-panel-title class="title">{{breakdown.value.title}}</mat-panel-title>

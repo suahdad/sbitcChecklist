@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { IssuesService } from '../../helper/issues/issues.service';
 import { Issues } from 'src/app/shared/models/issues/issues';
-import { validateBasis } from '@angular/flex-layout';
+import { RemarksService } from 'src/app/helper/remarks.service';
 
 @Component({
   selector: 'app-remarks',
@@ -13,17 +13,23 @@ export class RemarksComponent implements OnInit {
 
   private remarksGroup: FormGroup
   private issuesList: Issues[]
+  displayedColumns: string[] = ['eqComponent', 'issue'];
 
   constructor(private issuesService: IssuesService,
-    private fb: FormBuilder) {
-    this.remarksGroup = this.fb.group({
-      remarksList: this.fb.array([])
-    })
+    private fb: FormBuilder,
+    private remarksService: RemarksService) {
   }
 
   ngOnInit() {
+    this.remarksGroup = this.fb.group({
+      remarksList: this.fb.array([])
+    })
+
     this.issuesService.getIssues()
     .subscribe(val => this.issuesList = val)
+
+    this.remarksForms.valueChanges.subscribe(val =>
+      this.remarksService.setRemarks(this.remarksForms))
   }
 
   get remarksForms()
@@ -38,7 +44,6 @@ export class RemarksComponent implements OnInit {
     })
 
     this.remarksForms.push(remarks)
-    console.log(this.remarksGroup)
   }
 
   deleteRemark(index) {

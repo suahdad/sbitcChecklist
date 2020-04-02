@@ -1,3 +1,18 @@
+<div *ngIf="remarksForms.length > 0">
+    <mat-card>
+        <h1>Remarks</h1>
+        <div *ngFor="let groups of remarksForms.controls">
+            <ul>
+                <li>
+                    <p>
+                        Component: {{groups.value.eqComponent}} || Issue: {{groups.value.issue}} 
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </mat-card>
+</div>
+
 <div *ngIf="breakdownForms.length > 0">
     <mat-card>
         <h1>Breakdowns</h1>
@@ -13,3 +28,6 @@
     </mat-card>
 </div>
 
+<button mat-raised-button color="primary" (click)="submitForm()">
+    Submit
+  </button>
