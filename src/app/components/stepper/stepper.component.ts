@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import { format } from 'url';
+import { MatStepperModule, MatHorizontalStepper, MatStepper } from '@angular/material/stepper';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-stepper',
@@ -9,7 +11,8 @@ import { format } from 'url';
 })
 export class StepperComponent implements OnInit {
 
-  isLinear = false;
+
+  @ViewChild('mainStepper', {static: false}) mainStepper: MatStepper;
 
   remarksGroup: FormGroup;
   breakdownsGroup: FormGroup;
@@ -22,9 +25,11 @@ export class StepperComponent implements OnInit {
     })
     this.summaryGroup = this._formBuilder.group({
     })
+
   }
 
   ngOnInit() {
   }
+
 
 }

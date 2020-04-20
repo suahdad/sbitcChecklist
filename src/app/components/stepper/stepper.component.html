@@ -1,6 +1,6 @@
-<mat-horizontal-stepper>
+<mat-horizontal-stepper #mainStepper>
 
-  <mat-step [stepControl]="remarksGroup">
+  <mat-step [stepControl]="remarksGroup" #first>
     <form [formGroup]="remarksGroup">
       <ng-template matStepLabel>Remarks</ng-template>
       <app-remarks></app-remarks>
@@ -14,7 +14,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="summaryGroup">
+  <mat-step [stepControl]="summaryGroup" #last>
     <form [formGroup]="summaryGroup">
       <ng-template matStepLabel>Summary</ng-template>
       <app-summary></app-summary>
@@ -22,3 +22,8 @@
   </mat-step>
 
 </mat-horizontal-stepper>
+
+<div>
+  <button mat-raised-button color="primary" class="navButtonPrev" *ngIf="mainStepper.selectedIndex != first" (click)="mainStepper.previous()">Previous</button>
+  <button mat-raised-button color="primary" class="navButtonNext" *ngIf="mainStepper.selected != last" (click)="mainStepper.next()">Next</button>
+</div>
