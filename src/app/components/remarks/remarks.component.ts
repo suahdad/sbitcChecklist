@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { IssuesService } from '../../helper/issues/issues.service';
-import { Issues } from 'src/app/shared/models/issues/issues';
-import { RemarksService } from 'src/app/helper/remarks.service';
+import { Issues } from '../../shared/models/issues/issues';
+import { RemarksService } from '../../helper/remarks.service';
 
 @Component({
   selector: 'app-remarks',

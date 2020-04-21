@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { BreakdownService } from '../../helper/breakdown/breakdown.service';
 import { FormArray } from '@angular/forms';
-import { RemarksService } from 'src/app/helper/remarks.service';
+import { RemarksService } from '../../helper/remarks.service';
 
 @Component({
   selector: 'app-summary',
