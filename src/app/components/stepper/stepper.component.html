@@ -24,6 +24,6 @@
 </mat-horizontal-stepper>
 
 <div>
-  <button mat-raised-button color="primary" class="navButtonPrev" *ngIf="mainStepper.selectedIndex != first" (click)="mainStepper.previous()">Previous</button>
+  <button mat-raised-button color="primary" class="navButtonPrev" *ngIf="mainStepper.selected != first" (click)="mainStepper.previous()">Previous</button>
   <button mat-raised-button color="primary" class="navButtonNext" *ngIf="mainStepper.selected != last" (click)="mainStepper.next()">Next</button>
 </div>
