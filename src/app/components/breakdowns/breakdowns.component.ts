@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormControl,FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { BreakdownService } from '../../helper/breakdown/breakdown.service';
+import { BreakdownService } from '../../services/breakdown/breakdown.service';
 import { Observable } from 'rxjs';
 import { MatAccordion } from '@angular/material';
 
