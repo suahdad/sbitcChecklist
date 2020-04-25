@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/authentication/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,52 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class LoginComponent implements OnInit {
 
-  ngOnInit() {
+  loginform: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = '';
+
+  constructor(
+    private _fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ){
+    if(this.authService.currentUserValue) {
+      this.router.navigate(['/equipment']);
+    }
+
   }
+  ngOnInit() {
+    this.loginform = this._fb.group({
+      username: [''],
+      password: ['']
+    })
+    
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/equipment'
+  }
+  
+  get f() { return this.loginform.controls;}
+
+  onSubmit(){
+    this.submitted = true;
+
+    if (this.loginform.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService.login(this.f.username.value,this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
+    }
 
 }

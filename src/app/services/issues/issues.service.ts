@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Issues } from '../../shared/models/issues';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssuesService {
 
-  private issuesUrl = 'https://10.88.140.133:44350/api/issues'
+  private issuesUrl = `${environment.apiURL}/api/issues`
   constructor(private http: HttpClient) {  }
 
   getIssues(): Observable<Issues[]> {
