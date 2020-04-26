@@ -16,8 +16,4 @@ export class IssuesService {
     return this.http.get<Issues[]>(this.issuesUrl);
   }
 
-  getissues(key: string): Observable<Issues[]> {
-    return this.http.get<Issues[]>(`${this.issuesUrl}/${key}`);
-  }
-
 }

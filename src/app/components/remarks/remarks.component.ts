@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { IssuesService } from '../../services/issues/issues.service';
 import { Issues } from '../../shared/models/issues';
 import { RemarksService } from '../../services/remarks/remarks.service';
+import { ComponentService } from 'src/app/services/component.service';
+import { EqComponent } from 'src/app/shared/models/component';
 
 @Component({
   selector: 'app-remarks',
@@ -11,39 +13,44 @@ import { RemarksService } from '../../services/remarks/remarks.service';
 })
 export class RemarksComponent implements OnInit {
 
-  private remarksGroup: FormGroup
+  private formGroup: FormGroup
+  private controlGroup : FormGroup
   private issuesList: Issues[]
-  displayedColumns: string[] = ['eqComponent', 'issue'];
+    private compList: EqComponent[]
 
   constructor(private issuesService: IssuesService,
+    private compService: ComponentService,
     private fb: FormBuilder,
     private remarksService: RemarksService) {
   }
 
   ngOnInit() {
-    this.remarksGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       remarksList: this.fb.array([])
     })
 
-    this.issuesService.getIssues()
+    this.compService.getComponent() //load issues for options
+    .subscribe(val => this.compList = val)
+
+    this.issuesService.getIssues() //load issues for options
     .subscribe(val => this.issuesList = val)
 
-    this.remarksForms.valueChanges.subscribe(val =>
+    this.remarksForms.valueChanges.subscribe(val => //subscribe changes to remarksForms
       this.remarksService.setRemarks(this.remarksForms))
   }
 
   get remarksForms()
   {
-    return this.remarksGroup.get('remarksList') as FormArray
+    return this.formGroup.get('remarksList') as FormArray
   }
 
   addRemarks() {
-    const remarks = this.fb.group({
-      eqComponent:[''],
-      issue:['']
+    const controlGroup = this.fb.group({
+      component: [''],
+      issue: ['']
     })
 
-    this.remarksForms.push(remarks)
+    this.remarksForms.push(controlGroup)
   }
 
   deleteRemark(index) {

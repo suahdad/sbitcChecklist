@@ -1,3 +1,5 @@
-<mat-toolbar>
-  <span>Hello, Juan Dela Cruz @ RTG01</span>
-</mat-toolbar>
+<div *ngIf="user && equip">
+  <mat-toolbar >
+    <span>Hello {{user}} @ {{equip}}</span>
+  </mat-toolbar>
+</div>

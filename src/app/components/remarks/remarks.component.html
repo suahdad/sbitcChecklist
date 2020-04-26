@@ -1,17 +1,23 @@
 <h1>Remarks</h1>
-<div [formGroup]="remarksGroup">
+<div [formGroup]="formGroup">
   <div formArrayName="remarksList">
-      <mat-list *ngFor="let item of remarksForms.controls; let i = index" formGroupName="{{i}}">
-        <div>
-          <span>
+      <mat-list *ngFor="let item of remarksForms.controls; let i = index" >
+        <div formGroupName={{i}}>
+          <span> 
             <mat-form-field class="remarks">
               Component
-              <mat-select formControlName="eqComponent">
+              <mat-select formControlName="component">
+                <mat-option *ngFor="let component of compList" [value]="component.id">
+                  {{component.id}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field >
-              Issue
+                Issue
               <mat-select formControlName="issue">
+                <mat-option *ngFor="let issue of issuesList" [value]="issue.id">
+                  {{issue.id}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
           </span>
@@ -21,7 +27,6 @@
           </button>
         </div>
       </mat-list>
-      
   </div>
 </div>
 <button mat-raised-button color="primary" (click)="addRemarks()">
