@@ -62,7 +62,7 @@ export class AuthService {
      return this.http.post<any>(`${environment.apiURL}/api/Equipments/Auth`,postData,{headers: headers})
      .pipe(map(equip => {  
       localStorage.setItem('currentequip', JSON.stringify(equip));
-      this.currentUserSubject.next(equip);
+      this.currentEquipmentSubject.next(equip);
       return equip;
      }));
    }

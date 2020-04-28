@@ -24,6 +24,7 @@ export class EquipmentComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     if(this.authService.currentEquipmentValue) {
+      console.log(this.authService.currentEquipmentValue)
       this.router.navigate(['']);
     }
    }
@@ -32,8 +33,7 @@ export class EquipmentComponent implements OnInit {
     this.equipmentForm = this._fb.group({
       equipment: ['']
     })
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || ''
+    
   }
 
   get f(){
@@ -45,7 +45,7 @@ export class EquipmentComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
-        this.router.navigate([this.returnUrl]);
+        this.router.navigate(['']);
       },
       error => {
         this.error = error;

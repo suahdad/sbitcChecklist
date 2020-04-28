@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       password: ['']
     })
     
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/equipment'
   }
   
   get f() { return this.loginform.controls;}
@@ -46,13 +45,15 @@ export class LoginComponent implements OnInit {
     if (this.loginform.invalid) {
       return;
     }
+    
 
     this.loading = true;
     this.authService.login(this.f.username.value,this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          console.log(this.returnUrl)
+          this.router.navigate(['equipment']);
         },
         error => {
           this.error = error;
