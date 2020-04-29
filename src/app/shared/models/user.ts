@@ -1,9 +1,9 @@
 export class User {
-    Id: string;
-    FirstName: string;
-    MiddleName: string;
-    LastName: string;
-    Password: string;
-    IsActive: boolean;
+    id: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    password: string;
+    isActive: boolean;
     token?: string;
 }

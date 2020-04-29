@@ -1,6 +1,6 @@
 export class Breakdown {
-    id: Int32Array;
-    rtgformid: Int32Array;
+    id: number;
+    rtgformid: number;
     timestart: Date;
     timeend: Date;
     description: Date;

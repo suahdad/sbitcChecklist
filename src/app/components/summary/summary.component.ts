@@ -4,6 +4,10 @@ import { FormArray } from '@angular/forms';
 import { RemarksService } from '../../services/remarks/remarks.service';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { Router } from '@angular/router';
+import { RTGForm } from 'src/app/shared/models/rtgform';
+import { RtgformService } from 'src/app/services/rtgform.service';
+import { map } from 'rxjs/operators';
+import { Breakdown } from 'src/app/shared/models/breakdown';
 
 @Component({
   selector: 'app-summary',
@@ -17,7 +21,8 @@ export class SummaryComponent implements OnInit {
   constructor(private bservices: BreakdownService,
     private rservices:RemarksService,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private rtgService: RtgformService) {
   }
   ngOnInit() { 
     this.bservices.breakdowns.subscribe(val =>
@@ -35,10 +40,35 @@ export class SummaryComponent implements OnInit {
     return this.remarks as FormArray
   }
 
+  createRTGForm(): RTGForm {
+    var data = new RTGForm
+    var currentDateTime = new Date
+
+    data.datecreated = currentDateTime
+    data.datemodified = currentDateTime
+    data.equipmentId = this.authService.currentEquipmentValue.id
+    data.createdbyid = this.authService.currentUserValue.id
+    data.modifiedbyid = null
+
+    return data
+  }
+
+  createbreakdowns(rtgKey : number) : Breakdown[]{
+    var data : Breakdown[]
+    this.breakdownForms.controls.map( x=> {
+      data.push(new Breakdown{
+        rtgformid = rtgKey,
+        timestart = x.get('')[0]
+      })
+    })
+    return data
+  }
+
   submitForm(){
-    console.log(this.breakdownForms.value)
-    console.log(this.remarksForms.value)
-    this.authService.logout()
-    this.router.navigate(['/login'])
+    var rtgForm = this.createRTGForm()
+    var key = this.rtgService.saveRTGForm(rtgForm)
+    this.bservices.saveBreakdown()
+    //this.authService.logout()
+    //this.router.navigate(['/login'])
   }
 }

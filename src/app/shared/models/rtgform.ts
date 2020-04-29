@@ -1,5 +1,5 @@
 export class RTGForm {
-    id: Int32Array;
+    id: number;
     equipmentId: string;
     datecreated: Date;
     datemodified: Date;
