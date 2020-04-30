@@ -1,3 +1,3 @@
 export class Equipment {
-    Id: string;
+    id: string;
 }

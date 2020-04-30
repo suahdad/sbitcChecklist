@@ -13,10 +13,9 @@ export class BreakdownService {
   private breakApi = `${environment.apiURL}/api/breakdowns`
   private dataSource = new BehaviorSubject('');
   breakdowns = this.dataSource.asObservable();
-  http: HttpClient;
   currentKey: any;
 
-  constructor() {    }
+  constructor(private http: HttpClient) {    }
   
   setBreakdowns(breakdownList) {
     this.dataSource.next(breakdownList)

@@ -1,3 +1,6 @@
+import { Breakdown } from './breakdown';
+import { Remark } from './remark';
+
 export class RTGForm {
     id: number;
     equipmentId: string;
@@ -5,5 +8,8 @@ export class RTGForm {
     datemodified: Date;
     createdbyid: string;
     modifiedbyid: string;
+
+    breakdowns: Breakdown[]
+    remarks: Remark[]
     
 }

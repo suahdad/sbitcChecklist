@@ -13,10 +13,10 @@ import { EqComponent } from 'src/app/shared/models/component';
 })
 export class RemarksComponent implements OnInit {
 
-  private formGroup: FormGroup
-  private controlGroup : FormGroup
-  private issuesList: Issues[]
-    private compList: EqComponent[]
+  public formGroup: FormGroup
+  public controlGroup : FormGroup
+  public issuesList: Issues[]
+  public compList: EqComponent[]
 
   constructor(private issuesService: IssuesService,
     private compService: ComponentService,

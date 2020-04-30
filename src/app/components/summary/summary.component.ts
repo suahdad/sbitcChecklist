@@ -8,6 +8,8 @@ import { RTGForm } from 'src/app/shared/models/rtgform';
 import { RtgformService } from 'src/app/services/rtgform.service';
 import { map } from 'rxjs/operators';
 import { Breakdown } from 'src/app/shared/models/breakdown';
+import { timer } from 'rxjs';
+import { Remark } from 'src/app/shared/models/remark';
 
 @Component({
   selector: 'app-summary',
@@ -53,22 +55,44 @@ export class SummaryComponent implements OnInit {
     return data
   }
 
-  createbreakdowns(rtgKey : number) : Breakdown[]{
-    var data : Breakdown[]
-    this.breakdownForms.controls.map( x=> {
-      data.push(new Breakdown{
-        rtgformid = rtgKey,
-        timestart = x.get('')[0]
-      })
-    })
+  createbreakdowns(): Breakdown[]{
+    var data: Breakdown[] = new Array()
+    this.breakdownForms.controls.forEach( x => {
+      var tempData: Breakdown = new Breakdown
+      var timeRange: Date[] = x.get('timeRange').value
+
+      tempData.timestart = timeRange[0]
+      tempData.timeend = timeRange[1]
+      tempData.description = x.get('description').value
+      data.push(tempData)
+    });
+    console.log(data)
+    return data
+  }
+
+  createRemarks(): Remark[]{
+    var data: Remark[] = new Array()
+    this.remarksForms.controls.forEach( x => {
+      var tempData: Remark = new Remark
+
+      tempData.componentid = x.get('component').value
+      tempData.issueid = x.get('issue').value
+      data.push(tempData)
+    });
+    console.log(data)
     return data
   }
 
   submitForm(){
     var rtgForm = this.createRTGForm()
-    var key = this.rtgService.saveRTGForm(rtgForm)
-    this.bservices.saveBreakdown()
-    //this.authService.logout()
-    //this.router.navigate(['/login'])
+    var breakdowns = this.createbreakdowns()
+    var remarks = this.createRemarks()
+
+    rtgForm.breakdowns = breakdowns
+    rtgForm.remarks = remarks
+
+    this.rtgService.saveRTGForm(rtgForm)
+    this.authService.logout()
+    this.router.navigate(['/login'])
   }
 }
