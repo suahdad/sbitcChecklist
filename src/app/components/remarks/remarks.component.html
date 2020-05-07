@@ -4,7 +4,7 @@
       <mat-list *ngFor="let item of remarksForms.controls; let i = index" >
         <div formGroupName={{i}}>
           <span> 
-            <mat-form-field class="remarks">
+            <mat-form-field>
               Component
               <mat-select formControlName="component">
                 <mat-option *ngFor="let component of compList" [value]="component.id">
@@ -22,9 +22,11 @@
             </mat-form-field>
           </span>
 
-          <button mat-raised-button color="warn" (click)="deleteRemark(i)">
-            Delete
-          </button>
+          <span>
+              <button mat-raised-button color="warn" (click)="deleteRemark(i)">
+                Delete
+              </button>
+          </span>
         </div>
       </mat-list>
   </div>

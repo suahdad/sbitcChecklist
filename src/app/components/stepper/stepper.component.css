@@ -6,6 +6,10 @@
   margin-top: 16px;
 }
 
+.stepperArea {
+  border: 5px solid red;
+}
+
 .navButtonPrev {
   position: fixed;
   bottom: 0;

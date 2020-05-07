@@ -1,3 +1,3 @@
 export class Issues {
-  Id: string;
+  id: string;
 }

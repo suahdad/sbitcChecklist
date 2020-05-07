@@ -1,5 +1,7 @@
-.remarks{
-    margin: auto;
-    justify-self: start;
-    width: max-content;
+.remarks.fields{
+    margin-right: 3%;
+}
+
+.delete{
+    padding: auto;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/services/authentication/auth.service';
+//import { AuthService } from '../../app/services/authentication/auth.service';
+import { AuthService } from '../../services/mock/fake-authentication.service';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
