@@ -1,7 +1,7 @@
-.remarks.fields{
-    margin-right: 3%;
+table{
+    width: 100%;
 }
 
-.delete{
-    padding: auto;
+mat-form-field{
+    width: 90%;
 }

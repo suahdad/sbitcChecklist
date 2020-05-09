@@ -26,7 +26,8 @@
         </div>
 
         <div>
-            <textarea formControlName="description" class="Description" class="description" maxlength="150"></textarea>
+            <textarea #desc formControlName="description" class="Description" class="description" maxlength="120"></textarea>
+            <p style="text-align: right;">{{120-desc.value.length}} Characters Left</p>
         </div>
         
       </mat-expansion-panel>
