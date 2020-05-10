@@ -1,12 +1,21 @@
 import { TestBed } from '@angular/core/testing';
-
 import { IssuesService } from './fake-issues.service';
 
 describe('FakeIssuesService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: IssuesService
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [IssuesService]
+    })
+  service = TestBed.get(IssuesService)
+  });
 
   it('should be created', () => {
-    const service: IssuesService = TestBed.get(IssuesService);
     expect(service).toBeTruthy();
+  });
+
+  it('getIssues() should return some values', () => {
+    service.getIssues().subscribe(data => 
+      expect(data.length).toBeGreaterThanOrEqual(1))
   });
 });

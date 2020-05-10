@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 //import { AuthService } from 'src/app/services/authentication/auth.service';
 import { AuthService} from '../../services/mock/fake-authentication.service'
 import { first } from 'rxjs/operators';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +50,12 @@ export class LoginComponent implements OnInit {
     
 
     this.loading = true;
-    this.authService.login(this.f.username.value,this.f.password.value)
+
+    let user: User
+    user.id = this.f.username.value
+    user.password = this.f.password.value
+
+    this.authService.login(user)
       .pipe(first())
       .subscribe(
         data => {

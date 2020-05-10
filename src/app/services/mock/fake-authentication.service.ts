@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../shared/models/user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
 import { Equipment } from 'src/app/shared/models/equipment';
-import { TestBed } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +12,7 @@ export class AuthService {
   public currentUser: Observable<User>;
   public currentEquipment: Observable<Equipment>;
   
-  constructor(private http: HttpClient) {
+  constructor() {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentuser')));
     this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(localStorage.getItem('currentequip')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -31,25 +27,16 @@ export class AuthService {
     return this.currentEquipmentSubject.value;
   }
 
-   login(username: string, password: string)
+   login(user: User)
    {
-     var user = new User()
-     user.id = username
-     user.isActive = true
-     user.firstName = 'test'
-     user.lastName = 'test'
-     user.password = password
-
       localStorage.setItem('currentuser', JSON.stringify(user))
       this.currentUserSubject.next(user)
       return this.currentUser;
     }
    
 
-   loginEquipment(id: string)
+   loginEquipment(equip: Equipment)
    {
-     var equip = new Equipment()
-     equip.id = id
 
       localStorage.setItem('currentequip', JSON.stringify(equip))
       this.currentEquipmentSubject.next(equip)
