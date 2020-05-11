@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    let user: User
+    let user: User = new User()
     user.id = this.f.username.value
     user.password = this.f.password.value
 
