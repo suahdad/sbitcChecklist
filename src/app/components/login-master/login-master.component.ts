@@ -19,6 +19,7 @@ export class LoginMasterComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

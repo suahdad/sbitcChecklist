@@ -5,9 +5,10 @@ import { LoginMasterComponent } from './components/login-master/login-master.com
 import { EquipmentComponent } from './components/login-equipment/equipment.component';
 import { MainformComponent } from './components/mainform/mainform.component';
 import { AuthGuard } from './helper/auth.guard';
+import { animation } from '@angular/animations';
 
 const routes: Routes = [
-  {path: 'login', component: LoginMasterComponent},
+  {path: 'login', component: LoginMasterComponent },
   {path: '', component: MainformComponent,canActivate:[AuthGuard]}
 ];
 

@@ -4,11 +4,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/mock/fake-authentication.service';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { slider } from 'src/app/route-animations';
 
 @Component({
   selector: 'app-equipment',
   templateUrl: './equipment.component.html',
-  styleUrls: ['./equipment.component.scss']
+  styleUrls: ['./equipment.component.scss'],
+  animations: [slider]
 })
 export class EquipmentComponent implements OnInit {
 
@@ -17,6 +19,7 @@ export class EquipmentComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  direction: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -34,7 +37,8 @@ export class EquipmentComponent implements OnInit {
     this.equipmentForm = this._fb.group({
       equipment: ['']
     })
-    
+
+    this.direction = 'isRight'
   }
 
   get f(){
