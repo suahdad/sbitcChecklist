@@ -1,0 +1,13 @@
+body{
+    background-image: url('../../../sbitc.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Numans', sans-serif;
+    }
+    
+    @media screen and (max-width: 768px) {
+        body {
+            background-position: center;
+        }
+    }

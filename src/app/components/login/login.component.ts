@@ -10,7 +10,7 @@ import { User } from 'src/app/shared/models/user';
   selector: 'app-login',
   templateUrl: './login.component.html',
   providers: [],
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(this.returnUrl)
-          this.router.navigate(['equipment']);
+          // console.log(this.returnUrl)
+          // this.router.navigate(['equipment']);
         },
         error => {
           this.error = error;

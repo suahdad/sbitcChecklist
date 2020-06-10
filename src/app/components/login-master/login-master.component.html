@@ -1,0 +1,4 @@
+<body>
+    <app-login @routeAnimations *ngIf="!user"></app-login>
+    <app-equipment @routeAnimations *ngIf="user && !equip"></app-equipment>
+</body>

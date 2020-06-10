@@ -19,6 +19,7 @@ import { RemarksComponent } from './components/remarks/remarks.component';
 import { BreakdownsComponent } from './components/breakdowns/breakdowns.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { DatePipe } from '@angular/common';
+import { LoginMasterComponent } from './components/login-master/login-master.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DatePipe } from '@angular/common';
     StepperComponent,
     RemarksComponent,
     BreakdownsComponent,
-    SummaryComponent
+    SummaryComponent,
+    LoginMasterComponent,
   ],
   imports: [
     BrowserModule,
