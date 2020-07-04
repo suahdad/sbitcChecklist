@@ -9,17 +9,14 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
 import { ErrorInterceptor } from './helper/error.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EquipmentComponent } from './components/login-equipment/equipment.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MainformComponent } from './components/mainform/mainform.component';
-import { StepperComponent } from './components/stepper/stepper.component';
-import { RemarksComponent } from './components/remarks/remarks.component';
-import { BreakdownsComponent } from './components/breakdowns/breakdowns.component';
-import { SummaryComponent } from './components/summary/summary.component';
 import { DatePipe } from '@angular/common';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,10 +25,6 @@ import { LoginMasterComponent } from './components/login-master/login-master.com
     EquipmentComponent,
     MenuComponent,
     MainformComponent,
-    StepperComponent,
-    RemarksComponent,
-    BreakdownsComponent,
-    SummaryComponent,
     LoginMasterComponent,
   ],
   imports: [
@@ -46,7 +39,12 @@ import { LoginMasterComponent } from './components/login-master/login-master.com
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
+    {
+        window.location.href = (route.data as any).externalUrl;
+    }
+}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

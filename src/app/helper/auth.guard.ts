@@ -1,6 +1,5 @@
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 // import {AuthService} from '../services/authentication/auth.service';
 import {AuthService} from '../services/mock/fake-authentication.service';
 
@@ -23,6 +22,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
+    //no need for returnURL, new users wont go back to other user's previous equipment form
     this.router.navigate(['login']);
     return false;
   }

@@ -3,6 +3,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/authentication/auth.service';
 
+
+//used to intercept http requests going out 
+//attaches jwt token
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private auth: AuthService){}

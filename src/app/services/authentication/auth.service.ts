@@ -39,14 +39,15 @@ export class AuthService {
        lastName: "test" //FOR API PURPOSES
      };
 
+     //added headers
      const headers: HttpHeaders = new HttpHeaders();
      headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
      return this.http.post<any>(`${environment.apiURL}/api/Users/Auth`,postData,{headers: headers})
      .pipe(map(user => {  
-      localStorage.setItem('currentuser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
-      return user;
+        localStorage.setItem('currentuser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
      }));
    }
 
