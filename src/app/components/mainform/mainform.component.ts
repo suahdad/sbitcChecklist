@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// import { AuthService } from '../../services/authentication/auth.service'
+import { AuthService } from '../../services/mock/fake-authentication.service'
 
 @Component({
   selector: 'app-mainform',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainformComponent implements OnInit {
 
-  constructor() { }
+  equipment: any;
+
+  constructor(auth : AuthService) { 
+    auth.currentEquipment.subscribe( data => this.equipment = data)
+  }
 
   ngOnInit() {
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/authentication/auth.service';
-// import { AuthService } from '../../services/mock/fake-authentication.service';
+// import { AuthService } from '../../services/authentication/auth.service';
+import { AuthService } from '../../services/mock/fake-authentication.service';
 import { slider } from '../../route-animations'
 
 @Component({

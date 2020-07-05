@@ -1,2 +1,4 @@
 <app-menu></app-menu>
-
+<app-empty-handler *ngIf="equipment == 'RTG001'"></app-empty-handler>
+<app-reach-stacker *ngIf="equipment == 'RTG002'"></app-reach-stacker>
+<app-tractor *ngIf="equipment == 'RTG003'"></app-tractor>
