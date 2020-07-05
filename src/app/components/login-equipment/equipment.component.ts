@@ -51,6 +51,8 @@ export class EquipmentComponent implements OnInit {
     .subscribe(
       data => {
         this.router.navigate(['']);
+        //added because sometimes after submission it doesn't go into the main form
+        location.reload();
       },
       error => {
         this.error = error;

@@ -27,10 +27,20 @@ export class AuthService {
     return this.currentEquipmentSubject.value;
   }
 
-   login(user: User)
+   login(username: string, password: string)
    {
-      localStorage.setItem('currentuser', JSON.stringify(user))
-      this.currentUserSubject.next(user)
+    var data : User = {
+      id: username,
+      password: password,
+      firstName: "test",
+      middleName: "test",
+      lastName: "test",
+      isActive: true
+      
+    }
+
+      localStorage.setItem('currentuser', JSON.stringify(data))
+      this.currentUserSubject.next(data)
       return this.currentUser;
     }
    
