@@ -1,5 +1,5 @@
-export class EqComponent {
-    id: string;  
+export class Condition {
+    id: string;
     shortname: string;
     description: string;
 }

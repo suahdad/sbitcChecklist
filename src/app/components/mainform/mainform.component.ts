@@ -9,10 +9,10 @@ import { AuthService } from '../../services/mock/fake-authentication.service'
 })
 export class MainformComponent implements OnInit {
 
-  equipment: any;
+  eqType: any;
 
   constructor(auth : AuthService) { 
-    auth.currentEquipment.subscribe( data => this.equipment = data)
+    auth.currentEquipment.subscribe( data => this.eqType = data)
   }
 
   ngOnInit() {
