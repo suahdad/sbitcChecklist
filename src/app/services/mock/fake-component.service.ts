@@ -11,11 +11,11 @@ export class ComponentService {
 
   getComponent() :Observable<EqComponent[]>{
     var comps : EqComponent[] = [
-      {id: 'test'},
-      {id: 'test2'},
-      {id: 'test3'},
-      {id: 'test4'},
-      {id: 'test5'},
+      {id: 'test', shortname:'', description: ''},
+      {id: 'test2', shortname:'', description: ''},
+      {id: 'test3', shortname:'', description: ''},
+      {id: 'test4', shortname:'', description: ''},
+      {id: 'test5', shortname:'', description: ''},
     ]
 
     return of(comps)

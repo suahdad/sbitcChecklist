@@ -1,5 +1,5 @@
 export class Equipment {
     id: string;
-    equipment_typeid: string;
+    equipment_TypeID: string;
     shortname: string;
 }

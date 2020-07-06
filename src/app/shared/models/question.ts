@@ -1,6 +1,6 @@
 export class Question {
-    equipment_typeid: string;
-    component_id: string;
-    question_text: string;
+    equipment_TypeID: string;
+    componentID: string;
+    question_Text: string;
     rank: number;
 }
