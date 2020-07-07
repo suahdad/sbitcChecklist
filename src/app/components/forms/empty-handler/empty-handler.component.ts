@@ -3,6 +3,7 @@ import { QuestionService } from '../../../services/question.service'
 import { Question } from 'src/app/shared/models/question';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { timer } from 'rxjs';
+import { ChecklistService } from 'src/app/services/checklist.service';
 
 @Component({
   selector: 'app-empty-handler',
@@ -17,7 +18,8 @@ export class EmptyHandlerComponent implements OnInit {
   questions: Question[] = new Array();
   eqType: string;
   constructor(private questionService: QuestionService,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private checklistService: ChecklistService) {
       this.auth.currentEquipment.subscribe( x => this.eqType = x.equipment_TypeID) //get equipmentType in authService
 
    }
@@ -31,9 +33,8 @@ export class EmptyHandlerComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("submitted")
     this.isSubmitted = true;
-
+    this.checklistService.submitChecklist();
   }
 
 }

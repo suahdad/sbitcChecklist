@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,10 @@ export class ChecklistService {
 
   constructor(private http: HttpClient,
     private checklistService: ChecklistService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private router: Router) { }
 
-  submitChecklist() {
-    this.checklistService.submitChecklist();
+  public submitChecklist() {
+    this.router.navigate(['test'])
   }
 }

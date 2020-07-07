@@ -1,1 +1,154 @@
-<p>tractor works!</p>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <!-- Brand/logo -->
+      <a class="navbar-brand">
+        <img [src]="logo" alt="logo" style="width:100px;">
+      </a>
+      
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <h3> PRE-OPERATION SAFETY INSPECTION CHECKLIST</h3>
+        </li>
+      
+      </ul>
+    </nav>
+  
+  <form action="">
+     <div class="container" *ngFor="let question of questions">
+        <div class="row">
+          <div class="col-25">
+             <label class="customcheck">{{question.question_Text}}
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+       </div>
+      <!-- <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Check Engine Oil Level
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Check Hydraulic Oil Level (after close all cylinders)
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Check Tires Condition
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Check Wiper Function
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Lights, signal lights functional and Spreader, straightness twist lock
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Fire extinguisher availability
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Oil Leaks
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Cleanness of the equipment
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Attachment Functions
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>
+      
+      <div class="row">
+          <div class="col-25">
+             <label class="customcheck">Display Errors
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+          <div class="col-75">
+             <textarea class="form-control" id="scales" rows="1"></textarea>
+          </div>
+        </div>  -->
+      
+        <input class="btn btn-primary" type="submit" value="Submit" (click)="onSubmit()" [disabled]="isSubmitted">
+  </form>
+  
+  </body>
