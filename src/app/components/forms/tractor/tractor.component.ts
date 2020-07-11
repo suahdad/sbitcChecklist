@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/authentication/auth.service';
-import { QuestionService } from 'src/app/services/question.service';
+import { QuestionService } from '../../../services/mock/fake-question.service'
+// import { QuestionService } from '../../../services/question.service'
 import { Question } from 'src/app/shared/models/question';
+import { AuthService } from 'src/app/services/mock/fake-authentication.service';
+// import { AuthService } from 'src/app/services/authentication/auth.service';
 import { ChecklistService } from 'src/app/services/checklist.service';
 
 @Component({

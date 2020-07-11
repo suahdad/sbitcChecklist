@@ -47,11 +47,9 @@ export class AuthService {
 
    loginEquipment(equip: Equipment)
    {
-
       localStorage.setItem('currentequip', JSON.stringify(equip))
       this.currentEquipmentSubject.next(equip)
       return this.currentEquipment
-     
    }
 
    logout()
