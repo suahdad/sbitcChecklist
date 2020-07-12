@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     this.loginform = this._fb.group({
-      username: [''],
-      password: ['']
+      username: ['user'],
+      password: ['password']
     })
     
   }
