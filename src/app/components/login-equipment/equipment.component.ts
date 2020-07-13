@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-// import { AuthService } from '../../services/authentication/auth.service';
-import { AuthService } from '../../services/mock/fake-authentication.service';
+import { AuthService } from '../../services/authentication/auth.service';
+// import { AuthService } from '../../services/mock/fake-authentication.service';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { slider } from 'src/app/route-animations';

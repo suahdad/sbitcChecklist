@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { AuthService } from 'src/app/services/authentication/auth.service';
-import { AuthService} from '../../services/mock/fake-authentication.service'
+import { AuthService } from '../../services/authentication/auth.service';
+// import { AuthService} from '../../services/mock/fake-authentication.service'
 import { first } from 'rxjs/operators';
-import { User } from 'src/app/shared/models/user';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-login',

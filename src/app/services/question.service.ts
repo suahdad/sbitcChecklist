@@ -15,7 +15,7 @@ export class QuestionService {
 
   getQuestions(eqType: string): Observable<Question[]> {
     this.QUESTIONS =  this.http.get<Question[]>(`${this.apiUrl}/${eqType}`);
-    console.log(this.QUESTIONS)
+    // console.log(this.QUESTIONS)
     return this.QUESTIONS
   }
 }

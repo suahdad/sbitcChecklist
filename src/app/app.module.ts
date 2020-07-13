@@ -17,9 +17,7 @@ import { MainformComponent } from './components/mainform/mainform.component';
 import { DatePipe } from '@angular/common';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { EmptyHandlerComponent } from './components/forms/empty-handler/empty-handler.component';
-import { ReachStackerComponent } from './components/forms/reach-stacker/reach-stacker.component';
-import { TractorComponent } from './components/forms/tractor/tractor.component';
+import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +27,7 @@ import { TractorComponent } from './components/forms/tractor/tractor.component';
     MenuComponent,
     MainformComponent,
     LoginMasterComponent,
-    EmptyHandlerComponent,
-    ReachStackerComponent,
-    TractorComponent,
+    EquipmentFormComponent,
   ],
   imports: [
     BrowserModule,
