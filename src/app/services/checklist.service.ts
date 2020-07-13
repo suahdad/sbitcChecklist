@@ -28,7 +28,7 @@ export class ChecklistService {
     this.http.post<Checklist>(this.apiUrl,data).subscribe(data => console.log(data));
     console.log(JSON.stringify(data))
 
-    // this.authService.logout();
-    // this.router.navigate(['test']);
+    this.authService.logout();
+    this.router.navigate(['test']);
   }
 }
