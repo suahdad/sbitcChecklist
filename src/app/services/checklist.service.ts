@@ -12,6 +12,8 @@ import { Checklist } from '../shared/models/checklist';
 })
 export class ChecklistService {
   apiUrl = `${environment.apiURL}/api/checklists`
+
+  submitSuccess = false;
   
   checklistItem = this.fb.group({
     checkbox: [''],
@@ -27,6 +29,8 @@ export class ChecklistService {
 
     this.http.post<Checklist>(this.apiUrl,data).subscribe(data => console.log(data));
     console.log(JSON.stringify(data))
+
+    this.submitSuccess = true;
 
     this.authService.logout();
     this.router.navigate(['test']);

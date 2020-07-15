@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
 import { MainformComponent } from './components/mainform/mainform.component';
 import { AuthGuard } from './helper/auth.guard';
+import { N4Guard } from './helper/n4.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
@@ -16,7 +17,7 @@ const routes: Routes = [
     },
     data: {
         externalUrl: 'http://10.122.8.114:8280/ecn4web/servlet/xmlrdt'
-    }
+    },canActivate:[N4Guard]
 }
 ];
 
