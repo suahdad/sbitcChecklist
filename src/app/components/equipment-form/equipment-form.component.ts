@@ -5,7 +5,7 @@ import { Question } from '../../shared/models/question';
 // import { AuthService } from '../../services/mock/fake-authentication.service';
 import { AuthService } from '../../services/authentication/auth.service';
 import { ChecklistService } from '../../services/checklist.service';
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
  
@@ -52,7 +52,11 @@ export class EquipmentFormComponent implements OnInit {
             compID: [x.componentID],
             label: [x.question_Text],
             check: [''],
-            desc: ['',Validators.maxLength(50)]
+            desc: ['',[
+              Validators.maxLength(50),
+              Validators.minLength(4),
+              this.hasCharacters
+            ]]
           },{validators: (group) => {
             if (!group.get('check').value) {
               return Validators.required(group.get('desc'))
@@ -64,11 +68,17 @@ export class EquipmentFormComponent implements OnInit {
     })
   }
 
+  hasCharacters(input: FormControl) {
+    const control = input.value as string
+    return control.trim().length > 0 ? null : {hasNoCharacters: true}
+  }
+
   get checklistItemArray(){
     return this.fg.get('checklistItems') as FormArray
   }
 
   onSubmit() {
+    console.log(this.checklistItemArray.controls)
     if(this.fg.valid) {
       // this.isSubmitted = true;
 

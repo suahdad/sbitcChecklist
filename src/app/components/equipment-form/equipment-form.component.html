@@ -14,7 +14,7 @@
       </ul>
     </nav>
   
-  <div [formGroup]="fg">
+  <div [formGroup]="fg" (ngSubmit) = "onSubmit()">
      <form action="" formArrayName="checklistItems">
         <div class="container" *ngFor="let item of checklistItemArray.controls; let i = index" [formGroupName]="i">
            <div class="row" >
@@ -149,7 +149,7 @@
              </div>
            </div>  -->
          
-           <input class="btn btn-primary" type="submit" value="Submit" (click)="onSubmit()" [disabled]="isSubmitted">
+           <input class="btn btn-primary" type="submit" value="Submit" [disabled]="isSubmitted">
      </form>
   </div>
   
