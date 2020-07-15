@@ -20,12 +20,28 @@
            <div class="row" >
              <div class="col-25">
                 <label class="customcheck">{{item.controls.label.value}}
-                   <input type="checkbox" formControlName="check">
+                   <input type="checkbox" formControlName="check" (change)="refresh(item)">
                    <span class="checkmark"></span>
                  </label>
              </div>
              <div class="col-75">
-                <textarea class="form-control" id="scales" rows="1" formControlName="desc"></textarea>
+                <!-- add css invalid class if error -->
+                <textarea class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': item.controls.desc.errors}"></textarea>
+                <div *ngIf="item.errors? item.errors.required : false" class="invalid-feedback">
+                  Remarks is required
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.hasNoCharacters : false" class="invalid-feedback">
+                  Remarks should not be empty
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.maxlength : false" class="invalid-feedback">
+                  Remarks should be less than 50 characters
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.minlength : false" class="invalid-feedback">
+                  Remarks should be more than 4 characters
+                </div>
              </div>
            </div>
           </div>

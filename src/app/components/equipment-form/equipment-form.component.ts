@@ -5,9 +5,12 @@ import { Question } from '../../shared/models/question';
 // import { AuthService } from '../../services/mock/fake-authentication.service';
 import { AuthService } from '../../services/authentication/auth.service';
 import { ChecklistService } from '../../services/checklist.service';
-import { FormBuilder, FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
+import { validateBasis } from '@angular/flex-layout';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
+import { group } from 'console';
  
 
 @Component({
@@ -52,15 +55,18 @@ export class EquipmentFormComponent implements OnInit {
             compID: [x.componentID],
             label: [x.question_Text],
             check: [''],
-            desc: ['',[
-              Validators.maxLength(50),
-              Validators.minLength(4),
-              this.hasCharacters
-            ]]
+            desc: ['']
           },{validators: (group) => {
-            if (!group.get('check').value) {
+              const check = group.get('check')
+              if(check.value){
+                group.get('desc').setValidators(Validators.maxLength(50))
+                return null
+              }
+              group.get('desc').setValidators(Validators.maxLength(50))
+              group.get('desc').setValidators(Validators.minLength(4))
+              group.get('desc').setValidators(this.hasCharacters)
+
               return Validators.required(group.get('desc'))
-            }
           }})
     
           this.checklistItemArray.push(items)
@@ -68,9 +74,16 @@ export class EquipmentFormComponent implements OnInit {
     })
   }
 
+  refresh(item: AbstractControl) {
+    item.get('desc').updateValueAndValidity()
+    console.log(item.parent)
+  }
+
   hasCharacters(input: FormControl) {
     const control = input.value as string
+  
     return control.trim().length > 0 ? null : {hasNoCharacters: true}
+
   }
 
   get checklistItemArray(){
@@ -78,7 +91,7 @@ export class EquipmentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.checklistItemArray.controls)
+    this.fg.updateValueAndValidity()
     if(this.fg.valid) {
       // this.isSubmitted = true;
 
