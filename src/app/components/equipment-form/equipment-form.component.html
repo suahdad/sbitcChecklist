@@ -26,7 +26,7 @@
              </div>
              <div class="col-75">
                 <!-- add css invalid class if error -->
-                <textarea class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': item.controls.desc.errors}"></textarea>
+                <textarea class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': (item.controls.check.touched || item.controls.desc.touched) && item.controls.desc.errors}"></textarea>
                 <div *ngIf="item.errors? item.errors.required : false" class="invalid-feedback">
                   Remarks is required
                 </div>

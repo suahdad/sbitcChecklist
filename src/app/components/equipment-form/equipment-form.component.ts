@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 // import { QuestionService } from '../../services/mock/fake-question.service'
 import { QuestionService } from '../../services/question.service'
 import { Question } from '../../shared/models/question';
@@ -8,7 +8,7 @@ import { ChecklistService } from '../../services/checklist.service';
 import { FormBuilder, FormArray, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
-import { validateBasis } from '@angular/flex-layout';
+import { validateBasis, FlexAlignStyleBuilder } from '@angular/flex-layout';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { group } from 'console';
  
@@ -23,6 +23,7 @@ export class EquipmentFormComponent implements OnInit {
   private logo = require("../../../assets/check.png");
   private isSubmitted : boolean = false;
   private fg: FormGroup ;
+  private isFinishedChecking = false;
 
   questions: Question[] = new Array();
   eqType: string;
@@ -75,8 +76,10 @@ export class EquipmentFormComponent implements OnInit {
   }
 
   refresh(item: AbstractControl) {
-    item.get('desc').updateValueAndValidity()
-    console.log(item.parent)
+    if(item){
+      item.get('desc').updateValueAndValidity()
+      console.log(item.parent)
+    }
   }
 
   hasCharacters(input: FormControl) {
