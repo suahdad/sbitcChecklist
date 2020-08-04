@@ -6,6 +6,8 @@ import { AuthService } from './authentication/auth.service';
 import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 import { environment } from 'src/environments/environment';
 import { Checklist } from '../shared/models/checklist';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,9 @@ export class ChecklistService {
 
     this.authService.logout();
     this.router.navigate(['test']);
+  }
+
+  public getChecklist() : Observable<Checklist[]>{
+    return this.http.get<any>(this.apiUrl)
   }
 }

@@ -13,9 +13,11 @@
       
       </ul>
     </nav>
-  
   <div [formGroup]="fg" (ngSubmit) = "onSubmit()">
      <form action="" formArrayName="checklistItems">
+      <div *ngIf="this.isEndOfMonth" class="alert alert-warning" role="alert">
+        This is a warning alert—check it out!
+      </div>
         <div class="container" *ngFor="let item of checklistItemArray.controls; let i = index" [formGroupName]="i">
            <div class="row" >
              <div class="col-25">

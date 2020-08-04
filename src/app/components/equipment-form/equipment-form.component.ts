@@ -24,6 +24,7 @@ export class EquipmentFormComponent implements OnInit {
   private isSubmitted : boolean = false;
   private fg: FormGroup ;
   private isFinishedChecking = false;
+  private isEndOfMonth;
 
   questions: Question[] = new Array();
   eqType: string;
@@ -41,6 +42,10 @@ export class EquipmentFormComponent implements OnInit {
    }
 
   ngOnInit() {
+    var dateNow = new Date();
+    var endOfMonth = new Date(dateNow.getFullYear(),dateNow.getMonth()+1,0);
+    this.isEndOfMonth = dateNow == endOfMonth;
+    
     this.auth.currentEquipment.subscribe( x => this.eqType = x.equipment_TypeID) //get equipmentType in authService
 
     //get questions
@@ -94,43 +99,51 @@ export class EquipmentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.fg.updateValueAndValidity()
-    if(this.fg.valid) {
-      // this.isSubmitted = true;
+    if(navigator.onLine){
 
-      //turn checklistItemArray => checklistFormat
+      //touch all Check Control to validate
+      Object.keys(this.checklistItemArray.controls).forEach( form => {
+        this.checklistItemArray.get(form).get('check').markAsTouched();
+      }) 
 
-      const checklistItems: ChecklistItem[] = new Array();
 
-      this.checklistItemArray.controls.map( x => {
-        const item: ChecklistItem = {
-          componentid: x.get('compID').value,
-          conditionid: x.get('check').value? 'OK':'OTHER',
-          equipment_typeid: x.get('eqType').value,
-          remarks: x.get('desc').value
+      if(this.fg.valid) {
+        // this.isSubmitted = true;
+  
+        //turn checklistItemArray => checklistFormat
+  
+        const checklistItems: ChecklistItem[] = new Array();
+  
+        this.checklistItemArray.controls.map( x => {
+          const item: ChecklistItem = {
+            componentid: x.get('compID').value,
+            conditionid: x.get('check').value? 'OK':'OTHER',
+            equipment_typeid: x.get('eqType').value,
+            remarks: x.get('desc').value
+          }
+  
+          checklistItems.push(item)
+        })
+  
+        const checklist: Checklist = {
+          checklist_items: checklistItems,
+          date_created: new Date,
+          equipmentid: this.auth.currentEquipmentValue.id,
+          userid: this.auth.currentUserValue.id
         }
-
-        checklistItems.push(item)
-      })
-
-      const checklist: Checklist = {
-        checklist_items: checklistItems,
-        date_created: new Date,
-        equipmentid: this.auth.currentEquipmentValue.id,
-        userid: this.auth.currentUserValue.id
+        
+        
+        console.log(checklist)
+  
+        this.checklistService.submitChecklist(checklist)
+      } else {
+        console.log(false)
       }
-      
-      
-      console.log(checklist)
-
-      this.checklistService.submitChecklist(checklist)
-    } else {
-      console.log(false)
+    }else{
+      window.alert("No Connection, Please Connect to the Internet First")
     }
 
-    
-
-    
+   
     // this.checklistService.submitChecklist();
   }
 
