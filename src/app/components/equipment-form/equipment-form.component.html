@@ -28,8 +28,9 @@
                  <span>
                   <mat-form-field *ngIf="!item.controls.check.value" style="display: inline-block;">
                     <mat-label>Condition</mat-label>
-                    <mat-select>
-                      <mat-option>test</mat-option>
+                    <mat-select formControlName="condition">
+                      <mat-option value="test">test</mat-option>
+                      <mat-option value="OTHERS">OTHERS</mat-option>
                     </mat-select>
                   </mat-form-field>
                  </span>
@@ -37,7 +38,7 @@
              </div>
              <div class="col-75">
                 <!-- add css invalid class if error -->
-                <textarea class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': (item.controls.check.touched || item.controls.desc.touched) && item.controls.desc.errors}"></textarea>
+                <textarea [ngClass]="{'hidden':item.controls.condition.value != 'OTHERS'}" class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': (item.controls.check.touched || item.controls.desc.touched) && item.controls.desc.errors}"></textarea>
                 <div *ngIf="item.errors? item.errors.required : false" class="invalid-feedback">
                   Remarks is required
                 </div>

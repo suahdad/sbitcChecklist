@@ -143,3 +143,7 @@ color: white;
   flex-direction: row-reverse;
   padding-right: 100px;
 }
+
+.hidden {
+  display: none;
+}

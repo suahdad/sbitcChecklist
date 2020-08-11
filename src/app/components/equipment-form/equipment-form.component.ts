@@ -61,6 +61,7 @@ export class EquipmentFormComponent implements OnInit {
             compID: [x.componentID],
             label: [x.question_Text],
             check: [''],
+            condition: [''],
             desc: ['']
           },{validators: (group) => {
               const check = group.get('check')
@@ -83,6 +84,9 @@ export class EquipmentFormComponent implements OnInit {
   refresh(item: AbstractControl) {
     if(item){
       item.get('desc').updateValueAndValidity()
+      if(item.value) {
+        item.get('condition').setValue('OK')
+      }
     }
   }
 
