@@ -16,7 +16,7 @@
   <div [formGroup]="fg" (ngSubmit) = "onSubmit()">
      <form action="" formArrayName="checklistItems">
       <div *ngIf="this.isEndOfMonth" class="alert alert-warning" role="alert">
-        This is a warning alert—check it out!
+        Please Check Fuel Level, Must be FULL
       </div>
         <div class="container" *ngFor="let item of checklistItemArray.controls; let i = index" [formGroupName]="i">
            <div class="row" >
@@ -25,6 +25,15 @@
                    <input type="checkbox" formControlName="check" (change)="refresh(item)">
                    <span class="checkmark"></span>
                  </label>
+                 <span>
+                  <mat-form-field *ngIf="!item.controls.check.value" style="display: inline-block;">
+                    <mat-label>Condition</mat-label>
+                    <mat-select>
+                      <mat-option>test</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 </span>
+
              </div>
              <div class="col-75">
                 <!-- add css invalid class if error -->

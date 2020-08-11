@@ -83,7 +83,6 @@ export class EquipmentFormComponent implements OnInit {
   refresh(item: AbstractControl) {
     if(item){
       item.get('desc').updateValueAndValidity()
-      console.log(item.parent)
     }
   }
 
