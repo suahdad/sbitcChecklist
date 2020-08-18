@@ -5,10 +5,24 @@ import { LoginMasterComponent } from './components/login-master/login-master.com
 import { MainformComponent } from './components/mainform/mainform.component';
 import { AuthGuard } from './helper/auth.guard';
 import { N4Guard } from './helper/n4.guard';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
+import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
+import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
-  {path: '', component: MainformComponent,canActivate:[AuthGuard]},
+  {path: 'admin', component: AdminPageComponent , children: [
+    {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
+    {path: 'profile', outlet:'sub', children: [
+      {path: 'changepass', component: AdminChangePasswordComponent}
+    ]},
+    {path: 'management', children: [
+      {path: 'user', component: AdminUserManagementComponent}
+    ]}
+
+  ]},
+  {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'},
   {
     path: 'test',
     component: LoginComponent, //just any random component

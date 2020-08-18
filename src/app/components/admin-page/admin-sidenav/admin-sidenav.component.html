@@ -1,0 +1,73 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="javascript:void(0)" [routerLink]="[{outlets:{ sub : ['dashboard'] }}]">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Dashboard
+                </a>
+                <div class="sb-sidenav-menu-heading">Interface</div>
+
+            <!--Start Profile Dashboard-->
+                <a class="nav-link collapsed" href="javascript:void(0)" (click)="isProfileCollapsed = !isProfileCollapsed" 
+                [attr.aria-expanded]="!isProfileCollapsed" aria-controls="collapseProfile">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Profile
+                    <div class="sb-sidenav-collapse-arrow"><i [ngClass]="{'expandedArrow':!isProfileCollapsed}" class="fas fa-angle-down"></i></div>
+                </a>
+                <div [ngbCollapse]="isProfileCollapsed" id="collapseProfile" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">   
+                        <a class="nav-link" [routerLink]="[{outlets:{ sub : ['profile'] }}]">Change Password</a>
+                    </nav>
+                </div>
+            <!--End Profile Dashboard-->    
+
+            <!--Start Accounts Dashboard-->
+               <!--  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccounts" aria-expanded="false" aria-controls="collapseAccounts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                    Accounts
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                 <div class="collapse" id="collapseAccounts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">   
+                        <a class="nav-link" href="layout-static.html">Change Password</a>
+                        <a class="nav-link" href="layout-static.html">Change Role</a>
+                    </nav>
+                </div> -->
+            <!--End Accounts Dashboard-->
+
+            <!--Start Management Dashboard-->
+              <a class="nav-link collapsed" href="javascript:void(0)" (click)="isManagementCollapsed = !isManagementCollapsed" 
+              aria-expanded="false" aria-controls="collapseManagement">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Management
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" [ngClass]="{'expandedArrow':!isManagementCollapsed}"></i></div>
+                </a>
+                <div [ngbCollapse]="isManagementCollapsed" id="collapseManagement" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">   
+                        <a class="nav-link" href="user-man.html">User Management</a>
+                    </nav>
+                </div>
+            <!--End Management Dashboard-->
+
+                <div class="sb-sidenav-menu-heading">Reports</div> <!--ADDONS to Reports-->
+                <a class="nav-link" href="charts.html">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Charts
+                </a>
+                <a class="nav-link" href="tables.html">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Tables
+                </a>
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            Admin Panel <!--Start Bootstrap to Admin Panel-->
+        </div>
+    </nav>
+</div>
+
+
+

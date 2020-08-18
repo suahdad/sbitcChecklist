@@ -18,6 +18,13 @@ import { DatePipe } from '@angular/common';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
+import { AdminMenuComponent } from './components/admin-page/admin-menu/admin-menu.component';
+import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
+import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +35,12 @@ import { EquipmentFormComponent } from './components/equipment-form/equipment-fo
     MainformComponent,
     LoginMasterComponent,
     EquipmentFormComponent,
+    AdminPageComponent,
+    AdminSidenavComponent,
+    AdminMenuComponent,
+    AdminHomeComponent,
+    AdminChangePasswordComponent,
+    AdminUserManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +50,8 @@ import { EquipmentFormComponent } from './components/equipment-form/equipment-fo
     AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCollapseModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
