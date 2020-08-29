@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-admin-menu',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminMenuComponent implements OnInit {
 
-  constructor() { }
+  
+  @Output() sidenavToggle: EventEmitter<any> = new EventEmitter();
+
+  public isMenuCollapsed: boolean;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
+
+  
+  SidenavToggle(){
+    this.sidenavToggle.emit(null)
+  }
+
 
 }

@@ -18,7 +18,8 @@
                 </a>
                 <div [ngbCollapse]="isProfileCollapsed" id="collapseProfile" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">   
-                        <a class="nav-link" [routerLink]="[{outlets:{ sub : ['profile'] }}]">Change Password</a>
+                        <!-- <a class="nav-link" [routerLink]="[{outlets:{ sub : ['profile']/['changepass'] }}]">Change Password</a> -->
+                        <a class="nav-link" (click)="GoToChangePass()">Change Password</a>
                     </nav>
                 </div>
             <!--End Profile Dashboard-->    
@@ -46,7 +47,7 @@
                 </a>
                 <div [ngbCollapse]="isManagementCollapsed" id="collapseManagement" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">   
-                        <a class="nav-link" href="user-man.html">User Management</a>
+                        <a class="nav-link" (click)="GoToManagementUser()">User Management</a>
                     </nav>
                 </div>
             <!--End Management Dashboard-->

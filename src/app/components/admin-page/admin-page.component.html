@@ -1,8 +1,6 @@
 
-<body class="sb-nav-fixed">
-
-
-    <app-admin-menu></app-admin-menu>
+<body class="sb-nav-fixed" [ngClass]="{'sb-sidenav-toggled': isSidenavToggled}">
+    <app-admin-menu (sidenavToggle)="isSidenavToggled = !isSidenavToggled"></app-admin-menu>
     <div id="layoutSidenav">
         <app-admin-sidenav></app-admin-sidenav>
 

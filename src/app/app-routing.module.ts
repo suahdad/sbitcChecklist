@@ -13,13 +13,15 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
   {path: 'admin', component: AdminPageComponent , children: [
+    {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
     {path: 'profile', outlet:'sub', children: [
       {path: 'changepass', component: AdminChangePasswordComponent}
     ]},
-    {path: 'management', children: [
+    {path: 'management', outlet:'sub', children: [
       {path: 'user', component: AdminUserManagementComponent}
-    ]}
+    ]},
+    {path:'**', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'}
 
   ]},
   {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'},
