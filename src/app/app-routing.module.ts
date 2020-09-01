@@ -9,10 +9,11 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
 import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
+import { AdminGuard } from './helper/admin.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
-  {path: 'admin', component: AdminPageComponent , children: [
+  {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
     {path: 'profile', outlet:'sub', children: [

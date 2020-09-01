@@ -12,14 +12,18 @@ import { Equipment } from 'src/app/shared/models/equipment';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   private currentEquipmentSubject: BehaviorSubject<Equipment>;
+  private currentUserAdminSubject: BehaviorSubject<boolean>;
   public currentUser: Observable<User>;
   public currentEquipment: Observable<Equipment>;
+  public currentUserAdmin: Observable<boolean>;
   
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentuser')));
     this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(localStorage.getItem('currentequip')));
+    this.currentUserAdminSubject = new BehaviorSubject<boolean>(false);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentEquipment = this.currentEquipmentSubject.asObservable();
+    this.currentUserAdmin = this.currentUserAdminSubject.asObservable();
    }
 
    public get currentUserValue(): User {
@@ -30,8 +34,27 @@ export class AuthService {
     return this.currentEquipmentSubject.value;
   }
 
+    public get IsCurrentUserAdmin() : boolean {
+    return this.currentUserAdminSubject.value;
+  }
+  
+
+  checkAdmin(){
+    return this.http.get<any>(`${environment.apiURL}/api/admins/${this.currentUserValue.id}`)
+    .pipe(map(admin => {  
+       if(admin == 404){
+         console.log(admin);
+         return false
+       }
+       this.currentUserAdminSubject.next(true);
+       return true
+    }));
+  }
+
    login(username: string, password: string)
    {
+     this.currentUserAdminSubject.next(false);
+     
      var postData = {
        id: username,
        password: password,

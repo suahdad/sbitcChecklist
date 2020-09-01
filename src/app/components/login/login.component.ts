@@ -59,6 +59,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.authService.checkAdmin().subscribe(data => {
+            if(this.authService.IsCurrentUserAdmin) this.router.navigate(['admin'])
+          });
+          
           // console.log(this.returnUrl)
           // this.router.navigate(['equipment']);
         },
