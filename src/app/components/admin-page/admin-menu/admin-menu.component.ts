@@ -12,7 +12,7 @@ export class AdminMenuComponent implements OnInit {
   
   @Output() sidenavToggle: EventEmitter<any> = new EventEmitter();
 
-  public isMenuCollapsed: boolean;
+  public isMenuCollapsed: boolean = true;
   constructor(private authService: AuthService,
     private router: Router) { }
 

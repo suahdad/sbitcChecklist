@@ -24,5 +24,8 @@ export class AdminSidenavComponent implements OnInit {
   GoToManagementUser(){
     this.router.navigateByUrl('/admin/(sub:management/user)')
   }
+  GoToChecklists(){
+    this.router.navigateByUrl('/admin/(sub:management/checklists)')
+  }
 
 }

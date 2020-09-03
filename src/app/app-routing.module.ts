@@ -10,6 +10,7 @@ import { AdminHomeComponent } from './components/admin-page/admin-home/admin-hom
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminGuard } from './helper/admin.guard';
+import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: 'changepass', component: AdminChangePasswordComponent}
     ]},
     {path: 'management', outlet:'sub', children: [
-      {path: 'user', component: AdminUserManagementComponent}
+      {path: 'user', component: AdminUserManagementComponent},
+      {path: 'checklists', component: AdminChecklistsComponent}
     ]},
     {path:'**', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'}
 

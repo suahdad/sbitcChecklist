@@ -24,7 +24,9 @@ import { AdminMenuComponent } from './components/admin-page/admin-menu/admin-men
 import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
-import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component'
+import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
+import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
+import { MatTableModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
     AdminHomeComponent,
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
+    AdminChecklistsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,9 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

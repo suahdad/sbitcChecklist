@@ -18,8 +18,8 @@ export class AuthService {
   public currentUserAdmin: Observable<boolean>;
   
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentuser')));
-    this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(localStorage.getItem('currentequip')));
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentuser')));
+    this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(sessionStorage.getItem('currentequip')));
     this.currentUserAdminSubject = new BehaviorSubject<boolean>(false);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentEquipment = this.currentEquipmentSubject.asObservable();
@@ -68,7 +68,7 @@ export class AuthService {
 
      return this.http.post<any>(`${environment.apiURL}/api/Users/Auth`,postData,{headers: headers})
      .pipe(map(user => {  
-        localStorage.setItem('currentuser', JSON.stringify(user));
+      sessionStorage.setItem('currentuser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
      }));
@@ -85,7 +85,7 @@ export class AuthService {
 
      return this.http.post<any>(`${environment.apiURL}/api/Equipments/Auth`,postData,{headers: headers})
      .pipe(map(equip => {  
-      localStorage.setItem('currentequip', JSON.stringify(equip));
+      sessionStorage.setItem('currentequip', JSON.stringify(equip));
       this.currentEquipmentSubject.next(equip);
       return equip;
      }));
@@ -93,8 +93,8 @@ export class AuthService {
 
    logout()
    {
-     localStorage.removeItem('currentuser');
-     localStorage.removeItem('currentequip');
+    sessionStorage.removeItem('currentuser');
+    sessionStorage.removeItem('currentequip');
      this.currentUserSubject.next(null)
      this.currentEquipmentSubject.next(null)
    }
