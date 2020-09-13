@@ -130,9 +130,9 @@ export class EquipmentFormComponent implements OnInit {
   
         const checklist: Checklist = {
           checklist_items: checklistItems,
-          date_created: new Date,
-          equipmentid: this.auth.currentEquipmentValue.id,
-          userid: this.auth.currentUserValue.id
+          date_Created: new Date,
+          equipmentID: this.auth.currentEquipmentValue.id,
+          userID: this.auth.currentUserValue.id
         }
         
         

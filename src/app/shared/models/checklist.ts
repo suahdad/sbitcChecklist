@@ -4,9 +4,9 @@ import { ChecklistItem } from './checklist-item';
 
 export class Checklist {
     id?: number;
-    equipmentid: string;
-    date_created: Date;
-    userid: string;
+    equipmentID: string;
+    date_Created: Date;
+    userID: string;
 
     checklist_items:  ChecklistItem[];
 }

@@ -53,7 +53,7 @@ export class AuthService {
 
    login(username: string, password: string)
    {
-     this.currentUserAdminSubject.next(false);
+    //  this.currentUserAdminSubject.next(false);
      
      var postData = {
        id: username,

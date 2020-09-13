@@ -1,26 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatSort} from '@angular/material/sort';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { ChecklistService } from 'src/app/services/checklist.service';
+import { Checklist } from 'src/app/shared/models/checklist';
 
 /**
  * @title Table with sorting
@@ -30,15 +12,43 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './admin-checklists.component.html',
   styleUrls: ['./admin-checklists.component.scss']
 })
-export class AdminChecklistsComponent implements OnInit {
+export class AdminChecklistsComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  checklists: Checklist[] = new Array<Checklist>()
+  sortedData: Checklist[] = new Array<Checklist>()
+  displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
+  dataSource = new MatTableDataSource(this.checklists);
+
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  ngOnInit() {
+  constructor(private checklistService: ChecklistService){
+
+  }
+
+  ngAfterViewInit() {
+    this.refreshData();
+    //configure Sorting Functions
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'equipmentid': return item.equipmentID;
+        case 'date_created': return item.date_Created;
+        case 'userid': return item.userID;
+        default: return item[property];
+      }
+    }
     this.dataSource.sort = this.sort;
+
+
+  }
+
+  refreshData(){
+    this.checklistService.getChecklist().subscribe( data => {
+      this.dataSource.data = data;
+
+    })
   }
 
 }
+
+
