@@ -1,0 +1,65 @@
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <!-- Brand/logo -->
+      <a class="navbar-brand">
+        <img [src]="logo" alt="logo" style="width:100px;">
+      </a>
+      
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <h3> PRE-OPERATION SAFETY INSPECTION CHECKLIST</h3>
+        </li>
+      
+      </ul>
+    </nav>
+  <div [formGroup]="fg" (ngSubmit) = "onSubmit()">
+     <form action="" formArrayName="checklistItems">
+      <div *ngIf="this.isEndOfMonth" class="alert alert-warning" role="alert">
+        Please Check Fuel Level, Must be FULL
+      </div>
+        <div class="container" *ngFor="let item of checklistItemArray.controls; let i = index" [formGroupName]="i">
+           <div class="row" >
+             <div class="col-25">
+                <label class="customcheck">{{item.controls.label.value}}
+                   <input type="checkbox" formControlName="check" (change)="refresh(item)">
+                   <span class="checkmark"></span>
+                 </label>
+                 <span>
+                  <mat-form-field *ngIf="!item.controls.check.value" style="display: inline-block;">
+                    <mat-label>Condition</mat-label>
+                    <mat-select formControlName="condition">
+                      <mat-option value="test">test</mat-option>
+                      <mat-option value="OTHERS">OTHERS</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 </span>
+
+             </div>
+             <div class="col-75">
+                <!-- add css invalid class if error -->
+                <textarea class="form-control" id="scales" rows="1" formControlName="desc" [ngClass]="{'is-invalid': (item.controls.check.touched || item.controls.desc.touched) && item.controls.desc.errors && item.controls.condition.value == 'OTHERS' , 'hidden':item.controls.condition.value != 'OTHERS'}"></textarea>
+                <div *ngIf="item.errors? item.errors.required : false" class="invalid-feedback">
+                  Remarks is required
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.hasNoCharacters : false" class="invalid-feedback">
+                  Remarks should not be empty
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.maxlength : false" class="invalid-feedback">
+                  Remarks should be less than 50 characters
+                </div>
+                <div *ngIf="item.controls.desc.errors? 
+                item.controls.desc.errors.minlength : false" class="invalid-feedback">
+                  Remarks should be more than 4 characters
+                </div>
+             </div>
+           </div>
+          </div>
+         
+           <input class="btn btn-primary" type="submit" value="Submit" [disabled]="isSubmitted">
+     </form>
+  </div>
+  
+  </body>

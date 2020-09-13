@@ -17,9 +17,16 @@ import { MainformComponent } from './components/mainform/mainform.component';
 import { DatePipe } from '@angular/common';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { EmptyHandlerComponent } from './components/forms/empty-handler/empty-handler.component';
-import { ReachStackerComponent } from './components/forms/reach-stacker/reach-stacker.component';
-import { TractorComponent } from './components/forms/tractor/tractor.component';
+import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
+import { AdminMenuComponent } from './components/admin-page/admin-menu/admin-menu.component';
+import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
+import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
+import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
+import { MatTableModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -29,9 +36,14 @@ import { TractorComponent } from './components/forms/tractor/tractor.component';
     MenuComponent,
     MainformComponent,
     LoginMasterComponent,
-    EmptyHandlerComponent,
-    ReachStackerComponent,
-    TractorComponent,
+    EquipmentFormComponent,
+    AdminPageComponent,
+    AdminSidenavComponent,
+    AdminMenuComponent,
+    AdminHomeComponent,
+    AdminChangePasswordComponent,
+    AdminUserManagementComponent,
+    AdminChecklistsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +53,10 @@ import { TractorComponent } from './components/forms/tractor/tractor.component';
     AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCollapseModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

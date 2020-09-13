@@ -3,10 +3,10 @@ import { User } from './user';
 import { ChecklistItem } from './checklist-item';
 
 export class Checklist {
-    id: string;
-    equipmentid: string;
-    date_created: Date;
-    userid: string;
+    id?: number;
+    equipmentID: string;
+    date_Created: Date;
+    userID: string;
 
     checklist_items:  ChecklistItem[];
 }

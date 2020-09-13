@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Question } from '../../shared/models/question';
+import { relative } from 'path';
+import { sample } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,19 @@ import { Question } from '../../shared/models/question';
 export class QuestionService {
   apiUrl = `${environment.apiURL}/api/Questions`
 
-  questions: Question[] = new Array()
-
+   test : Question[] = new Array(1,2,3).map(x => {
+        var samp : Question  = {
+          componentID: x.toString(),
+          equipment_TypeID: '',
+          question_Text: x.toString(),
+          rank: x
+        }
+        return samp
+      })
 
   constructor(private http: HttpClient) {}
 
   getQuestions(eqType: string): Observable<Question[]> {
-    return this.http.get<Question[]>(`${this.apiUrl}/${eqType}`);
+    return of(this.test);
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/authentication/auth.service';
+import { AuthService } from '../../services/authentication/auth.service';
 // import { AuthService} from '../../services/mock/fake-authentication.service'
 import { first } from 'rxjs/operators';
-import { User } from 'src/app/shared/models/user';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-login',
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     this.loginform = this._fb.group({
-      username: [''],
-      password: ['']
+      username: ['user'],
+      password: ['password']
     })
     
   }
@@ -59,6 +59,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.authService.checkAdmin().subscribe(data => {
+            if(this.authService.IsCurrentUserAdmin) this.router.navigate(['admin'])
+          });
+          
           // console.log(this.returnUrl)
           // this.router.navigate(['equipment']);
         },

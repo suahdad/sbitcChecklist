@@ -12,14 +12,18 @@ import { Equipment } from 'src/app/shared/models/equipment';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   private currentEquipmentSubject: BehaviorSubject<Equipment>;
+  private currentUserAdminSubject: BehaviorSubject<boolean>;
   public currentUser: Observable<User>;
   public currentEquipment: Observable<Equipment>;
+  public currentUserAdmin: Observable<boolean>;
   
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentuser')));
-    this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(localStorage.getItem('currentequip')));
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentuser')));
+    this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(sessionStorage.getItem('currentequip')));
+    this.currentUserAdminSubject = new BehaviorSubject<boolean>(false);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentEquipment = this.currentEquipmentSubject.asObservable();
+    this.currentUserAdmin = this.currentUserAdminSubject.asObservable();
    }
 
    public get currentUserValue(): User {
@@ -30,8 +34,27 @@ export class AuthService {
     return this.currentEquipmentSubject.value;
   }
 
+    public get IsCurrentUserAdmin() : boolean {
+    return this.currentUserAdminSubject.value;
+  }
+  
+
+  checkAdmin(){
+    return this.http.get<any>(`${environment.apiURL}/api/admins/${this.currentUserValue.id}`)
+    .pipe(map(admin => {  
+       if(admin == 404){
+         console.log(admin);
+         return false
+       }
+       this.currentUserAdminSubject.next(true);
+       return true
+    }));
+  }
+
    login(username: string, password: string)
    {
+    //  this.currentUserAdminSubject.next(false);
+     
      var postData = {
        id: username,
        password: password,
@@ -45,7 +68,7 @@ export class AuthService {
 
      return this.http.post<any>(`${environment.apiURL}/api/Users/Auth`,postData,{headers: headers})
      .pipe(map(user => {  
-        localStorage.setItem('currentuser', JSON.stringify(user));
+      sessionStorage.setItem('currentuser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
      }));
@@ -62,7 +85,7 @@ export class AuthService {
 
      return this.http.post<any>(`${environment.apiURL}/api/Equipments/Auth`,postData,{headers: headers})
      .pipe(map(equip => {  
-      localStorage.setItem('currentequip', JSON.stringify(equip));
+      sessionStorage.setItem('currentequip', JSON.stringify(equip));
       this.currentEquipmentSubject.next(equip);
       return equip;
      }));
@@ -70,8 +93,8 @@ export class AuthService {
 
    logout()
    {
-     localStorage.removeItem('currentuser');
-     localStorage.removeItem('currentequip');
+    sessionStorage.removeItem('currentuser');
+    sessionStorage.removeItem('currentequip');
      this.currentUserSubject.next(null)
      this.currentEquipmentSubject.next(null)
    }
