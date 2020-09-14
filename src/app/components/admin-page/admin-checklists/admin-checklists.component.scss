@@ -6,3 +6,8 @@ table {
   th.mat-sort-header-sorted {
     color: black;
   }
+
+  #table-menu{
+    display: flex;
+    justify-content: flex-end ;
+  }

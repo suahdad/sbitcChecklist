@@ -1,3 +1,8 @@
+<div id="table-menu">
+  <mat-form-field class="example-full-width" floatLabel="never">
+    <input matInput placeholder="Search.." (keyup)="applyFilter($event.target.value)">
+  </mat-form-field>
+</div>
 <div class="mainContent" >
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -24,4 +29,17 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator [pageSize]=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+<footer class="py-4 bg-light mt-auto">
+  <div class="container-fluid">
+      <div class="d-flex align-items-center justify-content-between small">
+          <div class="text-muted">Copyright &copy; SBITC Checklist 2020</div> <!--changes-->
+          <div>
+              <a href="#">Privacy Policy</a>
+              &middot;
+              <a href="#">Terms &amp; Conditions</a>
+          </div>
+      </div>
+  </div>
+</footer>

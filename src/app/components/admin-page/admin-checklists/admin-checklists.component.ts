@@ -3,6 +3,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
 import { Checklist } from '../../../shared/models/checklist';
+import { MatPaginator } from '@angular/material';
 
 /**
  * @title Table with sorting
@@ -21,8 +22,10 @@ export class AdminChecklistsComponent implements AfterViewInit {
 
   @Input() MaxResults: number;
   @Input() RecentFirst: boolean;
+  @Input() TableOnly: boolean;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator
 
   constructor(private checklistService: ChecklistService){
   }
@@ -40,6 +43,7 @@ export class AdminChecklistsComponent implements AfterViewInit {
     }
     this.dataSource.sort = this.sort;
 
+    this.dataSource.paginator = this.paginator;
 
   }
 
@@ -51,6 +55,12 @@ export class AdminChecklistsComponent implements AfterViewInit {
       });
       if(this.MaxResults) this.dataSource.data = this.dataSource.data.slice(0,this.MaxResults);
     })
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
 }
