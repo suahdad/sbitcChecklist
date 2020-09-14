@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  alertUnavailable(){
+    window.alert("This Feature is not yet available.");
+  }
+
+  GoToChecklists(){
+    this.router.navigateByUrl('/admin/(sub:management/checklists)')
   }
 
 }

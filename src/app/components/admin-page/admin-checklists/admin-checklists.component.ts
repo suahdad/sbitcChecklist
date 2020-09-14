@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
@@ -19,11 +19,12 @@ export class AdminChecklistsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
   dataSource = new MatTableDataSource(this.checklists);
 
+  @Input() MaxResults: number;
+  @Input() RecentFirst: boolean;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private checklistService: ChecklistService){
-
   }
 
   ngAfterViewInit() {
@@ -45,7 +46,10 @@ export class AdminChecklistsComponent implements AfterViewInit {
   refreshData(){
     this.checklistService.getChecklist().subscribe( data => {
       this.dataSource.data = data;
-
+      if(this.RecentFirst) this.dataSource.data.sort((a,b) => {
+        return new Date(b.date_Created).getTime() - new Date(a.date_Created).getTime();
+      });
+      if(this.MaxResults) this.dataSource.data = this.dataSource.data.slice(0,this.MaxResults);
     })
   }
 
