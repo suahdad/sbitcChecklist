@@ -8,9 +8,6 @@ import { ChecklistService } from '../../services/checklist.service';
 import { FormBuilder, FormArray, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
-import { validateBasis, FlexAlignStyleBuilder } from '@angular/flex-layout';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
-import { group } from 'console';
  
 
 @Component({
