@@ -1,32 +1,87 @@
-<!-- <div id="table" class="table-editable"> -->
-  <div>
+<div id="table" class="table-editable">
     <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
           class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-      
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> UserID </th>
-        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-      </ng-container>
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-        <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-        <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="middleName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </th>
-        <td mat-cell *matCellDef="let user"> {{user.middleName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Enabled </th>
-        <td mat-cell *matCellDef="let user"> {{user.isActive}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <table class="table table-bordered table-responsive-md table-striped text-center">
+      <thead>
+        <tr>
+          <th class="text-center">User ID</th>
+          <th class="text-center">Last Name</th>
+          <th class="text-center">Middle Initial</th>
+          <th class="text-center">First Name</th>
+          <th class="text-center">Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pt-3-half" contenteditable="true">11111</td>
+          <td class="pt-3-half" contenteditable="true">Juan</td>
+          <td class="pt-3-half" contenteditable="true">D</td>
+          <td class="pt-3-half" contenteditable="true">Lim</td>
+          <td class="pt-3-half" contenteditable="true">Madrid</td>
+          <td class="pt-3-half">
+            <span class="table-remove"><button type="button"
+                class="btn btn-danger btn-rounded btn-sm my-0">Edit</button></span>
+          </td>
+          <td>
+            <span class="table-remove"><button type="button"
+                class="btn btn-danger btn-rounded btn-sm my-0">Disable</button></span>
+          </td>
+        </tr>
+        <!-- This is our clonable table line -->
+        <tr>
+          <td class="pt-3-half" contenteditable="true">Guerra Cortez</td>
+          <td class="pt-3-half" contenteditable="true">45</td>
+          <td class="pt-3-half" contenteditable="true">Insectus</td>
+          <td class="pt-3-half" contenteditable="true">USA</td>
+          <td class="pt-3-half" contenteditable="true">San Francisco</td>
+          <td class="pt-3-half">
+            <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up"
+                  aria-hidden="true"></i></a></span>
+            <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down"
+                  aria-hidden="true"></i></a></span>
+          </td>
+          <td>
+            <span class="table-remove"><button type="button"
+                class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+          </td>
+        </tr>
+        <!-- This is our clonable table line -->
+        <tr>
+          <td class="pt-3-half" contenteditable="true">Guadalupe House</td>
+          <td class="pt-3-half" contenteditable="true">26</td>
+          <td class="pt-3-half" contenteditable="true">Isotronic</td>
+          <td class="pt-3-half" contenteditable="true">Germany</td>
+          <td class="pt-3-half" contenteditable="true">Frankfurt am Main</td>
+          <td class="pt-3-half">
+            <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up"
+                  aria-hidden="true"></i></a></span>
+            <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down"
+                  aria-hidden="true"></i></a></span>
+          </td>
+          <td>
+            <span class="table-remove"><button type="button"
+                class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+          </td>
+        </tr>
+        <!-- This is our clonable table line -->
+        <tr class="hide">
+          <td class="pt-3-half" contenteditable="true">Elisa Gallagher</td>
+          <td class="pt-3-half" contenteditable="true">31</td>
+          <td class="pt-3-half" contenteditable="true">Portica</td>
+          <td class="pt-3-half" contenteditable="true">United Kingdom</td>
+          <td class="pt-3-half" contenteditable="true">London</td>
+          <td class="pt-3-half">
+            <!-- <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up"
+                  aria-hidden="true"></i></a></span>
+            <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down"
+                  aria-hidden="true"></i></a></span> -->
+          </td>
+          <td>
+            <span class="table-remove"><button type="button"
+                class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+          </td>
+        </tr>
+      </tbody>
     </table>
 </div>
 <footer class="py-4 bg-light mt-auto">
