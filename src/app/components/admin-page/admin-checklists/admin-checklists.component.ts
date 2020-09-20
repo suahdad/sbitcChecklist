@@ -49,11 +49,17 @@ export class AdminChecklistsComponent implements AfterViewInit {
 
   refreshData(){
     this.checklistService.getChecklist().subscribe( data => {
-      this.dataSource.data = data;
-      if(this.RecentFirst) this.dataSource.data.sort((a,b) => {
+      this.checklists = data;
+
+      //recentfirst option
+      if(this.RecentFirst) this.checklists.sort((a,b) => {
         return new Date(b.date_Created).getTime() - new Date(a.date_Created).getTime();
       });
-      if(this.MaxResults) this.dataSource.data = this.dataSource.data.slice(0,this.MaxResults);
+
+      //maxresults option
+      if(this.MaxResults) this.checklists = this.checklists.slice(0,this.MaxResults);
+
+      this.dataSource.data = this.checklists
     })
   }
 
