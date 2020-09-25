@@ -20,3 +20,12 @@
 @import "navigation/sidenav/sidenav.scss";
 @import "navigation/sidenav/sidenav-dark.scss";
 @import "navigation/sidenav/sidenav-light.scss";
+
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    #content{
+      flex-grow: 2;
+    }
+  }
