@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AdminUserManagementComponent implements AfterViewInit {
 
   users: User[] = new Array<User>();
-  displayedColumns: string[] = ['id', 'lastName' ,'firstName', 'middleName', 'isActive']
+  displayedColumns: string[] = ['id', 'lastName' ,'firstName', 'middleName', 'isActive', 'settings']
   dataSource = new MatTableDataSource(this.users);
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

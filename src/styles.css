@@ -18,3 +18,10 @@ body {
   float: right;
   margin: 8px;
 }
+
+table {
+  width: 100%;
+}
+
+tr:nth-child(even) {background: #CCC}
+  
