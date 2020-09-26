@@ -21,11 +21,11 @@
 @import "navigation/sidenav/sidenav-dark.scss";
 @import "navigation/sidenav/sidenav-light.scss";
 
-body{
+.main-body{
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    #content{
+    .content{
       flex-grow: 2;
     }
   }
