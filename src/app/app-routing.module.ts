@@ -14,7 +14,7 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
-  {path: 'dev', component: AdminChecklistsComponent},
+  {path: 'dev', component: AdminUserManagementComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},

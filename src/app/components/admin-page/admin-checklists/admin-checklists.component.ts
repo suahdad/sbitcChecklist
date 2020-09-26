@@ -22,7 +22,7 @@ export class AdminChecklistsComponent implements AfterViewInit {
 
   @Input() MaxResults: number;
   @Input() RecentFirst: boolean;
-  @Input() ShowFeatures: boolean;
+  @Input() ShowFeatures: boolean = true; //default value 
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator
