@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-// import {AuthService} from '../services/authentication/auth.service';
-import {AuthService} from '../services/mock/fake-authentication.service';
+import {AuthService} from '../services/authentication/auth.service';
+// import {AuthService} from '../services/mock/fake-authentication.service';
 
 
 @Injectable({
