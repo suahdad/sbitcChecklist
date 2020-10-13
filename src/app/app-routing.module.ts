@@ -15,6 +15,7 @@ import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
+  {path: 'dev', component: AdminIssuesComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},

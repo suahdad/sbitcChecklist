@@ -46,6 +46,7 @@ import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
     AdminChecklistsComponent,
+    AdminIssuesComponent
   ],
   imports: [
     BrowserModule,
