@@ -1,12 +1,20 @@
 <body class="main-body">
   <div class="content">
     <div id="table-menu" *ngIf="ShowFeatures">
+      <button 
+      mat-raised-button 
+      color="primary"
+      (click)="exportTableAsXlsx()">Export to Excel</button>
       <mat-form-field class="example-full-width" floatLabel="never">
         <input matInput placeholder="Search.." (keyup)="applyFilter($event.target.value)">
       </mat-form-field>
     </div>
     <div class="mainContent" >
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <table id="checklistTable"
+        mat-table 
+        [dataSource]="dataSource" 
+        matSort 
+        class="mat-elevation-z8">
     
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -31,7 +39,11 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <mat-paginator *ngIf="ShowFeatures" [pageSize]=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator
+          *ngIf="ShowFeatures" 
+          [pageSize]=10 
+          [pageSizeOptions]="[5, 10, 20]" 
+          showFirstLastButtons></mat-paginator>
     </div>
   </div>
   <footer *ngIf="ShowFeatures" class="py-4 bg-light mt-auto">

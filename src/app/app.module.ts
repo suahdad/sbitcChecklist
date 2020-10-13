@@ -27,6 +27,8 @@ import { AdminChangePasswordComponent } from './components/admin-page/admin-chan
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
 import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
+import { ExportAsModule } from 'ngx-export-as';
+import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/mate
     AdminHomeComponent,
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
-    AdminChecklistsComponent
+    AdminChecklistsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/mate
     NgbCollapseModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ExportAsModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
