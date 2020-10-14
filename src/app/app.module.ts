@@ -29,6 +29,7 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
 import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 import { ExportAsModule } from 'ngx-export-as';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
+import { TableModule } from 'ngx-easy-table';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    ExportAsModule
+    ExportAsModule,
+    TableModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
