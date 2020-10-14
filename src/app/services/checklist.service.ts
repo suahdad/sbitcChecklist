@@ -41,4 +41,8 @@ export class ChecklistService {
   public getChecklist() : Observable<Checklist[]>{
     return this.http.get<any>(this.apiUrl)
   }
+
+  public getChecklistWithIssues() : Observable<Checklist[]> {
+    return this.http.get<any>(`${this.apiUrl}/issues`)
+  }
 }
