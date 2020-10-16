@@ -52,7 +52,7 @@ export class EquipmentComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
-        if(data.equipment_TypeID == 'RS') {
+        if(data.equipment_TypeID == 'RTG') {
             this.checklistService.submitSuccess = true;
           document.location.href = `${environment.ecN4Url}`; //direct to N4 if RTG
           return} //don't execute anymore

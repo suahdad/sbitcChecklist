@@ -34,8 +34,8 @@ export class ChecklistService {
 
     this.submitSuccess = true;
 
+    document.location.href =`${environment.ecN4Url}`;
     this.authService.logout();
-    this.router.navigate(['test']);
   }
 
   public getChecklist() : Observable<Checklist[]>{

@@ -91,7 +91,7 @@ export class AuthService {
      }));
    }
 
-   logout()
+  logout()
    {
     sessionStorage.removeItem('currentuser');
     sessionStorage.removeItem('currentequip');

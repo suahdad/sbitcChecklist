@@ -17,7 +17,6 @@ import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 })
 export class EquipmentFormComponent implements OnInit {
 
-  private logo = require("../../../assets/check.png");
   private isSubmitted : boolean = false;
   private fg: FormGroup ;
   private isFinishedChecking = false;
