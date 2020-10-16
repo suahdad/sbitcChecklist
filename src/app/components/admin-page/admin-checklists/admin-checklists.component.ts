@@ -1,9 +1,9 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
 import { Checklist } from '../../../shared/models/checklist';
-import { MatPaginator } from '@angular/material';
 
 /**
  * @title Table with sorting

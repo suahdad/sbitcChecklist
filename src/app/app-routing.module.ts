@@ -28,17 +28,7 @@ const routes: Routes = [
     {path:'**', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'}
 
   ]},
-  {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'},
-  {
-    path: 'test',
-    component: LoginComponent, //just any random component
-    resolve: {
-        url: 'externalUrlRedirectResolver'
-    },
-    data: {
-        externalUrl: 'http://10.122.8.114:8280/ecn4web/servlet/xmlrdt'
-    },canActivate:[N4Guard]
-}
+  {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'}
 ];
 
 @NgModule({

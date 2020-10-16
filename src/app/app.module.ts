@@ -26,7 +26,6 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
-import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -54,10 +53,8 @@ import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/mate
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbCollapseModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
+    NgbCollapseModule
+
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

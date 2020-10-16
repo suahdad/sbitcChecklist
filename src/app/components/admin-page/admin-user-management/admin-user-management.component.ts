@@ -1,7 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-user-management',

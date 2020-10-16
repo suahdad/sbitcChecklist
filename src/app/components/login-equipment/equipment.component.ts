@@ -5,6 +5,8 @@ import { AuthService } from '../../services/authentication/auth.service';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { slider } from 'src/app/route-animations';
+import { ChecklistService } from 'src/app/services/checklist.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-equipment',
@@ -25,7 +27,8 @@ export class EquipmentComponent implements OnInit {
     private _fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private checklistService: ChecklistService
   ) {
     if(this.authService.currentEquipmentValue) {
       this.router.navigate(['']);
@@ -49,6 +52,11 @@ export class EquipmentComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
+        if(data.equipment_TypeID == 'RS') {
+            this.checklistService.submitSuccess = true;
+          document.location.href = `${environment.ecN4Url}`; //direct to N4 if RTG
+          return} //don't execute anymore
+
         this.router.navigate(['']);
         //added because sometimes after submission it doesn't go into the main form
         location.reload();
