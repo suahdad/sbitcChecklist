@@ -12,11 +12,11 @@ import { slider } from '../../route-animations'
 export class LoginMasterComponent implements OnInit {
 
   user: any;
-  equipment: any;
+  equip: any;
 
   constructor(private auth:AuthService) { 
     this.auth.currentUser.subscribe(data => this.user = data)
-    this.auth.currentEquipment.subscribe(data => this.equipment = data)
+    this.auth.currentEquipment.subscribe(data => this.equip = data)
   }
 
   ngOnInit() {

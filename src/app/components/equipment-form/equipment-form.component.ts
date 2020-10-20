@@ -17,10 +17,10 @@ import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 })
 export class EquipmentFormComponent implements OnInit {
 
-  private isSubmitted : boolean = false;
-  private fg: FormGroup ;
+  public isSubmitted : boolean = false;
+  public fg: FormGroup ;
   private isFinishedChecking = false;
-  private isEndOfMonth;
+  public isEndOfMonth;
 
   questions: Question[] = new Array();
   eqType: string;

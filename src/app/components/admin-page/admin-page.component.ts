@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPageComponent implements OnInit {
 
-  private isSidenavToggled: boolean;
+  public isSidenavToggled: boolean;
   
   constructor() { }
 
