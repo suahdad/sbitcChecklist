@@ -54,7 +54,8 @@ export class EquipmentComponent implements OnInit {
       data => {
         if(data.equipment_TypeID == 'RTG') {
             this.checklistService.submitSuccess = true;
-          document.location.href = `${environment.ecN4Url}`; //direct to N4 if RTG
+          document.location.href = `${environment.ecN4Url}`;//direct to N4 if RTG
+          this.authService.logout(); 
           return} //don't execute anymore
 
         this.router.navigate(['']);

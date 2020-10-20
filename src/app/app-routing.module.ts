@@ -11,9 +11,10 @@ import { AdminChangePasswordComponent } from './components/admin-page/admin-chan
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
-  {path: 'login', component: LoginMasterComponent },
+  {path: 'login', component: LoginMasterComponent,canActivate:[LoginGuard] },
   {path: 'dev', component: AdminUserManagementComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
