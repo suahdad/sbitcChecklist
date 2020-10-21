@@ -48,7 +48,7 @@ export class EquipmentFormComponent implements OnInit {
     this.questionService.getQuestions(this.eqType)
     .subscribe(data => {
       this.questions = data.sort((a,b) => 
-        a['rank'] > b['rank'] ? 1 : a['rank'] === b['rank'] ? 0 : -1); //sorting function
+        {return a.rank-b.rank}); //sorting function
         
         //looping through questions: create item literal and push to checklistItemArray
         this.questions.map(x => {
