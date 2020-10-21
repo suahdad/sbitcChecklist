@@ -35,7 +35,7 @@
 <body>
 	<div [@routeAnimations]="direction" class="container">
 	<div class="d-flex justify-content-center h-100">
-		<div class="card">
+		<div class="card" style="height: auto;">
 			<div class="card-header">
 				<h3>Equipment</h3>
 				
@@ -49,6 +49,11 @@
 						<input type="text" class="form-control" placeholder="Ex. SS01" formControlName="equipment">
 						
 					</div>
+					<div class="alert alert-warning" 
+						 role="alert"
+						 *ngIf = "invalidEquip">
+						Invalid Equipment ID
+					  </div>
 					
 					<div class="form-group">
 						<input type="submit" value="Proceed" class="btn float-right login_btn">

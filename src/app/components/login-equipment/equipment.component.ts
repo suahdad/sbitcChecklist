@@ -22,6 +22,7 @@ export class EquipmentComponent implements OnInit {
   returnUrl: string;
   error = '';
   direction: any;
+  invalidEquip = false;
 
   constructor(
     private _fb: FormBuilder,
@@ -52,6 +53,7 @@ export class EquipmentComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
+
         if(data.equipment_TypeID == 'RTG') {
             this.checklistService.submitSuccess = true;
           document.location.href = `${environment.ecN4Url}`;//direct to N4 if RTG
@@ -63,6 +65,7 @@ export class EquipmentComponent implements OnInit {
         location.reload();
       },
       error => {
+        if(error['status'] == 400) this.invalidEquip = true;
         this.error = error;
         this.loading = false;
       });

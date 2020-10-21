@@ -13,14 +13,16 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   private currentEquipmentSubject: BehaviorSubject<Equipment>;
   private currentUserAdminSubject: BehaviorSubject<boolean>;
+
   public currentUser: Observable<User>;
   public currentEquipment: Observable<Equipment>;
   public currentUserAdmin: Observable<boolean>;
-  
+
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentuser')));
     this.currentEquipmentSubject = new BehaviorSubject<Equipment>(JSON.parse(sessionStorage.getItem('currentequip')));
     this.currentUserAdminSubject = new BehaviorSubject<boolean>(false);
+    
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentEquipment = this.currentEquipmentSubject.asObservable();
     this.currentUserAdmin = this.currentUserAdminSubject.asObservable();
@@ -54,7 +56,7 @@ export class AuthService {
    login(username: string, password: string)
    {
     this.currentUserAdminSubject.next(false);
-     
+
      var postData = {
        id: username,
        password: password,
@@ -66,7 +68,8 @@ export class AuthService {
      const headers: HttpHeaders = new HttpHeaders();
      headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
-     return this.http.post<any>(`${environment.apiURL}/api/Users/Auth`,postData,{headers: headers})
+     return this.http.post<any>(`${environment.apiURL}/api/Users/Auth`,
+     postData,{headers: headers})
      .pipe(map(user => {  
       sessionStorage.setItem('currentuser', JSON.stringify(user));
         this.currentUserSubject.next(user);

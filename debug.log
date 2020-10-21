@@ -548,3 +548,5 @@
 [1020/161159.567:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\jpasol\AppData\Local\Temp\.profile\Crashpad\reports\2496967c-e253-4bfd-a45f-aa6ce607ca0a.dmp: The system cannot find the file specified. (0x2)
 [1020/161159.567:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\jpasol\AppData\Local\Temp\.profile\Crashpad\reports\16a7e345-3b09-4562-95a8-48fc679e57cb.dmp: The system cannot find the file specified. (0x2)
 [1020/161159.567:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1020/173439.067:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1021/092545.575:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

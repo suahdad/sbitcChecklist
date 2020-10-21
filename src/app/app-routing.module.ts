@@ -12,10 +12,11 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
 import { LoginGuard } from './login.guard';
+import { EquipmentComponent } from './components/login-equipment/equipment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent,canActivate:[LoginGuard] },
-  {path: 'dev', component: AdminUserManagementComponent},
+  {path: 'dev', component: EquipmentComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},

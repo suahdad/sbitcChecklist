@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  invalidLogin = false
+  public validLogin = true;
 
   constructor(
     private _fb: FormBuilder,
@@ -67,6 +69,7 @@ export class LoginComponent implements OnInit {
           // this.router.navigate(['equipment']);
         },
         error => {
+          if(error['status']== 400) this.invalidLogin = true;
           this.error = error;
           this.loading = false;
         });

@@ -58,7 +58,7 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, removed for now since there is no use
     { provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
     {
         window.location.href = (route.data as any).externalUrl;
