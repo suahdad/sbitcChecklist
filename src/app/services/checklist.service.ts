@@ -28,14 +28,13 @@ export class ChecklistService {
     private router: Router) { }
 
   public submitChecklist(data: Checklist) {
-
-    this.http.post<Checklist>(this.apiUrl,data).subscribe(data => console.log(data));
-    console.log(JSON.stringify(data))
-
-    this.submitSuccess = true;
-
-    document.location.href =`${environment.ecN4Url}`;
-    this.authService.logout();
+    this.http.post<Checklist>(this.apiUrl,data)
+    .subscribe(data => {
+      this.submitSuccess = true;
+      
+      document.location.href =`${environment.ecN4Url}`;
+      this.authService.logout();
+    });
   }
 
   public getChecklist() : Observable<Checklist[]>{
