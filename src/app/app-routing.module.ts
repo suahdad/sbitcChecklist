@@ -16,7 +16,7 @@ import { EquipmentComponent } from './components/login-equipment/equipment.compo
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent,canActivate:[LoginGuard] },
-  {path: 'dev', component: EquipmentComponent},
+  {path: 'dev', component: AdminPageComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
