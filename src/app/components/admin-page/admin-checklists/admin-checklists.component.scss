@@ -9,5 +9,11 @@ table {
 
   #table-menu{
     display: flex;
-    justify-content: flex-end ;
+    justify-content: space-between;
+    padding: 5px 10px;
+
+    button {
+      height: 40%;
+      margin: auto 0px;
+    }
   }

@@ -522,36 +522,4 @@
 [1012/133426.068:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1013/135550.915:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1013/153444.444:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1016/105636.463:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1016/111419.310:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1016/135920.614:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1017/110420.392:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/111920.391:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/113420.360:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/114920.340:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/120420.327:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/121920.307:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/123420.299:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/124920.294:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/130420.290:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/131920.283:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/133420.285:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/134920.287:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/135919.492:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1017/135919.493:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\jpasol\AppData\Local\Temp\.profile\Crashpad\reports\0966e27a-c917-43b9-a88b-921b481749bd.dmp: The system cannot find the file specified. (0x2)
-[1017/135919.493:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1018/135918.384:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1020/160159.556:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1020/160159.557:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1020/161159.563:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1020/161159.564:ERROR:crash_report_database_win.cc(498)] failed to stat report
-[1020/161159.567:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\jpasol\AppData\Local\Temp\.profile\Crashpad\reports\2496967c-e253-4bfd-a45f-aa6ce607ca0a.dmp: The system cannot find the file specified. (0x2)
-[1020/161159.567:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\jpasol\AppData\Local\Temp\.profile\Crashpad\reports\16a7e345-3b09-4562-95a8-48fc679e57cb.dmp: The system cannot find the file specified. (0x2)
-[1020/161159.567:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1020/173439.067:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1021/092545.575:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1021/094455.077:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1028/203208.213:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1031/200028.893:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1101/200027.822:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1102/200026.710:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1014/144145.094:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

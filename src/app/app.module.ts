@@ -26,6 +26,10 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
+import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
+import { ExportAsModule } from 'ngx-export-as';
+import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
+import { TableModule } from 'ngx-easy-table';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
     AdminHomeComponent,
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
-    AdminChecklistsComponent
+    AdminChecklistsComponent,
+    AdminIssuesComponent
   ],
   imports: [
     BrowserModule,
@@ -53,12 +58,16 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbCollapseModule
-
+    NgbCollapseModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    ExportAsModule,
+    TableModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, removed for now since there is no use
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
     {
         window.location.href = (route.data as any).externalUrl;

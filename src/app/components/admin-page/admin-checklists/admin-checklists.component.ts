@@ -1,9 +1,13 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, ViewChild, AfterViewInit, Input, ViewChildren, QueryList } from '@angular/core';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
 import { Checklist } from '../../../shared/models/checklist';
+import { MatPaginator } from '@angular/material';
+import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
+import { date } from '@rxweb/reactive-form-validators';
+import { DatePipe } from '@angular/common';
+import { format } from 'url';
 
 /**
  * @title Table with sorting
@@ -20,15 +24,23 @@ export class AdminChecklistsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
   dataSource = new MatTableDataSource(this.checklists);
 
+  exportAsConfig: ExportAsConfig = {
+    type: 'xlsx',
+    elementIdOrContent: 'checklistTable'
+  }
+
   @Input() MaxResults: number;
   @Input() RecentFirst: boolean;
   @Input() ShowFeatures: boolean = true; //default value 
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator
+  @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator> //viewchild doesn't work with ngIf
 
-  constructor(private checklistService: ChecklistService){
+  constructor(private checklistService: ChecklistService,
+    private exportAsService: ExportAsService,
+    private datepipe: DatePipe){
   }
+
 
   ngAfterViewInit() {
     this.refreshData();
@@ -41,9 +53,12 @@ export class AdminChecklistsComponent implements AfterViewInit {
         default: return item[property];
       }
     }
+    //add sorting
     this.dataSource.sort = this.sort;
 
-    this.dataSource.paginator = this.paginator;
+    //add paginator
+    //as commented, viewchild doesn't work with ngIF
+    this.dataSource.paginator = this.paginators.first;
 
   }
 
@@ -67,6 +82,13 @@ export class AdminChecklistsComponent implements AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  exportTableAsXlsx(){
+    const _datetime = this.datepipe.transform(new Date(),format('yyMMddHHmmssSS'))
+    this.exportAsService.save(this.exportAsConfig,`${_datetime}`).subscribe(data => {
+      //just needed, nothing to put here
+    })
   }
 
 }

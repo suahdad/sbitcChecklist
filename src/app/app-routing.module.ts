@@ -11,12 +11,11 @@ import { AdminChangePasswordComponent } from './components/admin-page/admin-chan
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
-import { LoginGuard } from './login.guard';
-import { EquipmentComponent } from './components/login-equipment/equipment.component';
+import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginMasterComponent,canActivate:[LoginGuard] },
-  {path: 'dev', component: AdminPageComponent},
+  {path: 'login', component: LoginMasterComponent },
+  {path: 'dev', component: AdminIssuesComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
@@ -30,7 +29,17 @@ const routes: Routes = [
     {path:'**', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'}
 
   ]},
-  {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'}
+  {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'},
+  {
+    path: 'test',
+    component: LoginComponent, //just any random component
+    resolve: {
+        url: 'externalUrlRedirectResolver'
+    },
+    data: {
+        externalUrl: 'http://10.122.8.114:8280/ecn4web/servlet/xmlrdt'
+    },canActivate:[N4Guard]
+}
 ];
 
 @NgModule({
