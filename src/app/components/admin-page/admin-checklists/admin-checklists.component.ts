@@ -3,7 +3,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
 import { Checklist } from '../../../shared/models/checklist';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { date } from '@rxweb/reactive-form-validators';
 import { DatePipe } from '@angular/common';
