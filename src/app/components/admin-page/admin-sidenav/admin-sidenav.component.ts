@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router , ActivatedRoute} from '@angular/router';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,23 +9,29 @@ import { EventEmitter } from '@angular/core';
 })
 export class AdminSidenavComponent implements OnInit {
 
-  public isProfileCollapsed: boolean = true;
-  public isManagementCollapsed: boolean = true;
+  public isChecklistsCollapse: boolean = false;
+  // public isProfileCollapsed: boolean = true;
+  // public isManagementCollapsed: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
-  GoToChangePass(){
-    this.router.navigateByUrl('/admin/(sub:profile/changepass)')
+  // GoToChangePass(){
+  //   this.router.navigateByUrl('/admin/(sub:profile/changepass)')
+  // }
+
+  // GoToManagementUser(){
+  //   this.router.navigateByUrl('/admin/(sub:management/user)')
+  // }
+  GoToChecklists(){
+    this.router.navigateByUrl('/admin/(sub:checklists/all)')
   }
 
-  GoToManagementUser(){
-    this.router.navigateByUrl('/admin/(sub:management/user)')
-  }
-  GoToChecklists(){
-    this.router.navigateByUrl('/admin/(sub:management/checklists)')
+  GoToChecklistswIssues(){
+    this.router.navigateByUrl('/admin/(sub:checklists/issues)')
   }
 
 }

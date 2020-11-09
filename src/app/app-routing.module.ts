@@ -12,6 +12,7 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
+import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
@@ -19,12 +20,16 @@ const routes: Routes = [
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
-    {path: 'profile', outlet:'sub', children: [
-      {path: 'changepass', component: AdminChangePasswordComponent}
-    ]},
-    {path: 'management', outlet:'sub', children: [
-      {path: 'user', component: AdminUserManagementComponent},
-      {path: 'checklists', component: AdminChecklistsComponent}
+    // {path: 'profile', outlet:'sub', children: [
+    //   {path: 'changepass', component: AdminChangePasswordComponent}
+    // ]},
+    // {path: 'management', outlet:'sub', children: [
+    //   {path: 'user', component: AdminUserManagementComponent},
+    //   {path: 'checklists', component: AdminChecklistsComponent}
+    // ]},
+      {path: 'checklists', outlet:'sub', children: [
+      {path: 'all', component: AdminChecklistsComponent},
+      {path: 'issues', component: AdminChecklistIssuesComponent}
     ]},
     {path:'**', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'}
 

@@ -9,17 +9,28 @@
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
 
-            <!--Start Profile Dashboard-->
-                <a class="nav-link collapsed" href="javascript:void(0)" (click)="isProfileCollapsed = !isProfileCollapsed" 
-                [attr.aria-expanded]="!isProfileCollapsed" aria-controls="collapseProfile">
+            <!--Start Checklist Dashboard-->
+                <a class="nav-link collapsed" href="javascript:void(0)" 
+                (click)="isChecklistsCollapse = !isChecklistsCollapse" 
+                [attr.aria-expanded]="!isChecklistsCollapse" aria-controls="collapseProfile">
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                    Profile
-                    <div class="sb-sidenav-collapse-arrow"><i [ngClass]="{'expandedArrow':!isProfileCollapsed}" class="fas fa-angle-down"></i></div>
+                    Checklists
+                    <div class="sb-sidenav-collapse-arrow"><i 
+                        [ngClass]="{'expandedArrow':!isChecklistsCollapse}" 
+                        class="fas fa-angle-down"></i></div>
                 </a>
-                <div [ngbCollapse]="isProfileCollapsed" id="collapseProfile" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div [ngbCollapse]="isChecklistsCollapse" id="collapseProfile" 
+                aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">   
                         <!-- <a class="nav-link" [routerLink]="[{outlets:{ sub : ['profile']/['changepass'] }}]">Change Password</a> -->
-                        <a class="nav-link" (click)="GoToChangePass()">Change Password</a>
+                        <a class="nav-link" (click)="GoToChecklists()">All</a>
+                    </nav>
+                </div>
+                <div [ngbCollapse]="isChecklistsCollapse" id="collapseProfile" 
+                aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">   
+                        <!-- <a class="nav-link" [routerLink]="[{outlets:{ sub : ['profile']/['changepass'] }}]">Change Password</a> -->
+                        <a class="nav-link" (click)="GoToChecklistswIssues()">w/ Issues</a>
                     </nav>
                 </div>
             <!--End Profile Dashboard-->    
