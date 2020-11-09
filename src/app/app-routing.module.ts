@@ -16,7 +16,7 @@ import { AdminChecklistIssuesComponent } from './components/admin-page/admin-che
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent },
-  {path: 'dev', component: AdminIssuesComponent},
+  {path: 'dev', component: AdminChecklistIssuesComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
