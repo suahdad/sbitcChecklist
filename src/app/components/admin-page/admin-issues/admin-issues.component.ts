@@ -11,9 +11,9 @@ import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 })
 export class AdminIssuesComponent implements OnInit {
 
-  private issueItems : ChecklistItem[]
-  private configuration : Config
-  private columns: Columns[]
+  public issueItems : ChecklistItem[]
+  public configuration : Config
+  public columns: Columns[]
 
   constructor(private checklistService:ChecklistService) { }
 
