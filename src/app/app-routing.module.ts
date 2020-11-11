@@ -7,11 +7,8 @@ import { AuthGuard } from './helper/auth.guard';
 import { N4Guard } from './helper/n4.guard';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { AdminHomeComponent } from './components/admin-page/admin-home/admin-home.component';
-import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
-import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
-import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 
 const routes: Routes = [

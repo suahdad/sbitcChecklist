@@ -29,6 +29,7 @@ import { AdminChecklistsComponent } from './components/admin-page/admin-checklis
 import { ExportAsModule } from 'ngx-export-as';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 import { TableModule } from 'ngx-easy-table';
+import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TableModule } from 'ngx-easy-table';
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
     AdminChecklistsComponent,
-    AdminIssuesComponent
+    AdminIssuesComponent,
+    AdminChecklistIssuesComponent
   ],
   imports: [
     BrowserModule,

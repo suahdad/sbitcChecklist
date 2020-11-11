@@ -1,1 +1,60 @@
-<p>admin-checklist-issues works!</p>
+<body class="main-body">
+    <div class="content">
+      <div id="table-menu">
+        <button 
+        mat-raised-button 
+        color="primary"
+        (click)="exportTableAsXlsx()">Export to Excel</button>
+        <mat-form-field class="example-full-width" floatLabel="never">
+          <input matInput placeholder="Search.." (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+      </div>
+      <div class="mainContent" >
+          <table id="checklistTable"
+          mat-table 
+          [dataSource]="dataSource" 
+          matSort 
+          class="mat-elevation-z8">
+      
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let checklist"> {{checklist.id}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="equipmentid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Equipment ID </th>
+                <td mat-cell *matCellDef="let checklist"> {{checklist.equipmentID}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="date_created">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Created </th>
+                <td mat-cell *matCellDef="let checklist"> {{checklist.date_Created | date:"MM/dd/yyyy HH:mm"}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="userid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+                <td mat-cell *matCellDef="let checklist"> {{checklist.userID}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator
+            [pageSize]=10 
+            [pageSizeOptions]="[5, 10, 20]" 
+            showFirstLastButtons = "true"></mat-paginator>
+      </div>
+    </div>
+    <footer class="py-4 bg-light mt-auto">
+      <div class="container-fluid">
+          <div class="d-flex align-items-center justify-content-between small">
+              <div class="text-muted">Copyright &copy; SBITC Checklist 2020</div> <!--changes-->
+              <div>
+                  <a href="#">Privacy Policy</a>
+                  &middot;
+                  <a href="#">Terms &amp; Conditions</a>
+              </div>
+          </div>
+      </div>
+    </footer>
+  </body>
