@@ -8,6 +8,7 @@ import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { DatePipe } from '@angular/common';
 import { format } from 'url';
 import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
+import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 
 @Component({
   selector: 'app-admin-checklist-issues',
@@ -16,10 +17,17 @@ import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 })
 export class AdminChecklistIssuesComponent implements AfterViewInit {
   
-  checklists: Checklist[] = new Array<Checklist>()
+  checklistItems: ChecklistItem[] = new Array<ChecklistItem>()
   sortedData: Checklist[] = new Array<Checklist>()
-  displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
-  dataSource = new MatTableDataSource(this.checklists);
+  displayedColumns: string[] = 
+  ['id',
+  'equipment_TypeiD', 
+  'equipmentID',
+  'componentShortname',
+  'remarks', 
+  'date_Created', 
+  'userID'];
+  dataSource = new MatTableDataSource(this.checklistItems);
 
   exportAsConfig: ExportAsConfig = {
     type: 'xlsx',
@@ -42,9 +50,9 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
     //configure Sorting Functions
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch(property) {
-        case 'equipmentid': return item.equipmentID;
-        case 'date_created': return item.date_Created;
-        case 'userid': return item.userID;
+        case 'equipmentID': return item.checklist.equipmentID;
+        case 'date_Created': return item.checklist.date_Created;
+        case 'userID': return item.checklist.user.firstName;
         default: return item[property];
       }
     }
@@ -58,13 +66,13 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
   }
 
   refreshData(){
-    this.checklistService.getChecklist().subscribe( data => {
-      this.checklists = data;
+    this.checklistService.getChecklistItemsWithIssues().subscribe( data => {
+      this.checklistItems = data;
 
-      this.checklists.sort((a,b) => {
-        return b.id-a.id
+      this.checklistItems.sort((a,b) => {
+        return b.checklistid-a.checklistid
       })
-      this.dataSource.data = this.checklists
+      this.dataSource.data = this.checklistItems
     })
   }
 
