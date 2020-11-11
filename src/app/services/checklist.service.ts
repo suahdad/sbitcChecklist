@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Checklist } from '../shared/models/checklist';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ChecklistItem } from '../shared/models/checklist-item';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,12 @@ export class ChecklistService {
 
   public getChecklistWithIssues() : Observable<Checklist[]> {
     return this.http.get<any>(`${this.apiUrl}/issues`)
+  }
+  public getChecklistItems() : Observable<ChecklistItem[]>{
+    return this.http.get<any>(`${this.apiUrl}/items`)
+  }
+
+  public getChecklistItemsWithIssues() : Observable<ChecklistItem[]> {
+    return this.http.get<any>(`${this.apiUrl}/items/issues`)
   }
 }
