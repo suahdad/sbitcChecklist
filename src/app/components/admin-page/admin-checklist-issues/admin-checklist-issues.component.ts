@@ -50,7 +50,10 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
     //configure Sorting Functions
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch(property) {
+        case 'id': return item.checklist.id;
+        case 'equipment_TypeiD': return item.equipment_typeid
         case 'equipmentID': return item.checklist.equipmentID;
+        case 'componentShortname' : return item.component.shortname
         case 'date_Created': return item.checklist.date_Created;
         case 'userID': return item.checklist.user.firstName;
         default: return item[property];
