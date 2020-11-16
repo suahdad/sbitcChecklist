@@ -6,6 +6,7 @@ export class Checklist {
     id?: number;
     equipmentID: string;
     date_Created: Date;
+    user? : User
     userID: string;
 
     checklist_items:  ChecklistItem[];

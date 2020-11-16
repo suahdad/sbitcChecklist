@@ -1,40 +1,43 @@
 import { Component, ViewChild, AfterViewInit, Input, ViewChildren, QueryList } from '@angular/core';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ChecklistService } from '../../../services/checklist.service';
 import { Checklist } from '../../../shared/models/checklist';
 import { MatPaginator } from '@angular/material/paginator';
 import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
-import { date } from '@rxweb/reactive-form-validators';
 import { DatePipe } from '@angular/common';
 import { format } from 'url';
+import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
+import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 
-/**
- * @title Table with sorting
- */
 @Component({
-  selector: 'app-admin-checklists',
-  templateUrl: './admin-checklists.component.html',
-  styleUrls: ['./admin-checklists.component.scss']
+  selector: 'app-admin-checklist-issues',
+  templateUrl: './admin-checklist-issues.component.html',
+  styleUrls: ['./admin-checklist-issues.component.scss']
 })
-export class AdminChecklistsComponent implements AfterViewInit {
-
-  checklists: Checklist[] = new Array<Checklist>()
+export class AdminChecklistIssuesComponent implements AfterViewInit {
+  
+  checklistItems: ChecklistItem[] = new Array<ChecklistItem>()
   sortedData: Checklist[] = new Array<Checklist>()
-  displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
-  dataSource = new MatTableDataSource(this.checklists);
+  displayedColumns: string[] = 
+  ['id',
+  'equipment_TypeiD', 
+  'equipmentID',
+  'componentShortname',
+  'remarks', 
+  'date_Created', 
+  'userID'];
+  dataSource = new MatTableDataSource(this.checklistItems);
 
   exportAsConfig: ExportAsConfig = {
     type: 'xlsx',
     elementIdOrContent: 'checklistTable'
   }
 
-  @Input() MaxResults: number;
-  @Input() RecentFirst: boolean;
-  @Input() ShowFeatures: boolean = true; //default value 
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator> //viewchild doesn't work with ngIf
+  @ViewChild(MatSort, {static: true}) 
+    sort: MatSort;
+  @ViewChildren(MatPaginator) 
+    paginators: QueryList<MatPaginator> //viewchild doesn't work with ngIf
 
   constructor(private checklistService: ChecklistService,
     private exportAsService: ExportAsService,
@@ -47,9 +50,12 @@ export class AdminChecklistsComponent implements AfterViewInit {
     //configure Sorting Functions
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch(property) {
-        case 'equipmentid': return item.equipmentID;
-        case 'date_created': return item.date_Created;
-        case 'userid': return item.userID;
+        case 'id': return item.checklist.id;
+        case 'equipment_TypeiD': return item.equipment_typeid
+        case 'equipmentID': return item.checklist.equipmentID;
+        case 'componentShortname' : return item.component.shortname
+        case 'date_Created': return item.checklist.date_Created;
+        case 'userID': return item.checklist.user.firstName;
         default: return item[property];
       }
     }
@@ -63,18 +69,13 @@ export class AdminChecklistsComponent implements AfterViewInit {
   }
 
   refreshData(){
-    this.checklistService.getChecklist().subscribe( data => {
-      this.checklists = data;
+    this.checklistService.getChecklistItemsWithIssues().subscribe( data => {
+      this.checklistItems = data;
 
-      //recentfirst option
-      if(this.RecentFirst) this.checklists.sort((a,b) => {
-        return new Date(b.date_Created).getTime() - new Date(a.date_Created).getTime();
-      });
-
-      //maxresults option
-      if(this.MaxResults) this.checklists = this.checklists.slice(0,this.MaxResults);
-
-      this.dataSource.data = this.checklists
+      this.checklistItems.sort((a,b) => {
+        return b.checklistid-a.checklistid
+      })
+      this.dataSource.data = this.checklistItems
     })
   }
 
@@ -92,5 +93,3 @@ export class AdminChecklistsComponent implements AfterViewInit {
   }
 
 }
-
-

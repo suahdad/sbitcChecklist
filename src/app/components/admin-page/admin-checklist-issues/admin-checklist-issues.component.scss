@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    tr:nth-child(even) {background: #CCC}
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  #table-menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+
+    button {
+      height: 40%;
+      margin: auto 0px;
+    }
+  }

@@ -26,10 +26,10 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminChangePasswordComponent } from './components/admin-page/admin-change-password/admin-change-password.component';
 import { AdminUserManagementComponent } from './components/admin-page/admin-user-management/admin-user-management.component';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
-import { MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 import { ExportAsModule } from 'ngx-export-as';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 import { TableModule } from 'ngx-easy-table';
+import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { TableModule } from 'ngx-easy-table';
     AdminChangePasswordComponent,
     AdminUserManagementComponent,
     AdminChecklistsComponent,
-    AdminIssuesComponent
+    AdminIssuesComponent,
+    AdminChecklistIssuesComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +60,6 @@ import { TableModule } from 'ngx-easy-table';
     FormsModule,
     ReactiveFormsModule,
     NgbCollapseModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
     ExportAsModule,
     TableModule
   ],
