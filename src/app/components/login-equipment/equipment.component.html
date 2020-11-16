@@ -36,9 +36,9 @@
 	<div [@routeAnimations]="direction" class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style="height: auto;">
-			<div class="card-header">
+			<div class="card-header" style="display: flex; justify-content: space-between;">
 				<h3>Equipment</h3>
-				
+				<a style="display: inline;" (click)="logout()" [routerLink]="" >Logout</a>
 			</div>
 			<div class="card-body">
 				<form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()">

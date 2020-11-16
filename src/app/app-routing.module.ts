@@ -10,10 +10,13 @@ import { AdminHomeComponent } from './components/admin-page/admin-home/admin-hom
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
+import { EquipmentComponent } from './components/login-equipment/equipment.component';
+import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
-  {path: 'login', component: LoginMasterComponent },
-  {path: 'dev', component: AdminChecklistIssuesComponent},
+  {path: 'login', component: LoginMasterComponent, canActivate: [LoginGuard] },
+  {path: 'dev', component: EquipmentFormComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},

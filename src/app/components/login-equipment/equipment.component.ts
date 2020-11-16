@@ -54,12 +54,6 @@ export class EquipmentComponent implements OnInit {
     .subscribe(
       data => {
 
-        if(data.equipment_TypeID == 'RTG') {
-            this.checklistService.submitSuccess = true;
-          document.location.href = `${environment.ecN4Url}`;//direct to N4 if RTG
-          this.authService.logout(); 
-          return} //don't execute anymore
-
         this.router.navigate(['']);
         //added because sometimes after submission it doesn't go into the main form
         location.reload();
@@ -69,6 +63,11 @@ export class EquipmentComponent implements OnInit {
         this.error = error;
         this.loading = false;
       });
+
+
+  }
+  logout(){
+    this.authService.logout();
   }
 
 }
