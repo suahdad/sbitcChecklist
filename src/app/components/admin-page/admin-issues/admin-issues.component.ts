@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { ChecklistService } from 'src/app/services/checklist.service';
-import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 
 @Component({
