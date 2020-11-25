@@ -132,6 +132,9 @@
             },
             "dev-running": {
               "browserTarget": "sbitcChecklist:build:dev-running"
+            },
+            "staging": {
+              "browserTarget": "sbitcChecklist:build:staging"
             }
           }
         },
