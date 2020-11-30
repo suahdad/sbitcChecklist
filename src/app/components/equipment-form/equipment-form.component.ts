@@ -117,7 +117,7 @@ export class EquipmentFormComponent implements OnInit {
           const item: ChecklistItem = {
             componentid: x.get('compID').value,
             conditionid: x.get('check').value? 'OK':'OTHER',
-            equipment_typeid: x.get('eqType').value,
+            equipment_TypeID: x.get('eqType').value,
             remarks: x.get('desc').value
           }
   
