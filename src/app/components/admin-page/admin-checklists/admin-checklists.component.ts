@@ -8,6 +8,7 @@ import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { date } from '@rxweb/reactive-form-validators';
 import { DatePipe } from '@angular/common';
 import { format } from 'url';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 /**
  * @title Table with sorting
@@ -23,6 +24,9 @@ export class AdminChecklistsComponent implements AfterViewInit {
   sortedData: Checklist[] = new Array<Checklist>()
   displayedColumns: string[] = ['id', 'equipmentid', 'date_created', 'userid'];
   dataSource = new MatTableDataSource(this.checklists);
+  
+  range : FormGroup
+  searchString : FormGroup
 
   exportAsConfig: ExportAsConfig = {
     type: 'xlsx',
@@ -38,7 +42,18 @@ export class AdminChecklistsComponent implements AfterViewInit {
 
   constructor(private checklistService: ChecklistService,
     private exportAsService: ExportAsService,
-    private datepipe: DatePipe){
+    private datepipe: DatePipe,
+    private fb: FormBuilder){
+
+      
+      this.range = this.fb.group({
+        start: [''],
+        end: [''],
+      })
+      
+      this.searchString = this.fb.group({
+        string: ['']
+      })
   }
 
 
@@ -59,6 +74,7 @@ export class AdminChecklistsComponent implements AfterViewInit {
     //add paginator
     //as commented, viewchild doesn't work with ngIF
     this.dataSource.paginator = this.paginators.first;
+    this.dataSource.filterPredicate = this.getFilterPredicate()
 
   }
 
@@ -78,18 +94,60 @@ export class AdminChecklistsComponent implements AfterViewInit {
     })
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
   exportTableAsXlsx(){
     const _datetime = this.datepipe.transform(new Date(),format('yyMMddHHmmssSS'))
     this.exportAsService.save(this.exportAsConfig,`${_datetime}`).subscribe(data => {
       //just needed, nothing to put here
     })
   }
+
+  
+  applyFilter() {
+    const _startDate = this.range.controls["start"].value || ''
+    const _endDate = this.range.controls["end"].value || ''
+    const _searchedStr:string = this.searchString.controls["string"].value
+
+    const _filterValue = `${_startDate}$${_endDate}$${_searchedStr.toLowerCase()}`
+    this.dataSource.filter = _filterValue
+  }
+
+  getFilterPredicate(){
+    return (row:Checklist, filters:string ) => {
+      const filterArray= filters.split('$')
+      const startDate = filterArray[0]
+      const endDate = filterArray[1]
+      const someString = filterArray[2]
+
+      const matchFilter = []
+
+      const colDateCreated = row.date_Created
+      const colChecklistID = row.id
+      const colEqpID = row.equipmentID
+      const colUser = row.userID
+      //cf = customFilter
+      const _start = new Date(this.range.controls["start"].value)
+      const _end = new Date(this.range.controls["end"].value)
+      const _searchedStr = someString
+
+      const _dateCreated = new Date(colDateCreated)
+
+      const cfDateCreated = _start <= _dateCreated &&
+                            _dateCreated <= _end
+      const cfChecklistID = colChecklistID.toString().includes(_searchedStr)
+      const cfEqpID = colEqpID.toLowerCase().includes(_searchedStr)
+      const cfUser = colUser.toLowerCase().includes(_searchedStr)
+      
+      if(startDate != '' && endDate != '') matchFilter.push(cfDateCreated)
+      matchFilter.push(cfChecklistID 
+      || cfEqpID 
+      || cfUser)
+
+      return matchFilter.every(Boolean)
+
+
+    }
+  }
+
 
 }
 
