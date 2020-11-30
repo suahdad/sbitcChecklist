@@ -99,8 +99,8 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
   }
 
   applyFilter() {
-    const _startDate = this.range.controls["start"].value
-    const _endDate = this.range.controls["end"].value
+    const _startDate = this.range.controls["start"].value || ''
+    const _endDate = this.range.controls["end"].value || ''
     const _searchedStr:string = this.searchString.controls["string"].value
 
     const _filterValue = `${_startDate}$${_endDate}$${_searchedStr.toLowerCase()}`
