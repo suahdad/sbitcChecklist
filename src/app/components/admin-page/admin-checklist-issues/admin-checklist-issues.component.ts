@@ -9,6 +9,9 @@ import { DatePipe } from '@angular/common';
 import { format } from 'url';
 import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { filter } from 'rxjs/operators';
+import { date } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-admin-checklist-issues',
@@ -21,13 +24,16 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
   sortedData: Checklist[] = new Array<Checklist>()
   displayedColumns: string[] = 
   ['id',
-  'equipment_TypeiD', 
+  'equipment_TypeID', 
   'equipmentID',
-  'componentShortname',
+  'questionText',
   'remarks', 
   'date_Created', 
   'userID'];
   dataSource = new MatTableDataSource(this.checklistItems);
+
+  range : FormGroup
+  searchString : FormGroup
 
   exportAsConfig: ExportAsConfig = {
     type: 'xlsx',
@@ -41,7 +47,18 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
 
   constructor(private checklistService: ChecklistService,
     private exportAsService: ExportAsService,
-    private datepipe: DatePipe){
+    private datepipe: DatePipe,
+    private fb: FormBuilder
+    ){
+
+      this.range = this.fb.group({
+        start: [''],
+        end: [''],
+      })
+      
+      this.searchString = this.fb.group({
+        string: ['']
+      })
   }
 
 
@@ -51,9 +68,10 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch(property) {
         case 'id': return item.checklist.id;
-        case 'equipment_TypeiD': return item.equipment_typeid
+        case 'equipment_TypeID': return item.equipment_TypeID
         case 'equipmentID': return item.checklist.equipmentID;
-        case 'componentShortname' : return item.component.shortname
+        case 'questionText' : return item.question.question_Text
+        case 'remarks' : return item.remarks
         case 'date_Created': return item.checklist.date_Created;
         case 'userID': return item.checklist.user.firstName;
         default: return item[property];
@@ -65,6 +83,7 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
     //add paginator
     //as commented, viewchild doesn't work with ngIF
     this.dataSource.paginator = this.paginators.first;
+    this.dataSource.filterPredicate = this.getFilterPredicate()
 
   }
 
@@ -73,16 +92,19 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
       this.checklistItems = data;
 
       this.checklistItems.sort((a,b) => {
-        return b.checklistid-a.checklistid
+        return b.checklistID-a.checklistID
       })
       this.dataSource.data = this.checklistItems
     })
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  applyFilter() {
+    const _startDate = this.range.controls["start"].value
+    const _endDate = this.range.controls["end"].value
+    const _searchedStr:string = this.searchString.controls["string"].value
+
+    const _filterValue = `${_startDate}$${_endDate}$${_searchedStr.toLowerCase()}`
+    this.dataSource.filter = _filterValue
   }
 
   exportTableAsXlsx(){
@@ -90,6 +112,53 @@ export class AdminChecklistIssuesComponent implements AfterViewInit {
     this.exportAsService.save(this.exportAsConfig,`${_datetime}`).subscribe(data => {
       //just needed, nothing to put here
     })
+  }
+
+  getFilterPredicate(){
+    return (row:ChecklistItem, filters:string ) => {
+      const filterArray= filters.split('$')
+      const startDate = filterArray[0]
+      const endDate = filterArray[1]
+      const someString = filterArray[2]
+
+      const matchFilter = []
+
+      const colDateCreated = row.checklist.date_Created
+      const colChecklistID = row.checklistID
+      const colEqpTypeID = row.equipment_TypeID
+      const colEqpID = row.checklist.equipmentID
+      const colQuestion = row.question.question_Text
+      const colRemarks = row.remarks
+      const colUser = row.checklist.user.firstName
+
+      //cf = customFilter
+      const _start = new Date(this.range.controls["start"].value)
+      const _end = new Date(this.range.controls["end"].value)
+      const _searchedStr = someString
+
+      const _dateCreated = new Date(colDateCreated)
+
+      const cfDateCreated = _start <= _dateCreated &&
+                            _dateCreated <= _end
+      const cfChecklistID = colChecklistID.toString().includes(_searchedStr)
+      const cfEqpTypeID = colEqpTypeID.toLowerCase().includes(_searchedStr)
+      const cfEqpID = colEqpID.toLowerCase().includes(_searchedStr)
+      const cfQuestion = colQuestion.toLowerCase().includes(_searchedStr)
+      const cfRemarks = colRemarks.toLowerCase().includes(_searchedStr)
+      const cfUser = colUser.toLowerCase().includes(_searchedStr)
+      
+      if(startDate != '' && endDate != '') matchFilter.push(cfDateCreated)
+      matchFilter.push(cfChecklistID 
+      || cfEqpTypeID 
+      || cfEqpID 
+      || cfQuestion 
+      || cfRemarks 
+      || cfUser)
+
+      return matchFilter.every(Boolean)
+
+
+    }
   }
 
 }

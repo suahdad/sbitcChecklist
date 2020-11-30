@@ -17,3 +17,9 @@ table {
       margin: auto 0px;
     }
   }
+
+.SearchOptions{
+  display: flex;
+  justify-content: space-between;
+  min-width: 410px;
+}
