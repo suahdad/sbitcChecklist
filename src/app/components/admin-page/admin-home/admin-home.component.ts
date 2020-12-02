@@ -10,17 +10,19 @@ import { FormatterService } from 'src/app/services/formatter.service';
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.css']
 })
+
 export class AdminHomeComponent implements OnInit {
 
-  public isChartReady;
-  public chartType: ChartType = "bar"
-  public chartLegends = true
-  public chartDataSet = []
-  public chartLabels: Label[] = []
-  public chartPlugins = []
   public chartOptions: ChartOptions = {
     responsive: true
   }
+  public chartType: ChartType = "bar"
+  public chartLabels: Label[] = []
+  public chartDataSet = []
+  public chartPlugins = []
+  public chartLegends = false
+  public isChartReady;
+
 
   private components = ['AIRLK',
     'ATTCH',
@@ -83,6 +85,5 @@ export class AdminHomeComponent implements OnInit {
 
   GoToChecklists(){
     this.router.navigateByUrl('/admin/(sub:management/checklists)')
-  }
-
+  } 
 }
