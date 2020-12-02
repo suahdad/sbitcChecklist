@@ -28,9 +28,9 @@ import { AdminUserManagementComponent } from './components/admin-page/admin-user
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component'
 import { ExportAsModule } from 'ngx-export-as';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
-import { TableModule } from 'ngx-easy-table';
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 import { CustomUrlSerializer } from './helper/custom-url-serializer';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { CustomUrlSerializer } from './helper/custom-url-serializer';
     ReactiveFormsModule,
     NgbCollapseModule,
     ExportAsModule,
-    TableModule
+    ChartsModule
+    
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
