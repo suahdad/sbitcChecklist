@@ -34,27 +34,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-12">
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area mr-1"></i>
-                        Area Chart Example
+                        Common Components with Issues
                     </div>
-                    <div class="card-body">
-                        <canvas id="myAreaChart" width="100%" height="40"></canvas>
-                        This feature is not yet Available.
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar mr-1"></i>
-                        Bar Chart Example
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myBarChart" width="100%" height="40"></canvas>
-                        This feature is not yet Available.
+                    <div class="card-body" *ngIf="isChartReady">
+                        <canvas
+                            baseChart width="100%" height="20"
+                            [chartType]="chartType"
+                            [labels]="chartLabels"
+                            [data]="chartDataSet"
+                            [legend]="chartLegends"
+                            [options]="chartOptions"    
+                            [plugins]="chartPlugins"
+                        ></canvas>
                     </div>
                 </div>
             </div>
