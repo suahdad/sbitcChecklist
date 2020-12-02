@@ -16,7 +16,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MainformComponent } from './components/mainform/mainform.component';
 import { DatePipe } from '@angular/common';
 import { LoginMasterComponent } from './components/login-master/login-master.component';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, DefaultUrlSerializer, RouterStateSnapshot, UrlSerializer } from '@angular/router';
 import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { AdminSidenavComponent } from './components/admin-page/admin-sidenav/admin-sidenav.component';
@@ -30,6 +30,7 @@ import { ExportAsModule } from 'ngx-export-as';
 import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin-issues.component';
 import { TableModule } from 'ngx-easy-table';
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
+import { CustomUrlSerializer } from './helper/custom-url-serializer';
 
 @NgModule({
   declarations: [
@@ -69,8 +70,9 @@ import { AdminChecklistIssuesComponent } from './components/admin-page/admin-che
     { provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
     {
         window.location.href = (route.data as any).externalUrl;
-    }
-}],
+    }},
+    {provide: UrlSerializer, useClass: CustomUrlSerializer}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
