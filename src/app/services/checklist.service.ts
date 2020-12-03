@@ -29,6 +29,7 @@ export class ChecklistService {
     private router: Router) { }
 
   public submitChecklist(data: Checklist) {
+     return this.http.post<Checklist>(this.apiUrl,data);
   }
 
   public getChecklist() : Observable<Checklist[]>{
