@@ -134,6 +134,12 @@ export class EquipmentFormComponent implements OnInit {
         console.log(checklist)
   
         this.checklistService.submitChecklist(checklist)
+        .subscribe(data => {
+          console.log('Submit Success!!') //added console log to ensure submit success
+          
+          this.checklistService.isSubmitSuccess = true
+          document.location.href =`${environment.ecN4Url}`;
+          this.auth.logout();
       } else {
         console.log(false)
       }
