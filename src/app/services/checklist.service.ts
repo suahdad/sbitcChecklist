@@ -15,13 +15,13 @@ import { ChecklistItem } from '../shared/models/checklist-item';
 })
 export class ChecklistService {
   apiUrl = `${environment.apiURL}/api/checklists`
-
-  submitSuccess = false;
   
   checklistItem = this.fb.group({
     checkbox: [''],
     remarks: ['']
   })
+
+  public isSubmitSuccess: boolean;
 
   constructor(private http: HttpClient,
     private authService: AuthService,

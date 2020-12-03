@@ -15,7 +15,7 @@ export class N4Guard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.checklistService.submitSuccess) {
+    if(this.checklistService.isSubmitSuccess) {
       return true;
     } 
     this.router.navigate(['']);
