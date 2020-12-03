@@ -29,14 +29,6 @@ export class ChecklistService {
     private router: Router) { }
 
   public submitChecklist(data: Checklist) {
-    this.http.post<Checklist>(this.apiUrl,data)
-    .subscribe(data => {
-      this.submitSuccess = true;
-
-      console.log('Submit Success!!') //added console log to ensure submit success
-      document.location.href =`${environment.ecN4Url}`;
-      this.authService.logout();
-    });
   }
 
   public getChecklist() : Observable<Checklist[]>{
