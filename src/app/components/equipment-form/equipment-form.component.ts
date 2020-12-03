@@ -145,6 +145,9 @@ export class EquipmentFormComponent implements OnInit {
         (err) => {
           console.log(err);''
         },
+        () => {
+          this.isSubmitted = false;
+        })
       } else {
         console.log(false)
       }
