@@ -106,9 +106,9 @@ export class EquipmentFormComponent implements OnInit {
       }) 
 
 
-      if(this.fg.valid) {
-        // this.isSubmitted = true;
+      if(this.fg.valid && !this.isSubmitted) {
   
+        this.isSubmitted = true
         //turn checklistItemArray => checklistFormat
   
         const checklistItems: ChecklistItem[] = new Array();
