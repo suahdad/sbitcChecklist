@@ -5,7 +5,7 @@ import { ChecklistItem } from './checklist-item';
 export class Checklist {
     id?: number;
     equipmentID: string;
-    date_Created: Date;
+    date_Created?: Date;
     user? : User
     userID: string;
 
