@@ -140,6 +140,11 @@ export class EquipmentFormComponent implements OnInit {
           this.checklistService.isSubmitSuccess = true
           document.location.href =`${environment.ecN4Url}`;
           this.auth.logout();
+          
+        },
+        (err) => {
+          console.log(err);''
+        },
       } else {
         console.log(false)
       }
