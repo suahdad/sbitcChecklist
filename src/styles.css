@@ -1,16 +1,7 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "~ng-pick-datetime/assets/style/picker.min.css";
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-@import url('https://fonts.googleapis.com/css?family=Oswald');
-@import url('https://fonts.googleapis.com/css?family=Numans');
-@import '../node_modules/bootstrap//dist/css/bootstrap.css';
-@import "~ngx-easy-table/style.scss";
-
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
-}
-
+} 
 
 .basic-container {
   padding: 30px;
