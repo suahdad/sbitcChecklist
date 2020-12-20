@@ -16,7 +16,7 @@ import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginMasterComponent, canActivate: [LoginGuard] },
-  {path: 'dev', component: EquipmentFormComponent},
+  {path: 'dev', component: LoginComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
