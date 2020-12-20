@@ -1,4 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { LoginComponent } from './login.component';
 
@@ -8,7 +13,11 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      declarations: [ LoginComponent ],
+      imports:[ReactiveFormsModule,
+      AppRoutingModule,
+      HttpClientModule,
+      FontAwesomeModule]
     })
     .compileComponents();
   }));
