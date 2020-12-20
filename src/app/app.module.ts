@@ -31,6 +31,7 @@ import { AdminIssuesComponent } from './components/admin-page/admin-issues/admin
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
 import { CustomUrlSerializer } from './helper/custom-url-serializer';
 import { ChartsModule } from 'ng2-charts';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     NgbCollapseModule,
     ExportAsModule,
-    ChartsModule
+    ChartsModule,
+    FontAwesomeModule
     
   ],
   providers: [DatePipe,
