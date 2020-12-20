@@ -10,8 +10,6 @@ import { AdminHomeComponent } from './components/admin-page/admin-home/admin-hom
 import { AdminGuard } from './helper/admin.guard';
 import { AdminChecklistsComponent } from './components/admin-page/admin-checklists/admin-checklists.component';
 import { AdminChecklistIssuesComponent } from './components/admin-page/admin-checklist-issues/admin-checklist-issues.component';
-import { EquipmentComponent } from './components/login-equipment/equipment.component';
-import { EquipmentFormComponent } from './components/equipment-form/equipment-form.component';
 import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
@@ -20,13 +18,6 @@ const routes: Routes = [
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] , children: [
     {path: '', redirectTo: '/admin/(sub:dashboard)', pathMatch: 'full'},
     {path: 'dashboard', component: AdminHomeComponent, outlet: 'sub'},
-    // {path: 'profile', outlet:'sub', children: [
-    //   {path: 'changepass', component: AdminChangePasswordComponent}
-    // ]},
-    // {path: 'management', outlet:'sub', children: [
-    //   {path: 'user', component: AdminUserManagementComponent},
-    //   {path: 'checklists', component: AdminChecklistsComponent}
-    // ]},
       {path: 'checklists', outlet:'sub', children: [
       {path: 'all', component: AdminChecklistsComponent},
       {path: 'issues', component: AdminChecklistIssuesComponent}
