@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -21,9 +19,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
-    NgxMaterialTimepickerModule,
-    OwlDateTimeModule, 
-    OwlNativeDateTimeModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -36,9 +31,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
-    NgxMaterialTimepickerModule,
-    OwlDateTimeModule, 
-    OwlNativeDateTimeModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
