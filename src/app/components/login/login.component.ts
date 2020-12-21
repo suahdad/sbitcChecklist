@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication/auth.service';
 import { first } from 'rxjs/operators';
 import { User } from '../../shared/models/user';
+import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ import { User } from '../../shared/models/user';
 export class LoginComponent implements OnInit {
 
   loginform: FormGroup;
+  userIcon = faUser;
+  passIcon = faKey;
 
   constructor(
     private _fb: FormBuilder,
