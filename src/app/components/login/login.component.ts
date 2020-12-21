@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           if(error['status']== 400) this.invalidLogin = true;
+          console.log(error)
+        },
         });
     }
 
