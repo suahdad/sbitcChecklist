@@ -51,9 +51,6 @@ export class LoginComponent implements OnInit {
           this.authService.checkAdmin().subscribe(data => {
             if(this.authService.IsCurrentUserAdmin) this.router.navigate(['admin'])
           });
-          
-          // console.log(this.returnUrl)
-          // this.router.navigate(['equipment']);
         },
         error => {
           if(error['status']== 400) this.invalidLogin = true;
