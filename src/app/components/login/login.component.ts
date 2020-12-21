@@ -44,7 +44,10 @@ export class LoginComponent implements OnInit {
     }
     this.isSubmitted = true;
     
+    const _id = this.f.username.value
+    const _pass = this.f.password.value
 
+    this.authService.login(_id, _pass)
       .pipe(first())
       .subscribe(
         data => {
