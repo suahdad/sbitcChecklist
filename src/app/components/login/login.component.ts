@@ -14,12 +14,6 @@ import { User } from '../../shared/models/user';
 export class LoginComponent implements OnInit {
 
   loginform: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error = '';
-  invalidLogin = false
-  public validLogin = true;
 
   constructor(
     private _fb: FormBuilder,
@@ -50,13 +44,6 @@ export class LoginComponent implements OnInit {
     }
     
 
-    this.loading = true;
-
-    let user: User = new User()
-    user.id = this.f.username.value
-    user.password = this.f.password.value
-
-    this.authService.login(user.id, user.password)
       .pipe(first())
       .subscribe(
         data => {
@@ -69,8 +56,6 @@ export class LoginComponent implements OnInit {
         },
         error => {
           if(error['status']== 400) this.invalidLogin = true;
-          this.error = error;
-          this.loading = false;
         });
     }
 
