@@ -59,6 +59,8 @@ export class LoginComponent implements OnInit {
           if(error['status']== 400) this.invalidLogin = true;
           console.log(error)
         },
+        () => {
+          this.isSubmitted = false;
         });
     }
 
