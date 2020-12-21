@@ -15,6 +15,8 @@ import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent implements OnInit {
 
   loginform: FormGroup;
+  isSubmitted = false;
+  invalidLogin = false;
   userIcon = faUser;
   passIcon = faKey;
 
