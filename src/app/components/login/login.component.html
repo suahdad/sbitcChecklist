@@ -9,13 +9,13 @@
 				<form [formGroup]="loginform" (ngSubmit)="onSubmit()">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><fa-icon [icon]="userIcon"></fa-icon></span>
+							<span class="input-group-text"><fa-icon [icon]="this.userIcon"></fa-icon></span>
 						</div>
 						<input type="text" class="form-control" placeholder="username" formControlName="username">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><fa-icon [icon]="passIcon"></fa-icon></span>
+							<span class="input-group-text"><fa-icon [icon]="this.passIcon"></fa-icon></span>
 						</div>
 						<input type="password" class="form-control" placeholder="password" formControlName="password">
 					</div>
@@ -25,7 +25,7 @@
 						Invalid Username or Password
 					  </div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
+						<input type="submit" value="Login" class="btn float-right login_btn" disabled="this.isSubmitted">
 					</div>
 				</form>
 			</div>
