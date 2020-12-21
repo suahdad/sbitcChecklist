@@ -39,11 +39,10 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginform.controls;}
 
   onSubmit(){
-    this.submitted = true;
-
     if (this.loginform.invalid) {
       return;
     }
+    this.isSubmitted = true;
     
 
       .pipe(first())
