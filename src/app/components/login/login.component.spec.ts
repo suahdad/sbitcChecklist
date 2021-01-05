@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { By } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { LoginComponent } from './login.component';
@@ -26,9 +27,76 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should say sign in', () => {
+    let h3: HTMLElement;
+    h3 = fixture.nativeElement.querySelector('#body-header');
+
+    expect(h3.textContent).toContain('Sign In')
+  });
+  it('should have login button', () => {
+    let loginBtn: HTMLElement;
+    loginBtn = fixture.nativeElement.querySelector('#form-login')
+
+    expect(loginBtn).toBeTruthy();
+  });
+  it('login button should have Login as text', () => {
+    let loginBtn: HTMLElement;
+    loginBtn = fixture.nativeElement.querySelector('#form-login')
+
+    expect(loginBtn['value']).toContain('Login')
+  });
+  it('Footer should have Forget Account Text', () => {
+    let helptext: HTMLElement = fixture.nativeElement.querySelector('#body-footer')
+    expect(helptext.innerHTML).toContain('Forget')
+  });
+
+  it('username input should not have any value', () => {
+    let username: HTMLElement = fixture.nativeElement.querySelector('#form-username')
+    expect(username.textContent).toBeFalsy();
+  });
+  it('username input should have username as place holder', () => {
+    let username: HTMLElement = fixture.nativeElement.querySelector('#form-username')
+    expect(username['placeholder']).toContain('username')
+  });
+  it('password should be pre-filled with the word password', () => {
+    let password: HTMLElement = fixture.nativeElement.querySelector('#form-password')
+    expect(password['value']).toContain('password')
+  });
+  it('password input should have password as placeholder', () => {
+    let password: HTMLElement = fixture.nativeElement.querySelector('#form-password')
+    expect(password['placeholder']).toContain('password')
+  });
+  it('should have icon for username', () => {
+    let usernameicon: HTMLElement = fixture.nativeElement.querySelector('#form-username-icon')
+    expect(usernameicon).toBeTruthy();
+  });
+  it('should have icon for password', () => {
+    let passwordicon: HTMLElement = fixture.nativeElement.querySelector('#form-password-icon')
+    expect(passwordicon.textContent).toBeFalsy();
+  });
+  // it('should be transparent', () => {
+  //   let loginCard: HTMLElement = fixture.debugElement.query(By.css('#login-card')).nativeElement;
+  //   console.log(window.getComputedStyle(loginCard));
+  //   expect(loginCard).toBeTruthy();
+  // });  //**removed due to non exposeable component styling **/
+  it('should show error on invalid login', () => {
+    component.invalidLogin=true;
+    fixture.detectChanges();
+    let invalidText: HTMLElement = fixture.nativeElement.querySelector('#invalid-text')
+    expect(invalidText).toBeTruthy();
+  });
+  it('login button should disable on submit', () => {
+    component.disableLoginButton(true);
+    fixture.detectChanges();
+    let loginButton: HTMLElement = fixture.nativeElement.querySelector('#form-login')
+    expect(loginButton.attributes['disabled']).toBeTruthy();
+  });
+
 });
