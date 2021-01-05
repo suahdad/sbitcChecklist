@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication/auth.service';
@@ -13,6 +13,8 @@ import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('loginBtn') loginButton : ElementRef
 
   loginform: FormGroup;
   isSubmitted = false;
@@ -64,6 +66,10 @@ export class LoginComponent implements OnInit {
         () => {
           this.isSubmitted = false;
         });
+    }
+
+    disableLoginButton(value : boolean) {
+      this.loginButton.nativeElement.disabled = value
     }
 
 }
