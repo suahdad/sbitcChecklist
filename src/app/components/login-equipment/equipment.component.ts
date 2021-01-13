@@ -43,6 +43,11 @@ export class EquipmentComponent implements OnInit {
     return this.equipmentForm.controls;
   }
 
+  set submit(value) {
+    this.isSubmitted = value;
+    this.disableLoginButton(value);
+  }
+
   onSubmit(){
     this.authService.loginEquipment(this.f.equipment.value)
     .pipe(first())
