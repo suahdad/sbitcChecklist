@@ -1,13 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { By } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { LoginComponent } from './login.component';
-
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -74,12 +71,14 @@ describe('LoginComponent', () => {
     expect(password['placeholder']).toContain('password')
   });
   it('should have icon for username', () => {
-    let usernameicon: HTMLElement = fixture.nativeElement.querySelector('#form-username-icon')
-    expect(usernameicon).toBeTruthy();
+    let nodes = fixture.nativeElement.querySelector('#form-username-icon').childNodes
+    var tagList = nodes.map(x => x.nativeNode['tagName']);
+    expect(tagList).toContain('svg');
   });
   it('should have icon for password', () => {
-    let passwordicon: HTMLElement = fixture.nativeElement.querySelector('#form-password-icon')
-    expect(passwordicon.textContent).toBeFalsy();
+    let nodes = fixture.nativeElement.querySelector('#form-password-icon').childNodes
+    var tagList = nodes.map(x => x.nativeNode['tagName']);
+    expect(tagList).toContain('svg');
   });
   // it('should be transparent', () => {
   //   let loginCard: HTMLElement = fixture.debugElement.query(By.css('#login-card')).nativeElement;
@@ -98,5 +97,46 @@ describe('LoginComponent', () => {
     let loginButton: HTMLElement = fixture.nativeElement.querySelector('#form-login')
     expect(loginButton.attributes['disabled']).toBeTruthy();
   });
+  it('should initialize isSubmitted to false', () => {
+    expect(component.isSubmitted).toBeFalsy();
+  });
+  it('should initialize invalidLogin to false', () => {
+    expect(component.invalidLogin).toBeFalsy();
+  });
+  it('should tick isSubmitted on submit', () => {
+    var checker;
+    var targetObj = new Proxy(component, {
+      set: (target, key, value) => {
+        if (key == 'isSubmitted' && value == true) checker = true;
+        return true;
+      }
+    })
+    targetObj.onSubmit(); // no further steps needed as function just listens if isSubmitted will be flagged on Submit
+    expect(checker).toBeTruthy();
+  });
+  // it('should tick invalidLogin at error on login', () => {
+  //   var checker;
+  //   var targetObj = new Proxy(component, {
+  //     set: (target, key, value) => {
+  //       if (key == 'invalidLogin' && value == true) {checker = true;}
+  //       return true;
+  //     }
+  //   })
+  //   targetObj.onSubmit(); // empty form should cause error
+  //   expect(checker).toBeTruthy();
+  // });
+  it('should tick isSubmitted on submit', () => {
+    var checker;
+    var targetObj = new Proxy(component, {
+      set: (target, key, value) => {
+        if (key == 'isSubmitted' && value == true) checker = true;
+        return true;
+      }
+    })
+    targetObj.onSubmit(); // no further steps needed as function just listens if isSubmitted will be flagged on Submit
+    expect(targetObj.isSubmitted).toBeFalsy();
+  });
+  
+
 
 });
