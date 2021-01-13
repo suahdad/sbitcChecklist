@@ -44,13 +44,13 @@
 				<form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-truck"></i></span>
+							<span class="input-group-text"><fa-icon id="equip-icon" [icon]="this.truckIcon"></fa-icon></span>
 						</div>
 						<input id="input-equip" type="text" class="form-control" placeholder="Ex. SS01" formControlName="equipment">
 					</div>
 					<div class="alert alert-warning" 
 						 role="alert"
-						 *ngIf = "invalidEquip">
+						 *ngIf = "this.invalidEquip"
 						 id='error-message'>
 						Invalid Equipment ID
 					  </div>
