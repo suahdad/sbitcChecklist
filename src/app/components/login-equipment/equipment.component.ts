@@ -17,6 +17,7 @@ export class EquipmentComponent implements OnInit {
   @ViewChild('loginBtn') loginButton : ElementRef
 
   equipmentForm: FormGroup;
+  isSubmitted = false;
   direction: any;
   invalidEquip = false;
   truckIcon = faTruck;
@@ -49,6 +50,9 @@ export class EquipmentComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submit = true;
+    this.invalidEquip = false;
+
     this.authService.loginEquipment(this.f.equipment.value)
     .pipe(first())
     .subscribe(
@@ -60,6 +64,9 @@ export class EquipmentComponent implements OnInit {
       error => {
         if(error['status'] >= 400 && error['status'] < 500) this.invalidEquip = true;
         console.log(error)
+      },
+      () => {
+        this.submit = false;
       });
 
 
