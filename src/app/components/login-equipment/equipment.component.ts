@@ -16,10 +16,6 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons';
 export class EquipmentComponent implements OnInit {
 
   equipmentForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error = '';
   direction: any;
   invalidEquip = false;
   truckIcon = faTruck;
@@ -59,9 +55,8 @@ export class EquipmentComponent implements OnInit {
         location.reload();
       },
       error => {
-        if(error['status'] == 400) this.invalidEquip = true;
-        this.error = error;
-        this.loading = false;
+        if(error['status'] >= 400 && error['status'] < 500) this.invalidEquip = true;
+        console.log(error)
       });
 
 
