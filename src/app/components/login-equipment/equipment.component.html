@@ -37,8 +37,8 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style="height: auto;">
 			<div class="card-header" style="display: flex; justify-content: space-between;">
-				<h3>Equipment</h3>
-				<a style="display: inline;" (click)="logout()" [routerLink]="" >Logout</a>
+				<h3 id="form-header">Equipment</h3>
+				<a style="display: inline;" (click)="logout()" [routerLink]="" id="logout-link">Logout</a>
 			</div>
 			<div class="card-body">
 				<form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()">
@@ -46,22 +46,22 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-truck"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Ex. SS01" formControlName="equipment">
-						
+						<input id="input-equip" type="text" class="form-control" placeholder="Ex. SS01" formControlName="equipment">
 					</div>
 					<div class="alert alert-warning" 
 						 role="alert"
 						 *ngIf = "invalidEquip">
+						 id='error-message'>
 						Invalid Equipment ID
 					  </div>
 					
 					<div class="form-group">
-						<input type="submit" value="Proceed" class="btn float-right login_btn">
+						<input type="submit" value="Proceed" class="btn float-right login_btn" id="form-button" #loginBtn>
 					</div>
 				</form>
 			</div>
 			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
+				<div class="d-flex justify-content-center links" id="helper-text">
 					Forget account? Call ITS Department
 				</div>
 				
