@@ -14,6 +14,7 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons';
   animations: [slider]
 })
 export class EquipmentComponent implements OnInit {
+  @ViewChild('loginBtn') loginButton : ElementRef
 
   equipmentForm: FormGroup;
   direction: any;
