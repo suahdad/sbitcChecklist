@@ -62,4 +62,8 @@ export class EquipmentComponent implements OnInit {
     this.authService.logout();
   }
 
+  disableLoginButton(value : boolean) {
+    this.loginButton.nativeElement.disabled = value
+  }
+
 }
