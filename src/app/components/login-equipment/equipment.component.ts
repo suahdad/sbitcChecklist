@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { slider } from 'src/app/route-animations';
 import { ChecklistService } from 'src/app/services/checklist.service';
 import { environment } from 'src/environments/environment';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-equipment',
@@ -23,6 +24,7 @@ export class EquipmentComponent implements OnInit {
   error = '';
   direction: any;
   invalidEquip = false;
+  truckIcon = faTruck;
 
   constructor(
     private _fb: FormBuilder,
