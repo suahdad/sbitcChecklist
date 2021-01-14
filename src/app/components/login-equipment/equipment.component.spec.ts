@@ -1,12 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NativeDateAdapter } from '@angular/material/core';
 import { By, disableDebugTools } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { by } from 'protractor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { EquipmentComponent } from './equipment.component';
@@ -61,11 +58,13 @@ describe('EquipmentComponent', () => {
     var logout = fixture.debugElement.query(By.css('#logout-link')).nativeElement;
     expect(logout).toBeTruthy();
   }) 
-  // it('should logout when logout is pressed', () => {
-  //   var logout = fixture.debugElement.query(By.css('#logout-link')).nativeElement;
-  //   logout.click();
-  //   //cannot be done as there is no login test
-  // }) 
+  it('should call logout when logout is pressed', () => {
+    var logout = fixture.debugElement.query(By.css('#logout-link')).nativeElement;
+    spyOn(component,'logout')
+    logout.click();
+    expect(component.logout).toHaveBeenCalled();
+    //check if logout will be called if
+  }) 
   it('should initialize isSubmitted to false', () => {
     expect(component.isSubmitted).toBeFalsy();
   }); 
@@ -81,14 +80,12 @@ describe('EquipmentComponent', () => {
   // });
   it('should disable button on submit', () => {
     const button = fixture.debugElement.query(By.css('#form-button'));
-    button.nativeElement.click();
-    fixture.detectChanges();
-    
-    let targetObj = new Proxy(button.nativeElement, {
-      set: (target, key, value) => {
-        console.log({key,value})
-        return true
-      }
+    var checker = false;
+    spyOn(component,'disableLoginButton').withArgs(true).and.callFake(x => {
+      checker = true;
     })
+    button.nativeElement.click()
+    fixture.detectChanges();
+    expect(checker).toBeTrue(); //checker should evaluate to true of disableloginbutton was properly called during submit
   });
 });
