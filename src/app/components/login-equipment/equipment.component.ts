@@ -64,8 +64,7 @@ export class EquipmentComponent implements OnInit {
       error => {
         if(error['status'] >= 400 && error['status'] < 500) this.invalidEquip = true;
         console.log(error)
-      },
-      () => {
+      }).add(x => {
         this.submit = false;
       });
 
