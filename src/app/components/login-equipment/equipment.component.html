@@ -4,7 +4,7 @@
 		<div class="card" style="height: auto;">
 			<div class="card-header" style="display: flex; justify-content: space-between;">
 				<h3 id="form-header">Equipment</h3>
-				<a style="display: inline;" (click)="logout()" [routerLink]="" id="logout-link">Logout</a>
+				<a style="display: inline;" (click)="logout()" [routerLink]="" id="logout-link" class="links">Logout</a>
 			</div>
 			<div class="card-body">
 				<form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()">
