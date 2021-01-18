@@ -71,12 +71,14 @@ describe('LoginComponent', () => {
     expect(password['placeholder']).toContain('password')
   });
   it('should have icon for username', () => {
-    let nodes = fixture.nativeElement.querySelector('#form-username-icon').childNodes
+    let nodes = fixture.debugElement.query(By.css('#form-username-icon')).childNodes;
+    console.log(nodes)
     var tagList = nodes.map(x => x.nativeNode['tagName']);
     expect(tagList).toContain('svg');
   });
   it('should have icon for password', () => {
-    let nodes = fixture.nativeElement.querySelector('#form-password-icon').childNodes
+    let nodes = fixture.debugElement.query(By.css('#form-password-icon')).childNodes;
+    console.log(nodes)
     var tagList = nodes.map(x => x.nativeNode['tagName']);
     expect(tagList).toContain('svg');
   });
