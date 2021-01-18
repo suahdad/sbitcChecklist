@@ -71,13 +71,16 @@ describe('EquipmentComponent', () => {
   it('should initialize invalidEquip to false', () => {
     expect(component.invalidEquip).toBeFalsy();
   });
-  // it('should show error message on error submit', () => {
-  //   component.invalidEquip = true;
-  //   fixture.detectChanges();
-  //   var message = fixture.debugElement.query(By.css('#error-message'))
-  //   console.log(component)
-  //   expect(message).toBeTruthy();
-  // });
+  it('should show error message on error submit', () => {
+    const button = fixture.debugElement.query(By.css('#form-button')).nativeElement;
+    spyOn(component,'onSubmit').and.callFake( () => {
+      component.invalidEquip = true;}
+    )
+    button.click()
+    fixture.detectChanges();
+    var message = fixture.debugElement.query(By.css('#error-message'))
+    expect(message).toBeTruthy();
+  });
   it('should disable button on submit', () => {
     const button = fixture.debugElement.query(By.css('#form-button'));
     var checker = false;
