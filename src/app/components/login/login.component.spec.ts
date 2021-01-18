@@ -116,17 +116,16 @@ describe('LoginComponent', () => {
     targetObj.onSubmit(); // no further steps needed as function just listens if isSubmitted will be flagged on Submit
     expect(checker).toBeTruthy();
   });
-  // it('should tick invalidLogin at error on login', () => {
-  //   var checker;
-  //   var targetObj = new Proxy(component, {
-  //     set: (target, key, value) => {
-  //       if (key == 'invalidLogin' && value == true) {checker = true;}
-  //       return true;
-  //     }
-  //   })
-  //   targetObj.onSubmit(); // empty form should cause error
-  //   expect(checker).toBeTruthy();
-  // });
+  it('should tick invalidLogin at error on login', () => {
+    let button = fixture.debugElement.query(By.css('#form-login')).nativeElement;
+    spyOn(component,'onSubmit').and.callFake(() => {
+      component.invalidLogin = true;
+    })
+    button.click();
+    fixture.detectChanges();
+    let message = fixture.debugElement.query(By.css('#invalid-text')).nativeElement;
+    expect(message).toBeTruthy;
+  });
   it('should tick isSubmitted on submit', () => {
     var checker;
     var targetObj = new Proxy(component, {
