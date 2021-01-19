@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
@@ -71,12 +72,14 @@ describe('LoginComponent', () => {
     expect(password['placeholder']).toContain('password')
   });
   it('should have icon for username', () => {
-    let nodes = fixture.nativeElement.querySelector('#form-username-icon').childNodes
+    let nodes = fixture.debugElement.query(By.css('#form-username-icon')).childNodes;
+    console.log(nodes)
     var tagList = nodes.map(x => x.nativeNode['tagName']);
     expect(tagList).toContain('svg');
   });
   it('should have icon for password', () => {
-    let nodes = fixture.nativeElement.querySelector('#form-password-icon').childNodes
+    let nodes = fixture.debugElement.query(By.css('#form-password-icon')).childNodes;
+    console.log(nodes)
     var tagList = nodes.map(x => x.nativeNode['tagName']);
     expect(tagList).toContain('svg');
   });
@@ -114,17 +117,16 @@ describe('LoginComponent', () => {
     targetObj.onSubmit(); // no further steps needed as function just listens if isSubmitted will be flagged on Submit
     expect(checker).toBeTruthy();
   });
-  // it('should tick invalidLogin at error on login', () => {
-  //   var checker;
-  //   var targetObj = new Proxy(component, {
-  //     set: (target, key, value) => {
-  //       if (key == 'invalidLogin' && value == true) {checker = true;}
-  //       return true;
-  //     }
-  //   })
-  //   targetObj.onSubmit(); // empty form should cause error
-  //   expect(checker).toBeTruthy();
-  // });
+  it('should tick invalidLogin at error on login', () => {
+    let button = fixture.debugElement.query(By.css('#form-login')).nativeElement;
+    spyOn(component,'onSubmit').and.callFake(() => {
+      component.invalidLogin = true;
+    })
+    button.click();
+    fixture.detectChanges();
+    let message = fixture.debugElement.query(By.css('#invalid-text')).nativeElement;
+    expect(message).toBeTruthy;
+  });
   it('should tick isSubmitted on submit', () => {
     var checker;
     var targetObj = new Proxy(component, {

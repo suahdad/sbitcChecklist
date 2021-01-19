@@ -27,11 +27,11 @@ export class AuthService {
     return this.currentEquipmentSubject.value;
   }
 
-   login(username: string, password: string)
+   login(user: User)
    {
     var data : User = {
-      id: username,
-      password: password,
+      id: user.id,
+      password: user.password,
       firstName: "test",
       middleName: "test",
       lastName: "test",
