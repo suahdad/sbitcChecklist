@@ -26,7 +26,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/external_styles/scss/styles.scss"
+              "src/external_styles/scss/styles.scss",
+              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
             ],
             "scripts": []
           },
