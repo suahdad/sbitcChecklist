@@ -28,7 +28,7 @@ describe('AuthService', () => {
   });
 
   it('should return user when user logs in',() => {
-    service.login(user.id,'password').subscribe(subUser =>
+    service.login(user).subscribe(subUser =>
       expect(subUser).toBe(user))
   });
 
@@ -39,7 +39,7 @@ describe('AuthService', () => {
 
   it('should delete storage tokens currentEquipment on logout', () => {
 
-    service.login(user.id,'password')
+    service.login(user)
     service.loginEquipment(equip)
     service.logout()
     
@@ -49,7 +49,7 @@ describe('AuthService', () => {
 
   it('should delete storage tokens currentUser on logout', () => {
 
-    service.login(user.id,'password')
+    service.login(user)
     service.loginEquipment(equip)
     service.logout()
     
