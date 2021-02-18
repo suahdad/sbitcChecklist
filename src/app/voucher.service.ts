@@ -31,13 +31,6 @@ export class VoucherService {
     //added headers
     const headers: HttpHeaders = new HttpHeaders();
     headers.set('Content-Type', 'application/x-www-form-urlencoded');
-
-
-    try{
-      return this.http.post<any>(`${this.apiUrl}`, _voucher, {headers: headers});
-    }catch(error){
-      console.log(error);
-      return error;
-    }
+    return this.http.post<any>(`${this.apiUrl}`, _voucher, {headers: headers});
   }
 }
