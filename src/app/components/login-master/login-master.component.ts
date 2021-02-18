@@ -27,12 +27,15 @@ export class LoginMasterComponent implements OnInit {
   }
 
   voucherSave(){
+    console.log(this.user, this.equip)
     if(this.user && this.equip){
-      this.voucherService.postVoucher(this.user.id,this.equip.id)
-
-      this.router.navigate(['']);
-      //added because sometimes after submission it doesn't go into the main form
-      location.reload();
+       this.voucherService.postVoucher(this.user.id,this.equip.id).subscribe(data => {
+        this.router.navigate(['']);
+        //added because sometimes after submission it doesn't go into the main form
+        location.reload();
+      },(e) =>{
+        console.log(e,'Voucher Saving');
+      })
     }
   }
 

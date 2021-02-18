@@ -1,12 +1,10 @@
-import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/authentication/auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { slider } from 'src/app/route-animations';
 import { faTruck } from '@fortawesome/free-solid-svg-icons';
-import { EventEmitter } from 'events';
-import { emit } from 'process';
 
 @Component({
   selector: 'app-equipment',
@@ -16,7 +14,7 @@ import { emit } from 'process';
 })
 export class EquipmentComponent implements OnInit {
   @ViewChild('loginBtn') loginButton : ElementRef
-  @Output('login') loginEvent: EventEmitter;
+  @Output() loginEvent = new EventEmitter();
 
   
   equipmentForm: FormGroup;
@@ -28,9 +26,7 @@ export class EquipmentComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-  ) {
-    this.loginEvent = new EventEmitter();
+    private router: Router) {
     if(this.authService.currentEquipmentValue) {
       this.router.navigate(['']);
     }
