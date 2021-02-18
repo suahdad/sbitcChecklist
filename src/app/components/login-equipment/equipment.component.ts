@@ -1,10 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/authentication/auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { slider } from 'src/app/route-animations';
 import { faTruck } from '@fortawesome/free-solid-svg-icons';
+import { EventEmitter } from 'events';
+import { emit } from 'process';
 
 @Component({
   selector: 'app-equipment',
@@ -14,7 +16,9 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons';
 })
 export class EquipmentComponent implements OnInit {
   @ViewChild('loginBtn') loginButton : ElementRef
+  @Output('login') loginEvent: EventEmitter;
 
+  
   equipmentForm: FormGroup;
   isSubmitted = false;
   direction: any;
@@ -26,6 +30,7 @@ export class EquipmentComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
   ) {
+    this.loginEvent = new EventEmitter();
     if(this.authService.currentEquipmentValue) {
       this.router.navigate(['']);
     }
@@ -56,9 +61,7 @@ export class EquipmentComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
-        this.router.navigate(['']);
-        //added because sometimes after submission it doesn't go into the main form
-        location.reload();
+        this.loginEvent.emit(null);
       },
       error => {
         if(error['status'] >= 400 && error['status'] < 500) this.invalidEquip = true;
