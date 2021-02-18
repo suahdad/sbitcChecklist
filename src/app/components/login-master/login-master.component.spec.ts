@@ -21,7 +21,7 @@ describe('LoginMasterComponent', () => {
   let equipComp : DebugElement;
   let loginInstance : LoginComponent;
   let mockVoucherService;
-  beforeEach((() => {
+  beforeEach(async(() => {
   mockVoucherService = jasmine.createSpyObj(['postVoucher'])
     TestBed.configureTestingModule({
       declarations: [ LoginMasterComponent ,
@@ -96,7 +96,9 @@ describe('LoginMasterComponent', () => {
     let equipComp = fixture.debugElement.query(By.css('#equip-component'));
     component.equip = true;
 
+    spyOn(component,'voucherSave')
+
     equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
-    expect(mockVoucherService.postVoucher).toHaveBeenCalled();
+    expect(component.voucherSave).toHaveBeenCalled();
   })
 });
