@@ -131,16 +131,12 @@ export class EquipmentFormComponent implements OnInit {
           equipmentID: this.auth.currentEquipmentValue.id,
           userID: this.auth.currentUserValue.id
         }
-        
-        
-        console.log(checklist)
-  
+          
         this.checklistService.submitChecklist(checklist)
         .subscribe(data => {
           console.log('Submit Success!!') //added console log to ensure submit success
-          
           this.checklistService.isSubmitSuccess = true
-          document.location.href =`${environment.ecN4Url}`;
+          document.location.href =`${environment.ecN4Url}`; //external url
           this.auth.logout();
           
         },
