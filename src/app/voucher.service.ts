@@ -16,7 +16,7 @@ export class VoucherService {
   constructor(private http: HttpClient) { }
   private apiUrl = `${environment.apiURL}/api/vouchers`
   
-  public isVoucherValid(userid: string, equipid: string){
+  public validateVoucher(userid: string, equipid: string){
     var _voucher
 
     this.getVoucher(userid).pipe(take(1)).subscribe(x => _voucher = x)

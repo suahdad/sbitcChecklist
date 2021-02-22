@@ -56,14 +56,14 @@ describe('VoucherService', () => {
   })
 
   it('should validate voucher validity', () => {
-    expect(service.isVoucherValid('jacob','SS02')).toBeFalsy();
+    expect(service.validateVoucher('jacob','SS02')).toBeFalsy();
   })
 
   it('should validate userid when validating voucher', () => {
-    expect(service.isVoucherValid('ian', 'SS02')).toBeFalsy();
+    expect(service.validateVoucher('ian', 'SS02')).toBeFalsy();
   })
 
   it('should validate equipld when validating voucher', () => {
-    expect(service.isVoucherValid('jacob','SS01')).toBeFalsy();
+    expect(service.validateVoucher('jacob','SS01')).toBeFalsy();
   })
 });
