@@ -28,7 +28,7 @@ const routes: Routes = [
   ]},
   {path: '', component: MainformComponent,canActivate:[AuthGuard], pathMatch: 'full'},
   {
-    path: 'test',
+    path: 'n4',
     component: LoginComponent, //just any random component
     resolve: {
         url: 'externalUrlRedirectResolver'
