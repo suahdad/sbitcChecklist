@@ -19,34 +19,28 @@ export class VoucherService {
   private currentVoucher = '';
   private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
   
-  public async validateVoucher(userid: string, equipid: string){
-    var _voucher;
-    var _validUser;
-    var _validEquip;
-    var _validDate;
+  // public async validateVoucher(voucher,userid: string, equipid: string){
+  //   var _voucher = voucher;
+  //   var _validUser;
+  //   var _validEquip;
+  //   var _validDate;
 
-    await this.getVoucher(userid).toPromise().then(x => {
-      var _voucher = x[0]
-      _validUser = _voucher.userid == userid;
-      _validEquip = _voucher.equipid == equipid;
-      _validDate = _voucher.validity > Date.now();
-    });
+  //   await this.getVoucher(userid).toPromise().then(x => {
+  //     var _voucher = x[0]
+  //     _validUser = _voucher.userid == userid;
+  //     _validEquip = _voucher.equipid == equipid;
+  //     _validDate = _voucher.validity > Date.now();
+  //   });
+  //   return _validUser && _validEquip && _validDate ;
+  // }
 
-    console.log(_validUser, _validEquip, _validDate)
+  validateVoucher(voucher,userid: string, equipid: string){
+    var _voucher = voucher;
+    var _validUser = _voucher.userid == userid;
+    var _validEquip = _voucher.equipid == equipid;
+    var _validDate = _voucher.validity > Date.now(); 
+
     return _validUser && _validEquip && _validDate ;
-  }
-
-  public get isVoucherValid{
-    return this.currentVoucher;
-  }
-
-  public loadVoucher(userid:string)
-  {
-    return this.getVoucher(userid).pipe(take(1)).toPromise().then(x => {
-      this.voucherSubject.next(x);
-    }).finally(() => {
-      this.voucherSubject.complete();
-    })
   }
 
   public getVoucher(id: string){

@@ -4,6 +4,7 @@ import { slider } from '../../route-animations'
 import { VoucherService } from 'src/app/voucher.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-master',
@@ -13,9 +14,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginMasterComponent implements OnInit {
 
-  user: any;
-  equip: any;
-
+  user;
+  equip;
   constructor(private auth:AuthService,
     private voucherService: VoucherService,
     private router: Router) { 
@@ -39,30 +39,37 @@ export class LoginMasterComponent implements OnInit {
   //   }
   // }
 
-  async voucherCheck(){
+  //  voucherCheck(){
+  //   if(this.user && this.equip){
+  //     const _userid = this.user.id;
+  //     const _equipid = this.equip.id;
+  //     if(this.voucherService.validateVoucher(_userid,_equipid)) {
+  //       this.router.navigate(['n4'])
+  //     }else{
+  //       this.router.navigate(['']);
+  //     };
+  //      //added because sometimes after submission it doesn't go into the main form
+  //   }
+  //  }
+
+   login(){
     if(this.user && this.equip){
       const _userid = this.user.id;
       const _equipid = this.equip.id;
-      if(await this.voucherService.validateVoucher(_userid,_equipid)) {
-        this.router.navigate(['n4'])
-      }else{
-        this.router.navigate(['']);
-      };
+      this.voucherService.getVoucher(_userid).pipe(first()).subscribe(x => {
+        if(this.voucherService.validateVoucher(x,_userid,_equipid)){
+          this.router.navigate(['n4'])
+        }else{
+          this.router.navigate(['']);
+        };
+      })
+      // this.voucherService.VoucherStream.subscribe({complete: () => {
+      //   if(this.voucherService.validateVoucher())
+      // }})
        //added because sometimes after submission it doesn't go into the main form
     }
    }
 
-   login(){
-     if(this.user && this.equip){
-      const _userid = this.user.id;
-      const _equipid = this.equip.id;
-      this.voucherService.loadVoucher(_userid,_equipid)
-      if(this.voucherService.isVoucherValid){
-        this.router.navigate(['n4'])
-      }else{
-        this.router.navigate(['']);
-      }
-     }
-   }
+
 
 }
