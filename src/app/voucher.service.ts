@@ -20,6 +20,22 @@ export class VoucherService {
     var _voucher
 
     this.getVoucher(userid).pipe(take(1)).subscribe(x => _voucher = x)
+  public async validateVoucher(userid: string, equipid: string){
+    var _voucher;
+    var _validUser;
+    var _validEquip;
+    var _validDate;
+
+    await this.getVoucher(userid).toPromise().then(x => {
+      var _voucher = x[0]
+      _validUser = _voucher.userid == userid;
+      _validEquip = _voucher.equipid == equipid;
+      _validDate = _voucher.validity > Date.now();
+    });
+
+    console.log(_validUser, _validEquip, _validDate)
+    return _validUser && _validEquip && _validDate ;
+  }
 
     const _validUser = _voucher.userid == userid;
     const _validEquip = _voucher.equipid == equipid;
