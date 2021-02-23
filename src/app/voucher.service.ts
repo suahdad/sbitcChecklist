@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { _closeDialogVia } from '@angular/material/dialog';
 import { date } from '@rxweb/reactive-form-validators';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -15,6 +16,8 @@ export class VoucherService {
 
   constructor(private http: HttpClient) { }
   private apiUrl = `${environment.apiURL}/api/vouchers`
+  private currentVoucher = '';
+  private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
   
   public async validateVoucher(userid: string, equipid: string){
     var _voucher;
@@ -33,7 +36,17 @@ export class VoucherService {
     return _validUser && _validEquip && _validDate ;
   }
 
+  public get isVoucherValid{
+    return this.currentVoucher;
+  }
 
+  public loadVoucher(userid:string)
+  {
+    return this.getVoucher(userid).pipe(take(1)).toPromise().then(x => {
+      this.voucherSubject.next(x);
+    }).finally(() => {
+      this.voucherSubject.complete();
+    })
   }
 
   public getVoucher(id: string){
