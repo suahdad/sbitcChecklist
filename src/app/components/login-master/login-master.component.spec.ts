@@ -7,7 +7,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MockExecutor } from 'protractor/built/driverProviders';
+import { of } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { VoucherService } from 'src/app/voucher.service';
 import { EquipmentComponent } from '../login-equipment/equipment.component';
@@ -21,8 +25,12 @@ describe('LoginMasterComponent', () => {
   let equipComp : DebugElement;
   let loginInstance : LoginComponent;
   let mockVoucherService;
+  let router: Router;
   beforeEach(async(() => {
-  mockVoucherService = jasmine.createSpyObj(['postVoucher'])
+    mockVoucherService = {
+      validateVoucher: () => {},
+      getVoucher:() => {return of(1)}
+    };
     TestBed.configureTestingModule({
       declarations: [ LoginMasterComponent ,
         EquipmentComponent ,
@@ -31,7 +39,8 @@ describe('LoginMasterComponent', () => {
         ReactiveFormsModule,
         AppRoutingModule,
         FontAwesomeModule,
-        BrowserAnimationsModule],
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([])],
       providers: [{
         provide: VoucherService, useValue: mockVoucherService
       }
@@ -42,9 +51,9 @@ describe('LoginMasterComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginMasterComponent);
+    router = TestBed.inject(Router)
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     loginComp = fixture.debugElement.query(By.css('#login-component'));
     loginInstance = loginComp.componentInstance;
 
@@ -89,16 +98,45 @@ describe('LoginMasterComponent', () => {
     expect(equipComp).toBeTruthy();
   });
 
-  it('should run voucher saving on equipmentComponent login event',() => {
+  it('should run voucher checking on login event',() => {
     component.user = true;
     fixture.detectChanges();
 
     let equipComp = fixture.debugElement.query(By.css('#equip-component'));
     component.equip = true;
 
-    spyOn(component,'voucherSave')
+    spyOn(mockVoucherService,'validateVoucher')
 
     equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
-    expect(component.voucherSave).toHaveBeenCalled();
+    expect(mockVoucherService.validateVoucher).toHaveBeenCalled();
+  })
+
+  it('should go to checklist on invalid check', () => {
+
+    component.user = true;
+    fixture.detectChanges();
+
+    let equipComp = fixture.debugElement.query(By.css('#equip-component'));
+    component.equip = true;
+
+    spyOn(router,'navigate')
+
+    equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
+    expect(router.navigate).toHaveBeenCalledWith(['']);
+  })
+
+  it('should go to n4 on invalid check', () => {
+
+    component.user = true;
+    fixture.detectChanges();
+
+    let equipComp = fixture.debugElement.query(By.css('#equip-component'));
+    component.equip = true;
+
+    spyOn(router,'navigate')
+    spyOn(mockVoucherService,'validateVoucher').and.returnValue(true)
+
+    equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
+    expect(router.navigate).toHaveBeenCalledWith(['n4']);
   })
 });
