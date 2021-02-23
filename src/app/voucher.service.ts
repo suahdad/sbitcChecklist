@@ -16,8 +16,8 @@ export class VoucherService {
 
   constructor(private http: HttpClient) { }
   private apiUrl = `${environment.apiURL}/api/vouchers`
-  private currentVoucher = '';
-  private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
+  // private currentVoucher = '';
+  // private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
   
   // public async validateVoucher(voucher,userid: string, equipid: string){
   //   var _voucher = voucher;
