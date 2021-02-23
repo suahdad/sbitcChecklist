@@ -16,10 +16,6 @@ export class VoucherService {
   constructor(private http: HttpClient) { }
   private apiUrl = `${environment.apiURL}/api/vouchers`
   
-  public validateVoucher(userid: string, equipid: string){
-    var _voucher
-
-    this.getVoucher(userid).pipe(take(1)).subscribe(x => _voucher = x)
   public async validateVoucher(userid: string, equipid: string){
     var _voucher;
     var _validUser;
@@ -37,11 +33,7 @@ export class VoucherService {
     return _validUser && _validEquip && _validDate ;
   }
 
-    const _validUser = _voucher.userid == userid;
-    const _validEquip = _voucher.equipid == equipid;
-    const _validDate = _voucher.validity > Date.now() 
 
-    return _validUser && _validEquip && _validDate ;
   }
 
   public getVoucher(id: string){
