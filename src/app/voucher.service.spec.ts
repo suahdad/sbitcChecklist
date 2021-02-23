@@ -6,22 +6,22 @@ import { VoucherService } from './voucher.service';
 
 describe('VoucherService', () => {
   let service: VoucherService;
-
+  let voucher;
   beforeEach( () => {
     TestBed.configureTestingModule({
       imports:[HttpClientModule]
     });
     service = TestBed.inject(VoucherService);
 
-    const _voucher = {
+    voucher = {
       userid:'jacob',
       equipid:'SS02',
       validity: Date.now() - 24*60*60
     }
 
-    spyOn(service,'getVoucher').and.callFake(() => {
-      return of(_voucher)
-    })
+    // spyOn(service,'getVoucher').and.callFake(() => {
+    //   return of(_voucher)
+    // })
   });
 
   it('should be created', () => {
@@ -56,14 +56,14 @@ describe('VoucherService', () => {
   })
 
   it('should validate voucher validity', () => {
-    expect(service.validateVoucher('jacob','SS02')).toBeFalsy();
+    expect(service.validateVoucher(voucher,'jacob','SS02')).toBeFalsy();
   })
 
   it('should validate userid when validating voucher', () => {
-    expect(service.validateVoucher('ian', 'SS02')).toBeFalsy();
+    expect(service.validateVoucher(voucher,'ian', 'SS02')).toBeFalsy();
   })
 
   it('should validate equipld when validating voucher', () => {
-    expect(service.validateVoucher('jacob','SS01')).toBeFalsy();
+    expect(service.validateVoucher(voucher,'jacob','SS01')).toBeFalsy();
   })
 });
