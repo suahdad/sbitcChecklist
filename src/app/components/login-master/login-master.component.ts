@@ -50,5 +50,19 @@ export class LoginMasterComponent implements OnInit {
       };
        //added because sometimes after submission it doesn't go into the main form
     }
+   }
+
+   login(){
+     if(this.user && this.equip){
+      const _userid = this.user.id;
+      const _equipid = this.equip.id;
+      this.voucherService.loadVoucher(_userid,_equipid)
+      if(this.voucherService.isVoucherValid){
+        this.router.navigate(['n4'])
+      }else{
+        this.router.navigate(['']);
+      }
+     }
+   }
 
 }

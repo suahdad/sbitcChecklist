@@ -1,4 +1,4 @@
 <body>
     <app-login *ngIf="!user && !equip" id="login-component"></app-login>
-    <app-equipment *ngIf="user && !equip" id="equip-component" (loginEvent)="voucherSave()"></app-equipment>
+    <app-equipment *ngIf="user && !equip" id="equip-component" (loginEvent)="login()"></app-equipment>
 </body>
