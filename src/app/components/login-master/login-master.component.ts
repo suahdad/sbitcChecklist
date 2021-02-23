@@ -3,6 +3,7 @@ import { AuthService } from '../../services/authentication/auth.service';
 import { slider } from '../../route-animations'
 import { VoucherService } from 'src/app/voucher.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-master',
@@ -37,15 +38,17 @@ export class LoginMasterComponent implements OnInit {
   //     })
   //   }
   // }
+
+  async voucherCheck(){
     if(this.user && this.equip){
-       this.voucherService.postVoucher(this.user.id,this.equip.id).subscribe(data => {
+      const _userid = this.user.id;
+      const _equipid = this.equip.id;
+      if(await this.voucherService.validateVoucher(_userid,_equipid)) {
+        this.router.navigate(['n4'])
+      }else{
         this.router.navigate(['']);
-        //added because sometimes after submission it doesn't go into the main form
-        location.reload();
-      },(e) =>{
-        console.log(e,'Voucher Saving');
-      })
+      };
+       //added because sometimes after submission it doesn't go into the main form
     }
-  }
 
 }
