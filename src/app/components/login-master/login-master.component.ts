@@ -26,8 +26,6 @@ export class LoginMasterComponent implements OnInit {
 
   }
 
-  voucherSave(){
-    console.log(this.user, this.equip)
   // voucherSave(){
   //   if(this.user && this.equip){
   //      this.voucherService.postVoucher(this.user.id,this.equip.id).subscribe(data => {
