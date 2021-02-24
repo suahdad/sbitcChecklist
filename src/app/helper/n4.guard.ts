@@ -21,10 +21,11 @@ export class N4Guard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const _userid = this.authService.currentUserValue.id;
     const _equipid = this.authService.currentEquipmentValue.id;
-    const _isVoucherValid = this.voucherService.validateVoucher(_userid,_equipid)
+    // const _isVoucherValid = this.voucherService.validateVoucher(_userid,_equipid)
   
     
-    if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
+    // if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
+    if(this.checklistService.isSubmitSuccess) {
       return true;
     } 
     this.router.navigate(['']);
