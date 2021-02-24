@@ -10,6 +10,7 @@ import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 import { date } from '@rxweb/reactive-form-validators';
 import { environment } from 'src/environments/environment';
+import { VoucherService } from 'src/app/voucher.service';
  
 
 @Component({
@@ -30,7 +31,8 @@ export class EquipmentFormComponent implements OnInit {
   constructor(private questionService: QuestionService,
     private auth: AuthService,
     private checklistService: ChecklistService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private voucherService: VoucherService) {
 
       //instantiate fromgroup
       this.fg = this.fb.group({
@@ -44,9 +46,18 @@ export class EquipmentFormComponent implements OnInit {
     var endOfMonth = new Date(dateNow.getFullYear(),dateNow.getMonth()+1,0);
     this.isEndOfMonth = dateNow == endOfMonth;
     
-    this.auth.currentEquipment.subscribe( x => this.eqType = x.equipment_TypeID) //get equipmentType in authService
+    this.equipmentSubscribe();
 
     //get questions
+    this.getQuestions();
+  }
+
+  equipmentSubscribe(){
+    this.auth.currentEquipment.subscribe( x => this.eqType = x.equipment_TypeID) //get equipmentType in authService
+
+  }
+
+  getQuestions(){
     this.questionService.getQuestions(this.eqType)
     .subscribe(data => {
       this.questions = data.sort((a,b) => 
@@ -99,6 +110,27 @@ export class EquipmentFormComponent implements OnInit {
     return this.fg.get('checklistItems') as FormArray
   }
 
+  prepChecklist(){
+    const checklistItems: ChecklistItem[] = new Array();
+  
+    this.checklistItemArray.controls.map( x => {
+      const item: ChecklistItem = {
+        componentid: x.get('compID').value,
+        conditionid: x.get('check').value? 'OK':'OTHER',
+        equipment_TypeID: x.get('eqType').value,
+        remarks: x.get('desc').value
+      }
+
+      checklistItems.push(item)
+    })
+    const checklist: Checklist = {
+      checklist_items: checklistItems,
+      equipmentID: this.auth.currentEquipmentValue.id,
+      userID: this.auth.currentUserValue.id
+    }
+
+    return checklist
+  }
   onSubmit() {
     if(navigator.onLine){
 
@@ -113,32 +145,17 @@ export class EquipmentFormComponent implements OnInit {
         this.isSubmitted = true
         //turn checklistItemArray => checklistFormat
   
-        const checklistItems: ChecklistItem[] = new Array();
-  
-        this.checklistItemArray.controls.map( x => {
-          const item: ChecklistItem = {
-            componentid: x.get('compID').value,
-            conditionid: x.get('check').value? 'OK':'OTHER',
-            equipment_TypeID: x.get('eqType').value,
-            remarks: x.get('desc').value
-          }
-  
-          checklistItems.push(item)
-        })
-        var _d = new Date()
-        const checklist: Checklist = {
-          checklist_items: checklistItems,
-          equipmentID: this.auth.currentEquipmentValue.id,
-          userID: this.auth.currentUserValue.id
-        }
+        const _checklist = this.prepChecklist()
           
-        this.checklistService.submitChecklist(checklist)
+        this.checklistService.submitChecklist(_checklist)
         .subscribe(data => {
           console.log('Submit Success!!') //added console log to ensure submit success
           this.checklistService.isSubmitSuccess = true
+          const _userid = this.auth.currentUserValue;
+          const _equipid = this.auth.currentEquipmentValue;
+          this.voucherService.postVoucher(_userid, _equipid)
           document.location.href =`${environment.ecN4Url}`; //external url
-          this.auth.logout();
-          
+          this.auth.logout(); 
         },
         (err) => {
           console.log(err);''
