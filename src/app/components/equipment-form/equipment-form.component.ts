@@ -1,14 +1,11 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
-// import { QuestionService } from '../../services/mock/fake-question.service'
 import { QuestionService } from '../../services/question.service'
 import { Question } from '../../shared/models/question';
-// import { AuthService } from '../../services/mock/fake-authentication.service';
 import { AuthService } from '../../services/authentication/auth.service';
 import { ChecklistService } from '../../services/checklist.service';
 import { FormBuilder, FormArray, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
-import { date } from '@rxweb/reactive-form-validators';
 import { environment } from 'src/environments/environment';
 import { VoucherService } from 'src/app/voucher.service';
  
@@ -45,16 +42,14 @@ export class EquipmentFormComponent implements OnInit {
     var dateNow = new Date();
     var endOfMonth = new Date(dateNow.getFullYear(),dateNow.getMonth()+1,0);
     this.isEndOfMonth = dateNow == endOfMonth;
-    
     this.equipmentSubscribe();
-
-    //get questions
     this.getQuestions();
   }
 
   equipmentSubscribe(){
-    this.auth.currentEquipment.subscribe( x => this.eqType = x.equipment_TypeID) //get equipmentType in authService
-
+    this.auth.currentEquipment.subscribe( x => {
+      this.eqType = x.equipment_TypeID
+    }) //get equipmentType in authService
   }
 
   getQuestions(){
@@ -138,31 +133,25 @@ export class EquipmentFormComponent implements OnInit {
       Object.keys(this.checklistItemArray.controls).forEach( form => {
         this.checklistItemArray.get(form).get('check').markAsTouched();
       }) 
-
-
+      console.log('bypassed Navigator')
       if(this.fg.valid && !this.isSubmitted) {
   
         this.isSubmitted = true
         //turn checklistItemArray => checklistFormat
   
         const _checklist = this.prepChecklist()
-          
+          console.log('bypassed validation')
         this.checklistService.submitChecklist(_checklist)
         .subscribe(data => {
           console.log('Submit Success!!') //added console log to ensure submit success
           this.checklistService.isSubmitSuccess = true
           const _userid = this.auth.currentUserValue;
           const _equipid = this.auth.currentEquipmentValue;
-          this.voucherService.postVoucher(_userid, _equipid)
-          document.location.href =`${environment.ecN4Url}`; //external url
-          this.auth.logout(); 
+          this.voucherService.postVoucher(_userid, _equipid);
+          this.redirectToN4();
         },
-        (err) => {
-          console.log(err);''
-        },
-        () => {
-          this.isSubmitted = false;
-        })
+        (err) => {console.log(err);},
+        () => {this.isSubmitted = false;})
       } else {
         console.log(false)
       }
@@ -172,6 +161,11 @@ export class EquipmentFormComponent implements OnInit {
 
    
     // this.checklistService.submitChecklist();
+  }
+
+  redirectToN4(){
+    document.location.href =`${environment.ecN4Url}`; //external url
+    this.auth.logout(); 
   }
 
   setValidators() {
