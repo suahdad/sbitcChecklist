@@ -1,7 +1,6 @@
 import { _ViewRepeaterOperation } from '@angular/cdk/collections';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 import { VoucherService } from './voucher.service';
 
 describe('VoucherService', () => {
