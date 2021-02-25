@@ -24,7 +24,8 @@ describe('EquipmentFormComponent', () => {
     }
 
     mockVoucherService = {
-      postVoucher: () => {}
+      postVoucher: () => {},
+      saveVoucher: () => {}
     }
 
     mockAuthService = {
@@ -68,7 +69,8 @@ describe('EquipmentFormComponent', () => {
   it('should post voucher on successful submit', async () => {
     spyOnProperty(navigator,'onLine').and.returnValue(true);
     spyOnProperty(component.fg,'valid').and.returnValue(true);
-    spyOn(mockVoucherService, 'postVoucher')
+    spyOn(mockVoucherService, 'postVoucher').and.returnValue(of(''))
+    spyOn(mockVoucherService, 'saveVoucher')
     spyOn(component,'redirectToN4')
     spyOn(component,'prepChecklist')
     spyOn(component, 'logout')
@@ -78,5 +80,6 @@ describe('EquipmentFormComponent', () => {
 
     component.onSubmit();
     expect(mockVoucherService.postVoucher).toHaveBeenCalled();
+    expect(mockVoucherService.saveVoucher).toHaveBeenCalled();
   })
 });
