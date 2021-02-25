@@ -57,7 +57,8 @@ export class LoginMasterComponent implements OnInit {
       const _userid = this.user.id;
       const _equipid = this.equip.id;
       this.voucherService.getVoucher(_userid).pipe(first()).subscribe(x => {
-        if(this.voucherService.validateVoucher(x,_userid,_equipid)){
+        this.voucherService.saveVoucher(x[0]);
+        if(this.voucherService.validateVoucher(x[0],_userid,_equipid)){
           this.router.navigate(['n4'])
         }else{
           this.router.navigate(['']);
