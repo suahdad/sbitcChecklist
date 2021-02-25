@@ -143,10 +143,13 @@ export class EquipmentFormComponent implements OnInit {
         .subscribe(data => {
           console.log('Submit Success!!') //added console log to ensure submit success
           this.checklistService.isSubmitSuccess = true
-          const _userid = this.auth.currentUserValue;
-          const _equipid = this.auth.currentEquipmentValue;
-          this.voucherService.postVoucher(_userid, _equipid);
-          this.redirectToN4();
+          const _userid = this.auth.currentUserValue.id;
+          const _equipid = this.auth.currentEquipmentValue.id;
+          this.voucherService.postVoucher(_userid, _equipid).subscribe(x => {
+            this.voucherService.saveVoucher(x);
+            this.redirectToN4();
+          });
+
         },
         (err) => {console.log(err);},
         () => {this.isSubmitted = false;})
