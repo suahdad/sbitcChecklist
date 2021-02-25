@@ -133,14 +133,12 @@ export class EquipmentFormComponent implements OnInit {
       Object.keys(this.checklistItemArray.controls).forEach( form => {
         this.checklistItemArray.get(form).get('check').markAsTouched();
       }) 
-      console.log('bypassed Navigator')
       if(this.fg.valid && !this.isSubmitted) {
   
         this.isSubmitted = true
         //turn checklistItemArray => checklistFormat
   
         const _checklist = this.prepChecklist()
-          console.log('bypassed validation')
         this.checklistService.submitChecklist(_checklist)
         .subscribe(data => {
           console.log('Submit Success!!') //added console log to ensure submit success
