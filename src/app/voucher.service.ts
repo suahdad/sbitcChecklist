@@ -1,14 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { _closeDialogVia } from '@angular/material/dialog';
-import { date } from '@rxweb/reactive-form-validators';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Equipment } from './shared/models/equipment';
-import { User } from './shared/models/user';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +11,8 @@ export class VoucherService {
 
   constructor(private http: HttpClient) { }
   private apiUrl = `${environment.apiURL}/api/vouchers`
+  private currentVoucher = '';
+  private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
   // private currentVoucher = '';
   // private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
   
@@ -34,11 +31,19 @@ export class VoucherService {
   //   return _validUser && _validEquip && _validDate ;
   // }
 
+  public get VoucherStream(){
+    return this.voucherSubject.asObservable()
+  }
+
+  public get CurrentVoucher(){
+    return this.voucherSubject.value;
+  }
+
   validateVoucher(voucher,userid: string, equipid: string){
     var _voucher = voucher;
-    var _validUser = _voucher.userid == userid;
-    var _validEquip = _voucher.equipid == equipid;
-    var _validDate = _voucher.validity > Date.now(); 
+    var _validUser = _voucher.userID == userid;
+    var _validEquip = _voucher.equipmentID == equipid;
+    var _validDate = Date.parse(_voucher.validity) > Date.now(); 
 
     return _validUser && _validEquip && _validDate ;
   }
@@ -63,5 +68,9 @@ export class VoucherService {
     return this.http.post<any>(`${this.apiUrl}`, _voucher, {headers: headers});
   }
 
+  saveVoucher(voucher){
+    this.currentVoucher = voucher
+    this.voucherSubject.next(voucher)
+  }
   
 }
