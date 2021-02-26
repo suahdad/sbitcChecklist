@@ -32,6 +32,8 @@ import { AdminChecklistIssuesComponent } from './components/admin-page/admin-che
 import { CustomUrlSerializer } from './helper/custom-url-serializer';
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbCollapseModule,
     ExportAsModule,
     ChartsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     
   ],
   providers: [DatePipe,
