@@ -19,19 +19,25 @@ export class N4Guard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const _userid = this.authService.currentUserValue.id;
-    const _equipid = this.authService.currentEquipmentValue.id;
-    const _voucher = this.voucherService.CurrentVoucher;
-    const _isVoucherValid = this.voucherService.validateVoucher(_voucher,_userid,_equipid);
-    // const _isVoucherValid = this.voucherService.validateVoucher(_userid,_equipid)
-  
-    
-    // if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
-    if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
-      return true;
-    } 
-    this.router.navigate(['']);
-    return false;
+      try{
+        const _userid = this.authService.currentUserValue.id;
+        const _equipid = this.authService.currentEquipmentValue.id;
+        const _voucher = this.voucherService.CurrentVoucher;
+        const _isVoucherValid = this.voucherService.validateVoucher(_voucher,_userid,_equipid);
+        // const _isVoucherValid = this.voucherService.validateVoucher(_userid,_equipid)
+       
+        // if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
+        if(this.checklistService.isSubmitSuccess || _isVoucherValid) {
+          this.authService.logout(); 
+          return true;
+        }else{
+          this.router.navigate(['']);
+          return false;
+        }
+      }catch(e){
+        console.log(e)
+        this.router.navigate(['']);
+        return false;
   }
-  
+}
 }
