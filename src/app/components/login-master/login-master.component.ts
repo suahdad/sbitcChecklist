@@ -59,7 +59,11 @@ export class LoginMasterComponent implements OnInit {
       this.voucherService.getVoucher(_userid).pipe(first()).subscribe(x => {
         this.voucherService.saveVoucher(x[0]);
         if(this.voucherService.validateVoucher(x[0],_userid,_equipid)){
-          this.router.navigate(['n4'])
+          this.router.navigate(['n4']).then(ok => {
+            if(!ok) {
+              this.router.navigate([''])
+            }
+          });
         }else{
           this.router.navigate(['']);
         };
@@ -70,6 +74,11 @@ export class LoginMasterComponent implements OnInit {
        //added because sometimes after submission it doesn't go into the main form
     }
    }
+
+   logout(){
+    this.auth.logout();
+    location.reload();
+  }
 
 
 
