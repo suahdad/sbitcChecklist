@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async, inject } from '@angular/core/testing';
+import { MockMediaQueryList } from '@angular/flex-layout/core/typings/match-media';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../services/authentication/auth.service';
 import { ChecklistService } from '../services/checklist.service';
@@ -18,7 +19,8 @@ describe('N4Guard', () => {
       },
       currentEquipmentValue: {
         id: ''
-      }
+      },
+      logout: () => {}
     }
     mockVoucherService = {
       currentVoucher: {
@@ -47,4 +49,13 @@ describe('N4Guard', () => {
     guard.canActivate(null,null);
     expect(guard).toBeTruthy();
   }));
-});
+  
+  it('should kick access on null user or null equipment', inject([N4Guard], (guard: N4Guard) => {
+    mockAuthService.currentUserValue = null;
+    mockAuthService.currentEquipmentValue = null;
+    var _kickAccessSpy = spyOn<any>(guard,'kickAccess')
+    
+    guard.canActivate(null,null);
+    expect(_kickAccessSpy).toHaveBeenCalled();
+    
+  }));});
