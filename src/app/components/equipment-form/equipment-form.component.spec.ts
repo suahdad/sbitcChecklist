@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { equal } from 'assert';
 import { of } from 'rxjs';
@@ -14,13 +15,15 @@ import { EquipmentFormComponent } from './equipment-form.component';
 describe('EquipmentFormComponent', () => {
   let component: EquipmentFormComponent;
   let fixture: ComponentFixture<EquipmentFormComponent>;
+  let router;
   let mockChecklistService;
   let mockVoucherService;
   let mockAuthService;
   let mockQuestionService;
   beforeEach(async(() => {
     mockChecklistService = {
-      submitChecklist: (sample) => {return of([true])}
+      submitChecklist: (sample) => {return of([true])},
+      isSubmitSuccess: ''
     }
 
     mockVoucherService = {
@@ -31,7 +34,13 @@ describe('EquipmentFormComponent', () => {
     mockAuthService = {
       currentEquipment: of({
         equipment_TypeID:''
-      })
+      }),
+      currentUserValue: {
+        id:''
+      },
+      currentEquipmentValue: {
+        id:''
+      }
     }
 
     mockQuestionService = {
@@ -58,6 +67,8 @@ describe('EquipmentFormComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EquipmentFormComponent);
+    router = TestBed.inject(Router)
+    mockAuthService = TestBed.inject(AuthService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -67,14 +78,7 @@ describe('EquipmentFormComponent', () => {
   });
 
   it('should post voucher on successful submit', async () => {
-    spyOnProperty(navigator,'onLine').and.returnValue(true);
-    spyOnProperty(component.fg,'valid').and.returnValue(true);
-    spyOn(mockVoucherService, 'postVoucher').and.returnValue(of(''))
-    spyOn(mockVoucherService, 'saveVoucher')
-    spyOn(component,'redirectToN4')
-    spyOn(component,'prepChecklist')
-    spyOn(component, 'logout')
-    component.isSubmitted = false;
+    prepMocks();
 
     await fixture.whenStable();
 
@@ -82,4 +86,23 @@ describe('EquipmentFormComponent', () => {
     expect(mockVoucherService.postVoucher).toHaveBeenCalled();
     expect(mockVoucherService.saveVoucher).toHaveBeenCalled();
   })
+
+  it('should navigate to n4 after successful submit',async () =>{
+    prepMocks();
+    await fixture.whenStable();
+
+    let spy = spyOn(router,'navigate')
+    component.onSubmit();
+    expect(spy).toHaveBeenCalledWith(['n4']);
+  })
+
+  function prepMocks(){
+    spyOnProperty(navigator,'onLine').and.returnValue(true);
+    spyOnProperty(component.fg,'valid').and.returnValue(true);
+    spyOn(mockVoucherService, 'postVoucher').and.returnValue(of(''))
+    spyOn(mockVoucherService, 'saveVoucher')
+    spyOn(component,'prepChecklist')
+    spyOn(component, 'logout')
+    component.isSubmitted = false;
+  }
 });

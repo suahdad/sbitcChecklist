@@ -8,6 +8,7 @@ import { Checklist } from 'src/app/shared/models/checklist';
 import { ChecklistItem } from 'src/app/shared/models/checklist-item';
 import { environment } from 'src/environments/environment';
 import { VoucherService } from 'src/app/voucher.service';
+import { Router } from '@angular/router';
  
 
 @Component({
@@ -29,7 +30,8 @@ export class EquipmentFormComponent implements OnInit {
     private auth: AuthService,
     private checklistService: ChecklistService,
     private fb: FormBuilder,
-    private voucherService: VoucherService) {
+    private voucherService: VoucherService,
+    private router: Router) {
 
       //instantiate fromgroup
       this.fg = this.fb.group({
@@ -165,8 +167,9 @@ export class EquipmentFormComponent implements OnInit {
   }
 
   redirectToN4(){
-    document.location.href =`${environment.ecN4Url}`; //external url
-    this.auth.logout(); 
+    // document.location.href =`${environment.ecN4Url}`; //external url
+    this.router.navigate(['n4'])
+    // this.auth.logout(); 
   }
 
   setValidators() {
