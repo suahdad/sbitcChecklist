@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterTestingModule, SpyNgModuleFactoryLoader } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MockExecutor } from 'protractor/built/driverProviders';
 import { of } from 'rxjs';
@@ -24,13 +24,9 @@ describe('LoginMasterComponent', () => {
   let loginComp: DebugElement;
   let equipComp : DebugElement;
   let loginInstance : LoginComponent;
-  let mockVoucherService;
+  let mockVoucherService: VoucherService;
   let router: Router;
-  beforeEach(async(() => {
-    mockVoucherService = {
-      validateVoucher: () => {},
-      getVoucher:() => {return of(1)}
-    };
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginMasterComponent ,
         EquipmentComponent ,
@@ -42,21 +38,23 @@ describe('LoginMasterComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([])],
       providers: [{
-        provide: VoucherService, useValue: mockVoucherService
+        provide: VoucherService
       }
       ]
     })
     .compileComponents();
-  }));
+
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginMasterComponent);
     router = TestBed.inject(Router)
+    mockVoucherService = TestBed.inject(VoucherService);
+    spyOn(mockVoucherService,'getVoucher').and.returnValue(of(1))
     component = fixture.componentInstance;
     fixture.detectChanges();
     loginComp = fixture.debugElement.query(By.css('#login-component'));
     loginInstance = loginComp.componentInstance;
-
   });
 
   it('should create', () => {
@@ -105,10 +103,10 @@ describe('LoginMasterComponent', () => {
     let equipComp = fixture.debugElement.query(By.css('#equip-component'));
     component.equip = true;
 
-    spyOn(mockVoucherService,'validateVoucher')
+    let validateSpy = spyOn(mockVoucherService,'validateVoucher')
 
     equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
-    expect(mockVoucherService.validateVoucher).toHaveBeenCalled();
+    expect(validateSpy).toHaveBeenCalled();
   })
 
   it('should go to checklist on invalid check', () => {
@@ -122,10 +120,11 @@ describe('LoginMasterComponent', () => {
     spyOn(router,'navigate')
 
     equipComp.nativeElement.dispatchEvent(new Event('loginEvent'))
+    console.log(mockVoucherService)
     expect(router.navigate).toHaveBeenCalledWith(['']);
   })
 
-  it('should go to n4 on invalid check', () => {
+  it('should go to n4 on valid check', () => {
 
     component.user = true;
     fixture.detectChanges();
