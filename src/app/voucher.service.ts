@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { flatten } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { _closeDialogVia } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
@@ -13,23 +14,6 @@ export class VoucherService {
   private apiUrl = `${environment.apiURL}/api/vouchers`
   private currentVoucher = '';
   private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
-  // private currentVoucher = '';
-  // private voucherSubject = new BehaviorSubject<any>(this.currentVoucher)
-  
-  // public async validateVoucher(voucher,userid: string, equipid: string){
-  //   var _voucher = voucher;
-  //   var _validUser;
-  //   var _validEquip;
-  //   var _validDate;
-
-  //   await this.getVoucher(userid).toPromise().then(x => {
-  //     var _voucher = x[0]
-  //     _validUser = _voucher.userid == userid;
-  //     _validEquip = _voucher.equipid == equipid;
-  //     _validDate = _voucher.validity > Date.now();
-  //   });
-  //   return _validUser && _validEquip && _validDate ;
-  // }
 
   public get VoucherStream(){
     return this.voucherSubject.asObservable()
@@ -41,7 +25,13 @@ export class VoucherService {
 
   validateVoucher(voucher,userid: string, equipid: string){
     var _voucher = voucher;
-    var _validUser = _voucher.userID == userid;
+    
+    if(!_voucher || 
+      !_voucher.userid ||
+      !_voucher.equipmentID ||
+      !_voucher.validiy){return false} //pre-detect invalid voucher
+    
+    var _validUser =  _voucher.userid == userid ;
     var _validEquip = _voucher.equipmentID == equipid;
     var _validDate = Date.parse(_voucher.validity) > Date.now(); 
 

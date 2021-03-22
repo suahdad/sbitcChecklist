@@ -65,4 +65,14 @@ describe('VoucherService', () => {
   it('should validate equipld when validating voucher', () => {
     expect(service.validateVoucher(voucher,'jacob','SS01')).toBeFalsy();
   })
+
+  it('shoud abort validation from vouchers with non-existent properties', () => {
+    let voucher = ''
+    expect(service.validateVoucher(voucher,'jacob','SS01')).toBeFalsy();
+  })
+
+  it('shoud abort validation from null vouchers', () => {
+    let voucher = null
+    expect(service.validateVoucher(voucher,'jacob','SS01')).toBeFalsy();
+  })
 });
