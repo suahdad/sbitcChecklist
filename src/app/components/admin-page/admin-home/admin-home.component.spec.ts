@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 
 import { AdminHomeComponent } from './admin-home.component';
 
@@ -8,7 +12,10 @@ describe('AdminHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminHomeComponent ]
+      declarations: [ AdminHomeComponent ],
+      imports: [RouterTestingModule.withRoutes([]),
+    HttpClientModule,
+  ReactiveFormsModule]
     })
     .compileComponents();
   }));

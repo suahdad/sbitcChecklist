@@ -5,17 +5,26 @@ import { VoucherService } from './voucher.service';
 
 describe('VoucherService', () => {
   let service: VoucherService;
-  let voucher;
+  let xVoucher;
+  let cVoucher
   beforeEach( () => {
     TestBed.configureTestingModule({
       imports:[HttpClientModule]
     });
     service = TestBed.inject(VoucherService);
 
-    voucher = {
-      userid:'jacob',
-      equipid:'SS02',
-      validity: Date.now() - 24*60*60
+    xVoucher = {
+      userID:'jacob',
+      equipmentID:'SS02',
+      // validity: new Date(Date.now() - 24*60*60*1000) 
+      validity: Date.now() - 24*60*60*1000
+    }
+
+    cVoucher = {
+      userID:'jacob',
+      equipmentID:'SS02',
+      // validity: new Date(Date.now() + 24*60*60*1000)
+      validity: Date.now() + 24*60*60*1000
     }
 
     // spyOn(service,'getVoucher').and.callFake(() => {
@@ -54,16 +63,24 @@ describe('VoucherService', () => {
     done();
   })
 
+  it('should validate valid voucher validity', () => {
+    expect(service.validateVoucher(cVoucher,'jacob','SS02')).toBeTruthy();
+  })
+
+  it('should validate valid userid and equipid voucher', () => {
+    expect(service.validateVoucher(cVoucher,'jacob', 'SS02')).toBeTruthy();
+  })
+
   it('should validate voucher validity', () => {
-    expect(service.validateVoucher(voucher,'jacob','SS02')).toBeFalsy();
+    expect(service.validateVoucher(xVoucher,'jacob','SS02')).toBeFalsy();
   })
 
   it('should validate userid when validating voucher', () => {
-    expect(service.validateVoucher(voucher,'ian', 'SS02')).toBeFalsy();
+    expect(service.validateVoucher(xVoucher,'ian', 'SS02')).toBeFalsy();
   })
 
   it('should validate equipld when validating voucher', () => {
-    expect(service.validateVoucher(voucher,'jacob','SS01')).toBeFalsy();
+    expect(service.validateVoucher(xVoucher,'jacob','SS01')).toBeFalsy();
   })
 
   it('shoud abort validation from vouchers with non-existent properties', () => {

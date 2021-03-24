@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ExportAsModule } from 'ngx-export-as';
 
 import { AdminChecklistsComponent } from './admin-checklists.component';
 
@@ -8,7 +12,11 @@ describe('AdminChecklistsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminChecklistsComponent ]
+      imports: [HttpClientModule,
+      ExportAsModule,
+    ReactiveFormsModule],
+      declarations: [ AdminChecklistsComponent],
+      providers: [DatePipe]
     })
     .compileComponents();
   }));
