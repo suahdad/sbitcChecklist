@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,11 +10,13 @@ export class MenuComponent implements OnInit {
 
   private currentUser;
   private currentEquipment;
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentuser'))
-    this.currentEquipment = JSON.parse(localStorage.getItem('currentequip'))
+    this.currentUser = this.authService.currentUserValue
+    this.currentEquipment = this.authService.currentEquipmentValue
   }
 
   get user(){
