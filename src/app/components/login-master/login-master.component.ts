@@ -5,6 +5,7 @@ import { VoucherService } from 'src/app/voucher.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs/operators';
+import { dataUri } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-login-master',
@@ -19,12 +20,12 @@ export class LoginMasterComponent implements OnInit {
   constructor(private auth:AuthService,
     private voucherService: VoucherService,
     private router: Router) { 
-    this.auth.currentUser.subscribe(data => this.user = data)
-    this.auth.currentEquipment.subscribe(data => this.equip = data)
+
   }
 
   ngOnInit() {
-
+    this.auth.currentUser.subscribe(data => this.user = data) //subscribed instead of value because this will be the start
+    this.auth.currentEquipment.subscribe(data => this.equip = data)
   }
 
   // voucherSave(){
