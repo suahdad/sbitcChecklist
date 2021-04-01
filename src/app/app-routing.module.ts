@@ -34,7 +34,7 @@ const routes: Routes = [
         url: 'externalUrlRedirectResolver'
     },
     data: {
-        externalUrl: 'http://10.122.8.114:8280/ecn4web/servlet/xmlrdt'
+        externalUrl: 'http://10.129.9.8:8280/ecn4web/servlet/xmlrdt?'
     },canActivate:[N4Guard]
 }
 ];
